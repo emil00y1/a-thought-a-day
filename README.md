@@ -15,6 +15,17 @@ npm run dev
 ```
 
 Any Postgres works (Neon's free tier is easiest for Vercel).
+Without a database you can still play today's thought as a guest and use `/preview`.
+
+## Sign-in
+
+No passwords. People sign in with a 6-digit code sent to their email, or with Google.
+
+- **Email codes** are sent with [Resend](https://resend.com). In local dev, leave `RESEND_API_KEY` empty
+  and the code is printed in the terminal running `npm run dev`. In production, set `RESEND_API_KEY`
+  and `EMAIL_FROM` (an address on a domain you've verified in Resend).
+- **Google** is optional. Set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` and the button appears.
+  In Google Cloud, add `<your URL>/api/auth/callback/google` as a redirect URI.
 
 ## How days work
 
@@ -22,12 +33,16 @@ Any Postgres works (Neon's free tier is easiest for Vercel).
   Set it to your real launch day before deploying.
 - Each next thought in the `thoughts` array unlocks one day later. Only today's thought is playable.
 - If the list runs out, the home page shows "No new thought today".
+- Someone mid-play at midnight can still save yesterday's thought for one hour.
 
 ## Adding thoughts
 
 1. Copy a file in `src/content/thoughts/` and edit it. Types are in `src/content/types.ts`.
 2. Add it to the end of the `thoughts` array in `src/content/index.ts`.
 3. Preview it at `/preview` (dev only). Nothing is saved there.
+
+Content is checked automatically when the app starts. A mistake like a wrong answer index makes
+`npm run dev` show an error and `npm run build` fail, with a message naming the thought and the problem.
 
 Rules: never change a `slug` or reorder thoughts that are already live, since progress is stored by slug and the schedule is by position.
 

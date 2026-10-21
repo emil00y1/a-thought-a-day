@@ -4,6 +4,7 @@ import { Suspense } from "react"
 
 import { Logo } from "@/components/logo"
 import { UserMenu } from "@/components/user-menu"
+import { UserMenuBoundary } from "@/components/user-menu-boundary"
 
 const links = [
   { href: "/", label: "Today", icon: Sun },
@@ -26,6 +27,7 @@ export function SiteHeader() {
             <Link
               key={href}
               href={href}
+              aria-label={label}
               className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
               <Icon className="size-4" />
@@ -33,9 +35,11 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Suspense fallback={<div className="size-8 animate-pulse rounded-full bg-muted" />}>
-          <UserMenu />
-        </Suspense>
+        <UserMenuBoundary>
+          <Suspense fallback={<div className="size-8 animate-pulse rounded-full bg-muted" />}>
+            <UserMenu />
+          </Suspense>
+        </UserMenuBoundary>
       </div>
     </header>
   )

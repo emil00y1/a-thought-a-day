@@ -1,5 +1,10 @@
+import type { Metadata } from "next"
+
 import { Logo } from "@/components/logo"
 import { SignInForm } from "@/components/sign-in-form"
+import { googleEnabled } from "@/lib/auth"
+
+export const metadata: Metadata = { title: "Sign in" }
 
 export default function SignInPage() {
   return (
@@ -9,7 +14,7 @@ export default function SignInPage() {
         <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight">Keep your thoughts</h1>
         <p className="mt-1 text-muted-foreground">Track what you learn and unlock memory quizzes.</p>
       </div>
-      <SignInForm />
+      <SignInForm googleEnabled={googleEnabled} />
     </div>
   )
 }

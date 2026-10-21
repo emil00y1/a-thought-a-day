@@ -17,7 +17,9 @@ const fraunces = Fraunces({
 })
 
 export const metadata: Metadata = {
-  title: "A Thought a Day",
+  // Absolute base for the share image links.
+  metadataBase: new URL(process.env.BETTER_AUTH_URL ?? "http://localhost:3000"),
+  title: { default: "A Thought a Day", template: "%s · A Thought a Day" },
   description: "One new idea every day. Five minutes, a few tiny games, and memory quizzes to make it stick.",
 }
 

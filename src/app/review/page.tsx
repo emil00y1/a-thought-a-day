@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Lock } from "lucide-react"
 import Link from "next/link"
 import { connection } from "next/server"
@@ -9,6 +10,8 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { getLearned, getUser, QUIZ_UNLOCK } from "@/lib/data"
 import { buildQuiz } from "@/lib/quiz"
+
+export const metadata: Metadata = { title: "Memory quiz" }
 
 export default function ReviewPage() {
   return (

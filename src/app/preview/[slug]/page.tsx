@@ -23,6 +23,7 @@ async function Preview({ params }: { params: PageProps<"/preview/[slug]">["param
 
   return (
     <ThoughtPlayer
+      key={slug}
       thought={thought}
       number={thoughtNumber(slug)}
       dateLabel={formatDay(scheduledDay(slug))}

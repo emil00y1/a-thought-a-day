@@ -63,7 +63,7 @@ type Props = {
   preview?: boolean
 }
 
-export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats, unlockAt, preview }: Props) {
+export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: serverStats, unlockAt, preview }: Props) {
   const steps: Step[] = [
     { kind: "intro" },
     { kind: "read" },
@@ -75,6 +75,8 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats, unl
   const [index, setIndex] = useState(0)
   const [ready, setReady] = useState<Record<number, boolean>>({})
   const [results, setResults] = useState<Record<number, Result>>({})
+  const [savedStats, setSavedStats] = useState<Stats | null>(null)
+  const stats = savedStats ?? serverStats
 
   const step = steps[index]
   const isReady = step.kind === "read" || ready[index]
@@ -108,9 +110,9 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats, unl
       savePending({ slug: thought.slug, ...score })
       return
     }
-    // The action refreshes the page, so `stats` arrives updated via props.
     const res = await completeThought({ slug: thought.slug, ...score })
-    if (!res.ok) toast.error(res.error)
+    if (res.ok) setSavedStats(res.stats)
+    else toast.error(res.error)
   }
 
   return (

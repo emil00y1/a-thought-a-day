@@ -27,6 +27,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-caret-blink: caret-blink 1.2s ease-out infinite;
 }
 
 :root {
@@ -86,6 +87,18 @@
     @apply bg-background text-foreground;
     background-image: radial-gradient(var(--dot) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  50% {
+    opacity: 0;
   }
 }
 

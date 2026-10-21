@@ -26,7 +26,8 @@ export async function getToday() {
 
 export const getUser = cache(async () => {
   const session = await auth.api.getSession({ headers: await headers() })
-  return session ? { id: session.user.id, name: session.user.name } : null
+  // Email-code sign-ups have no name, so fall back to the email.
+  return session ? { id: session.user.id, name: session.user.name || session.user.email } : null
 })
 
 /** The user's learned thoughts, newest first, joined with their content. */

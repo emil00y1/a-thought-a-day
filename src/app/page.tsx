@@ -26,8 +26,10 @@ async function Today() {
 
   return (
     <>
-      {stats && !stats.learnedToday && <PendingSync slug={thought.slug} />}
+      {stats && !stats.learnedToday && <PendingSync />}
+      {/* Keyed so a tab left open past midnight starts fresh on the new thought */}
       <ThoughtPlayer
+        key={thought.slug}
         thought={thought}
         number={thoughtNumber(thought.slug)}
         dateLabel={formatDay(today)}

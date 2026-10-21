@@ -11,6 +11,7 @@ import { octopus } from "./thoughts/octopus"
 import { shipOfTheseus } from "./thoughts/ship-of-theseus"
 import { trolleyProblem } from "./thoughts/trolley-problem"
 import { weirdTime } from "./thoughts/weird-time"
+import { validateThoughts } from "./validate"
 
 /** The day thought #1 goes live (UTC). Each following thought unlocks one day later. */
 export const LAUNCH_DATE = "2026-10-20"
@@ -29,8 +30,9 @@ export const thoughts: Thought[] = [
   marshmallowTest,
 ]
 
+validateThoughts(thoughts)
+
 const bySlug = new Map(thoughts.map((t) => [t.slug, t]))
-if (bySlug.size !== thoughts.length) throw new Error("Duplicate thought slug in src/content/index.ts")
 
 const DAY_MS = 86_400_000
 
@@ -51,6 +53,18 @@ export function dayIndex(day: string) {
 export function thoughtForDay(day: string) {
   const i = dayIndex(day)
   return i >= 0 ? (thoughts[i] ?? null) : null
+}
+
+/** How long after midnight yesterday's thought can still be saved, for anyone mid-play at midnight. */
+const GRACE_MS = 60 * 60 * 1000
+
+/** The day a finished thought counts for: today's thought, or yesterday's just after midnight. Otherwise null. */
+export function saveableDay(slug: string, now = new Date()) {
+  const today = todayKey(now)
+  if (thoughtForDay(today)?.slug === slug) return today
+  const yesterday = addDays(today, -1)
+  if (now.getTime() - Date.parse(today) < GRACE_MS && thoughtForDay(yesterday)?.slug === slug) return yesterday
+  return null
 }
 
 export function thoughtBySlug(slug: string) {

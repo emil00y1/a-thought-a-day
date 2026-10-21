@@ -1,9 +1,12 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { CategoryBadge } from "@/components/category-badge"
 import { PageHeader } from "@/components/page-header"
 import { formatDay, scheduledDay, thoughts } from "@/content"
+
+export const metadata: Metadata = { title: "Preview" }
 
 // Dev-only: browse every thought, including future ones.
 export default function PreviewIndex() {

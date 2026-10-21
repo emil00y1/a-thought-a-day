@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 
@@ -8,6 +9,8 @@ import { StatsStrip } from "@/components/stats-strip"
 import { Button } from "@/components/ui/button"
 import { formatDay } from "@/content"
 import { getLearned, getToday, getUser, QUIZ_UNLOCK, streakFrom } from "@/lib/data"
+
+export const metadata: Metadata = { title: "Your library" }
 
 export default function LibraryPage() {
   return (
