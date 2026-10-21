@@ -1,15 +1,31 @@
 import "server-only"
 
 import type { Thought } from "./types"
+import { antikythera } from "./thoughts/antikythera"
+import { birthdayParadox } from "./thoughts/birthday-paradox"
 import { blueSky } from "./thoughts/blue-sky"
+import { dunningKruger } from "./thoughts/dunning-kruger"
 import { fermiParadox } from "./thoughts/fermi-paradox"
 import { forgettingCurve } from "./thoughts/forgetting-curve"
+import { gpsRelativity } from "./thoughts/gps-relativity"
 import { greatStink } from "./thoughts/great-stink"
 import { leftAndRight } from "./thoughts/left-and-right"
 import { marshmallowTest } from "./thoughts/marshmallow-test"
+import { milgram } from "./thoughts/milgram"
+import { montyHall } from "./thoughts/monty-hall"
 import { octopus } from "./thoughts/octopus"
+import { paleBlueDot } from "./thoughts/pale-blue-dot"
+import { paperFolding } from "./thoughts/paper-folding"
+import { penicillin } from "./thoughts/penicillin"
+import { platosCave } from "./thoughts/platos-cave"
+import { prisonersDilemma } from "./thoughts/prisoners-dilemma"
 import { shipOfTheseus } from "./thoughts/ship-of-theseus"
+import { stoicControl } from "./thoughts/stoic-control"
+import { survivorshipBias } from "./thoughts/survivorship-bias"
+import { tardigrades } from "./thoughts/tardigrades"
 import { trolleyProblem } from "./thoughts/trolley-problem"
+import { tulipMania } from "./thoughts/tulip-mania"
+import { veilOfIgnorance } from "./thoughts/veil-of-ignorance"
 import { weirdTime } from "./thoughts/weird-time"
 import { validateThoughts } from "./validate"
 
@@ -28,6 +44,22 @@ export const thoughts: Thought[] = [
   weirdTime,
   leftAndRight,
   marshmallowTest,
+  montyHall,
+  paleBlueDot,
+  survivorshipBias,
+  platosCave,
+  tardigrades,
+  milgram,
+  gpsRelativity,
+  veilOfIgnorance,
+  penicillin,
+  paperFolding,
+  antikythera,
+  stoicControl,
+  birthdayParadox,
+  prisonersDilemma,
+  tulipMania,
+  dunningKruger,
 ]
 
 validateThoughts(thoughts)

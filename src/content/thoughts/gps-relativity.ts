@@ -1,0 +1,83 @@
+import type { Thought } from "../types"
+
+export const gpsRelativity: Thought = {
+  slug: "gps-relativity",
+  title: "GPS Runs on Einstein",
+  category: "science",
+  emoji: "🛰️",
+  hook: "Your map app only works because time runs at different speeds in space.",
+  body: [
+    "Your phone finds you by timing radio signals from GPS satellites about 20,000 km up. The signals travel at the speed of light, so the timing has to be incredibly precise: an error of just **one millionth of a second** puts you about 300 meters off.",
+    "Here's the catch: **Einstein** showed that time itself runs at different speeds. Fast-moving clocks tick slower (about 7 microseconds a day for GPS), and clocks in weaker gravity tick faster (about 45). Net result: satellite clocks gain about **38 microseconds a day**.",
+    "Left uncorrected, GPS would drift by around **10 km every day**. So engineers tune the satellite clocks to tick slightly slow before launch. Every time you use a map, you're relying on relativity.",
+  ],
+  takeaway: "Time runs at different speeds. GPS only works because it corrects for Einstein.",
+  facts: [
+    {
+      q: "How many satellites does your phone need?",
+      a: "At least four: three to pin down your position, and one more to correct your phone's own clock.",
+    },
+    {
+      q: "How high are GPS satellites?",
+      a: "About 20,200 km up, each circling Earth twice a day.",
+    },
+    {
+      q: "How are the clocks adjusted?",
+      a: "Before launch, they're set to tick a hair too slow, so that in orbit they keep exactly the right time as seen from the ground.",
+    },
+  ],
+  activities: [
+    {
+      type: "choice",
+      question: "Compared to clocks on the ground, GPS satellite clocks...",
+      options: ["Run slower", "Run faster, by about 38 microseconds a day", "Run at exactly the same speed", "Stop working in space"],
+      answer: 1,
+      explain: "Weaker gravity speeds them up more than their speed slows them down.",
+    },
+    {
+      type: "match",
+      prompt: "Match each effect to what it does to a satellite clock",
+      pairs: [
+        ["Moving fast", "Slows it by about 7 µs a day"],
+        ["Weaker gravity", "Speeds it up by about 45 µs a day"],
+        ["Both together", "Gains about 38 µs a day"],
+      ],
+    },
+    {
+      type: "estimate",
+      question: "If nobody corrected for relativity, how far off would GPS drift in one day?",
+      min: 0,
+      max: 50,
+      step: 1,
+      answer: 10,
+      tolerance: 3,
+      unit: "km",
+      explain: "Around 10 km per day, and growing. Your map would be noticeably wrong within minutes.",
+    },
+  ],
+  recall: [
+    {
+      question: "Why must GPS correct for relativity?",
+      options: [
+        "The satellites get too hot",
+        "Time runs at a different speed for the satellites",
+        "Signals bounce off clouds",
+        "Earth's magnetic field bends them",
+      ],
+      answer: 1,
+    },
+    {
+      question: "How much do GPS satellite clocks gain per day?",
+      options: ["About 38 microseconds", "About 1 second", "About 1 minute", "Nothing"],
+      answer: 0,
+    },
+    {
+      question: "Which effect makes GPS satellite clocks run faster?",
+      options: ["Their high speed", "Weaker gravity high above Earth", "Solar wind", "The cold of space"],
+      answer: 1,
+    },
+  ],
+  sources: [
+    { label: "Error analysis for GPS (Wikipedia)", url: "https://en.wikipedia.org/wiki/Error_analysis_for_the_Global_Positioning_System" },
+  ],
+}
