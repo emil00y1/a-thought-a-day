@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { SignOutButton } from "@/components/sign-out-button"
 import { Button } from "@/components/ui/button"
 import { getUser } from "@/lib/data"
 
@@ -15,5 +14,14 @@ export async function UserMenu() {
     )
   }
 
-  return <SignOutButton name={user.name} />
+  return (
+    <Link
+      href="/account"
+      title={`Signed in as ${user.email}`}
+      aria-label="Account"
+      className="ml-1 grid size-8 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 active:scale-95"
+    >
+      {user.name.slice(0, 1).toUpperCase()}
+    </Link>
+  )
 }

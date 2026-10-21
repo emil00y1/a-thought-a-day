@@ -26,6 +26,15 @@ No passwords. People sign in with a 6-digit code sent to their email, or with Go
   and `EMAIL_FROM` (an address on a domain you've verified in Resend).
 - **Google** is optional. Set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` and the button appears.
   In Google Cloud, add `<your URL>/api/auth/callback/google` as a redirect URI.
+- **Rate limits** (production only): 5 code emails and 5 sign-in attempts per IP per 10 minutes,
+  stored in the database so they hold on serverless.
+- If codes don't arrive, check the server logs for `Failed to run background task`. Send errors are
+  logged there instead of being shown to the user.
+
+## Privacy
+
+`/privacy` lists what's stored. People can delete their account and all their data from `/account`.
+The address in `EMAIL_FROM` is shown there as the contact address.
 
 ## How days work
 

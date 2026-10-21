@@ -3,6 +3,7 @@
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 import { ArrowLeft, Mail } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -113,7 +114,12 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
               <Button type="submit" size="lg" disabled={pending} className="w-full">
                 <Mail /> {pending ? "Sending..." : "Email me a code"}
               </Button>
-              <p className="text-center text-xs text-muted-foreground">No password needed. New here? This creates your account.</p>
+              <p className="text-center text-xs text-muted-foreground">
+                No password needed. New here? This creates your account.{" "}
+                <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground">
+                  Privacy
+                </Link>
+              </p>
             </form>
           </motion.div>
         ) : (

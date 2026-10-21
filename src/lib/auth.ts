@@ -20,9 +20,13 @@ export const googleEnabled = Boolean(google)
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", schema }),
   socialProviders: google ? { google } : {},
+  // On in production only. Stored in the database because serverless instances don't share memory.
+  rateLimit: { storage: "database" },
   plugins: [
     emailOTP({
       storeOTP: "hashed",
+      // Per IP: at most 5 code emails (and 5 sign-in attempts) per 10 minutes.
+      rateLimit: { window: 600, max: 5 },
       sendVerificationOTP: ({ email, otp }) => sendSignInCode(email, otp),
     }),
     nextCookies(), // must stay last

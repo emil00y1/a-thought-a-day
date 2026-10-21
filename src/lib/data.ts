@@ -26,8 +26,10 @@ export async function getToday() {
 
 export const getUser = cache(async () => {
   const session = await auth.api.getSession({ headers: await headers() })
+  if (!session) return null
+  const { id, name, email, createdAt } = session.user
   // Email-code sign-ups have no name, so fall back to the email.
-  return session ? { id: session.user.id, name: session.user.name || session.user.email } : null
+  return { id, name: name || email, email, createdAt }
 })
 
 /** The user's learned thoughts, newest first, joined with their content. */

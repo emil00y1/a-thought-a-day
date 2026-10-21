@@ -1,8 +1,12 @@
 "use server"
 
+import { eq } from "drizzle-orm"
+import { headers } from "next/headers"
+
 import { saveableDay, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought } from "@/db/schema"
+import { learnedThought, user } from "@/db/schema"
+import { auth } from "@/lib/auth"
 import { getStats, getUser, type Stats } from "@/lib/data"
 
 type Result = { ok: true; stats: Stats } | { ok: false; error: string }
@@ -29,4 +33,15 @@ export async function completeThought(input: { slug: string; correct: number; to
 
   // No refresh() here: just after midnight it would swap the page to the new thought mid-celebration.
   return { ok: true, stats: await getStats(user.id, todayKey()) }
+}
+
+/** Permanently deletes the signed-in user. Sessions, logins and learned thoughts go with it (cascade). */
+export async function deleteAccount(): Promise<{ ok: boolean }> {
+  const current = await getUser()
+  if (!current) return { ok: false }
+
+  // Sign out first so the session cookie is cleared, then remove the user.
+  await auth.api.signOut({ headers: await headers() })
+  await db.delete(user).where(eq(user.id, current.id))
+  return { ok: true }
 }

@@ -1,4 +1,4 @@
-import { boolean, date, index, integer, pgTable, primaryKey, text, timestamp } from "drizzle-orm/pg-core"
+import { bigint, boolean, date, index, integer, pgTable, primaryKey, text, timestamp } from "drizzle-orm/pg-core"
 
 // Better Auth tables
 
@@ -73,6 +73,14 @@ export const verification = pgTable(
   },
   (t) => [index("verification_identifier_idx").on(t.identifier)]
 )
+
+/** Sign-in rate limit counters, kept in the database so they hold across serverless instances. */
+export const rateLimit = pgTable("rate_limit", {
+  id: text("id").primaryKey(),
+  key: text("key").notNull().unique(),
+  count: integer("count").notNull(),
+  lastRequest: bigint("last_request", { mode: "number" }).notNull(),
+})
 
 // App tables
 

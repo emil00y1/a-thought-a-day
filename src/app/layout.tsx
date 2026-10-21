@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Fraunces, Geist } from "next/font/google"
+import Link from "next/link"
 
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
@@ -29,7 +30,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <Providers>
           <SiteHeader />
-          <main className="mx-auto w-full max-w-2xl flex-1 px-4 pt-4 pb-16 sm:pt-8">{children}</main>
+          <main className="mx-auto w-full max-w-2xl flex-1 px-4 pt-4 pb-12 sm:pt-8">{children}</main>
+          <footer className="pb-8 text-center text-xs text-muted-foreground">
+            <Link href="/privacy" className="hover:text-foreground hover:underline">
+              Privacy
+            </Link>
+          </footer>
         </Providers>
       </body>
     </html>
