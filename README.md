@@ -1,69 +1,130 @@
-# A Thought a Day
+# Just a thought
 
-One new idea every day. A short read, a few flip cards, two or three mini games, about 5 minutes.
-Sign in to track what you've learned. After 7 thoughts, memory quizzes unlock and mix questions from all of them.
+![Just a thought](src/app/opengraph-image.png)
 
-Next.js 16, Better Auth, Drizzle + Postgres, Tailwind v4, shadcn/ui, Motion.
+One new idea every day, learned in about five minutes. Read a short explanation, flip a few fact cards, play two or three tiny games, and walk away knowing something new. Sign in to keep a streak, and after 7 thoughts, memory quizzes unlock that mix questions from everything you've learned.
 
-## Setup
+Topics span science, space, history, philosophy, ethics, ideologies, experiments, research and curious facts.
+
+## Features
+
+- **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight UTC.
+- **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls.
+- **Library** of every thought you've learned, with your streak.
+- **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
+- **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, and their result is saved when they sign up.
+- **Light and dark mode**, following the device setting, with lots of small animations (respecting reduced motion).
+- **Account deletion** and a plain-language privacy page.
+
+## Tech
+
+[Next.js 16](https://nextjs.org) (App Router, Cache Components), [Better Auth](https://better-auth.com), [Drizzle ORM](https://orm.drizzle.team) on Postgres, [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Motion](https://motion.dev) and [Resend](https://resend.com) for email.
+
+## Run it locally
+
+You need Node.js 22 or newer and a Postgres database (a free [Neon](https://neon.tech) database works, or a local one).
 
 ```bash
 npm install
-cp .env.example .env   # fill in DATABASE_URL and BETTER_AUTH_SECRET
-npm run db:push        # create tables
-npm run dev
+cp .env.example .env   # set DATABASE_URL and BETTER_AUTH_SECRET
+npm run db:migrate     # create the tables
+npm run dev            # http://localhost:3000
 ```
 
-Any Postgres works (Neon's free tier is easiest for Vercel).
-Without a database you can still play today's thought as a guest and use `/preview`.
+Sign-in codes are printed in the terminal running `npm run dev`, so you don't need an email service locally.
 
-## Sign-in
+Without a database you can still play today's thought as a guest, and browse every thought at [`/preview`](http://localhost:3000/preview).
 
-No passwords. People sign in with a 6-digit code sent to their email, or with Google.
+## Deploy to Vercel with Neon
 
-- **Email codes** are sent with [Resend](https://resend.com). In local dev, leave `RESEND_API_KEY` empty
-  and the code is printed in the terminal running `npm run dev`. In production, set `RESEND_API_KEY`
-  and `EMAIL_FROM` (an address on a domain you've verified in Resend).
-- **Google** is optional. Set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` and the button appears.
-  In Google Cloud, add `<your URL>/api/auth/callback/google` as a redirect URI.
-- **Rate limits** (production only): 5 code emails and 5 sign-in attempts per IP per 10 minutes,
-  stored in the database so they hold on serverless.
-- If codes don't arrive, check the server logs for `Failed to run background task`. Send errors are
-  logged there instead of being shown to the user.
+1. Import the GitHub repo into [Vercel](https://vercel.com/new).
+2. In the Vercel project, open **Storage** and connect a **Neon** database. This sets `DATABASE_URL` for you.
+3. Add the other environment variables below under **Settings → Environment Variables**.
+4. Deploy. Every build first runs the database migrations, so the tables are created and kept up to date automatically.
 
-## Privacy
+### Environment variables
 
-`/privacy` lists what's stored. People can delete their account and all their data from `/account`.
-The address in `EMAIL_FROM` is shown there as the contact address.
+| Variable | Needed | What it is |
+| --- | --- | --- |
+| `DATABASE_URL` | Yes | Postgres connection string. Set automatically by the Neon integration. |
+| `BETTER_AUTH_SECRET` | Yes | A random string of 32+ characters. Generate one with `openssl rand -base64 32`. |
+| `BETTER_AUTH_URL` | Yes | The public URL of the app, e.g. `https://just-a-thought.vercel.app`. |
+| `RESEND_API_KEY` | In production | API key from [Resend](https://resend.com), used to email sign-in codes. |
+| `EMAIL_FROM` | In production | Sender, e.g. `Just a thought <hello@yourdomain.com>`, on a domain verified in Resend. Also shown as the contact address on `/privacy`. |
+| `GOOGLE_CLIENT_ID` | Optional | Enables "Continue with Google". |
+| `GOOGLE_CLIENT_SECRET` | Optional | Goes with the client ID. In Google Cloud, add `<BETTER_AUTH_URL>/api/auth/callback/google` as a redirect URI. |
 
-## How days work
+If sign-in codes don't arrive, check the Vercel logs for `Failed to run background task`. Email errors are logged there rather than shown to the user.
 
-- `LAUNCH_DATE` in `src/content/index.ts` is the day thought #1 goes live (UTC).
-  Set it to your real launch day before deploying.
-- Each next thought in the `thoughts` array unlocks one day later. Only today's thought is playable.
-- If the list runs out, the home page shows "No new thought today".
-- Someone mid-play at midnight can still save yesterday's thought for one hour.
+## How the days work
 
-## Adding thoughts
+- `LAUNCH_DATE` in [`src/content/index.ts`](src/content/index.ts) is the day thought #1 goes live (UTC). **Set it to your real launch day.**
+- Each next thought in the `thoughts` array unlocks one day later.
+- Only today's thought can be played. Someone mid-play at midnight can still save yesterday's thought for one hour.
+- If the list runs out, the home page shows "No new thought today", so keep a buffer of thoughts ready.
 
-1. Copy a file in `src/content/thoughts/` and edit it. Types are in `src/content/types.ts`.
-2. Add it to the end of the `thoughts` array in `src/content/index.ts`.
-3. Preview it at `/preview` (dev only). Nothing is saved there.
+## Writing new thoughts
 
-Content is checked automatically when the app starts. A mistake like a wrong answer index makes
-`npm run dev` show an error and `npm run build` fail, with a message naming the thought and the problem.
+Each thought is one file in [`src/content/thoughts/`](src/content/thoughts). The shape is defined in [`src/content/types.ts`](src/content/types.ts).
 
-Rules: never change a `slug` or reorder thoughts that are already live, since progress is stored by slug and the schedule is by position.
+1. Copy an existing thought file and rewrite it.
+2. Add it to the **end** of the `thoughts` array in [`src/content/index.ts`](src/content/index.ts).
+3. Play it at [`/preview`](http://localhost:3000/preview) in `npm run dev`. Nothing is saved there.
 
-Mini game types: `choice`, `truefalse` (swipe cards), `order` (drag to sort), `match` (tap pairs), `estimate` (slider), `poll` (no score).
-Each thought also has 3 `recall` questions used by the memory quizzes.
+A thought has a title, emoji, category, a one-line hook, 2 or 3 short paragraphs (wrap key words in `**double stars**`), a one-sentence takeaway, 3 flip-card facts, 2 or 3 games and 3 recall questions for the memory quizzes.
 
-## Structure
+| Game type | What the player does | Scored |
+| --- | --- | --- |
+| `choice` | Picks one answer | Yes |
+| `truefalse` | Swipes statements left or right | Yes |
+| `order` | Drags items into the right order | Yes, per position |
+| `match` | Taps pairs together | Yes, minus wrong guesses |
+| `estimate` | Guesses a number on a slider | Yes, within a tolerance |
+| `poll` | Gives an opinion, sees what others think | No |
+
+Content is checked automatically. A mistake like an answer pointing past the options shows an error in `npm run dev` and fails the build, naming the thought and the problem.
+
+**Rules:** never rename a `slug` or reorder thoughts that are already live. Progress is stored by slug, and the schedule follows the order of the list.
+
+## Changing the database
+
+Edit [`src/db/schema.ts`](src/db/schema.ts), then run:
+
+```bash
+npm run db:generate   # writes a new migration file to ./drizzle
+npm run db:migrate    # applies it to your local database
+```
+
+Commit the new file in `./drizzle`. The next deploy applies it to production automatically.
+
+## Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Run database migrations (if `DATABASE_URL` is set), then build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Lint the code |
+| `npm run db:migrate` | Apply pending migrations |
+| `npm run db:generate` | Create a migration after changing the schema |
+| `npm run db:studio` | Browse the database in Drizzle Studio |
+
+## Project structure
 
 ```
-src/content/        thoughts, schedule, categories
-src/components/     player (the daily flow + games), quiz, UI
-src/app/            pages: / (today), /library, /review, /sign-in, /preview
-src/app/actions.ts  saves a finished thought (only today's)
-src/db/schema.ts    Better Auth tables + learned_thought
+src/
+  app/                 pages: / (today), /library, /review, /account, /privacy, /sign-in, /preview
+    actions.ts         saving a learned thought, deleting an account
+  components/
+    player/            the daily flow and the six mini games
+    quiz/              memory quizzes
+    ui/                shadcn/ui components
+  content/
+    thoughts/          one file per thought
+    index.ts           the schedule and LAUNCH_DATE
+    validate.ts        the content checker
+  db/schema.ts         database tables
+  lib/                 auth, email, data access
+drizzle/               database migrations
+scripts/migrate.mjs    runs migrations before each build
 ```

@@ -2,7 +2,7 @@ import { BookOpen, Brain, Sun } from "lucide-react"
 import Link from "next/link"
 import { Suspense } from "react"
 
-import { Logo } from "@/components/logo"
+import { Wordmark } from "@/components/logo"
 import { UserMenu } from "@/components/user-menu"
 import { UserMenuBoundary } from "@/components/user-menu-boundary"
 
@@ -16,11 +16,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-14 w-full max-w-2xl items-center gap-2 px-4">
-        <Link href="/" className="group mr-auto flex items-center gap-2">
-          <Logo className="size-7 text-foreground transition-transform group-hover:scale-110 group-hover:-rotate-6" />
-          <span className="font-display text-lg font-semibold tracking-tight">
-            a thought <span className="text-muted-foreground">a day</span>
-          </span>
+        <Link href="/" aria-label="Just a thought, home" className="group mr-auto">
+          <Wordmark className="flex items-center gap-2" />
         </Link>
         <nav className="flex items-center">
           {links.map(({ href, label, icon: Icon }) => (

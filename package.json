@@ -1,13 +1,14 @@
 {
-  "name": "a-thought-a-day",
+  "name": "just-a-thought",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/migrate.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "drizzle-kit push",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:generate": "drizzle-kit generate",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

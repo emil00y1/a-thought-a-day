@@ -13,12 +13,12 @@ export async function sendSignInCode(email: string, code: string) {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: process.env.EMAIL_FROM ?? "A Thought a Day <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM ?? "Just a thought <onboarding@resend.dev>",
       to: email,
       subject: `${code} is your sign-in code`,
-      text: `Your sign-in code for A Thought a Day is ${code}. It expires in 5 minutes.\n\nDidn't ask for it? You can ignore this email.`,
+      text: `Your sign-in code for Just a thought is ${code}. It expires in 5 minutes.\n\nDidn't ask for it? You can ignore this email.`,
       html: `<div style="font-family:system-ui,sans-serif;max-width:420px;margin:auto;padding:24px;color:#1c1f2a">
-  <p style="font-size:16px">Your sign-in code for <b>A Thought a Day</b>:</p>
+  <p style="font-size:16px">Your sign-in code for <b>Just a thought</b>:</p>
   <p style="font-size:36px;font-weight:700;letter-spacing:8px;margin:24px 0">${code}</p>
   <p style="font-size:14px;color:#6b6f7b">It expires in 5 minutes. Didn't ask for it? You can ignore this email.</p>
 </div>`,

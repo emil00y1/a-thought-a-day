@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/page-header"
 
 export const metadata: Metadata = { title: "Privacy" }
 
-// The sender address doubles as the contact address, e.g. "A Thought a Day <hello@example.com>".
+// The sender address doubles as the contact address, e.g. "Just a thought <hello@example.com>".
 const contact = process.env.EMAIL_FROM?.match(/<([^>]+)>/)?.[1] ?? process.env.EMAIL_FROM
 
 const sections = [
