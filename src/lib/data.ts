@@ -1,4 +1,5 @@
 import "server-only"
+import { getSessionCookie } from "better-auth/cookies"
 import { desc, eq } from "drizzle-orm"
 import { headers } from "next/headers"
 import { connection } from "next/server"
@@ -25,7 +26,10 @@ export async function getToday() {
 }
 
 export const getUser = cache(async () => {
-  const session = await auth.api.getSession({ headers: await headers() })
+  const requestHeaders = await headers()
+  // Guests have no session cookie, so skip auth (and its database lookup) entirely.
+  if (!getSessionCookie(requestHeaders)) return null
+  const session = await auth.api.getSession({ headers: requestHeaders })
   if (!session) return null
   const { id, name, email, createdAt } = session.user
   // Email-code sign-ups have no name, so fall back to the email.
