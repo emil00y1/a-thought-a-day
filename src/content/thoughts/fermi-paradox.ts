@@ -70,20 +70,20 @@ export const fermiParadox: Thought = {
     {
       question: "What is the \"Great Filter\"?",
       options: [
-        "A telescope that blocks starlight",
-        "A step so hard almost no civilization gets past it",
-        "A law against contacting aliens",
-        "The edge of the galaxy",
+        "A telescope filter that blocks starlight",
+        "A step almost no civilization gets past",
+        "An alien rule against contacting us",
+        "The idea that everyone hides from danger",
       ],
       answer: 1,
     },
     {
       question: "Why is the silence of aliens a paradox?",
       options: [
-        "Aliens were found but won't talk",
-        "The galaxy is so big and old that someone should have shown up",
-        "Radio waves can't travel through space",
-        "Stars are too far apart to have planets",
+        "Aliens were found but won't talk to us",
+        "Someone should have shown up by now",
+        "No ship could ever cross the galaxy",
+        "Most stars have no planets at all",
       ],
       answer: 1,
     },

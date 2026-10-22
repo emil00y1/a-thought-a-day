@@ -30,7 +30,7 @@ export const forgettingCurve: Thought = {
     {
       type: "choice",
       question: "What did Ebbinghaus memorize to study forgetting?",
-      options: ["Famous poems", "Meaningless syllables", "Phone numbers", "Chess positions"],
+      options: ["Lists of everyday words", "Nonsense syllables", "Strings of random digits", "Chess positions"],
       answer: 1,
       explain: "He used made-up syllables so that meaning and past knowledge couldn't help him.",
     },
@@ -69,10 +69,10 @@ export const forgettingCurve: Thought = {
     {
       question: "What does the forgetting curve show?",
       options: [
-        "Memory drops fastest soon after learning",
-        "We forget at a steady rate forever",
-        "Old memories fade before new ones",
-        "Sleep erases short-term memory",
+        "We forget fastest right after learning",
+        "We forget at the same steady rate forever",
+        "Old memories fade faster than new ones",
+        "Sleep wipes out most new memories",
       ],
       answer: 0,
     },

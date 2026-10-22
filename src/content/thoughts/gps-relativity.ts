@@ -30,7 +30,7 @@ export const gpsRelativity: Thought = {
     {
       type: "choice",
       question: "Compared to clocks on the ground, GPS satellite clocks...",
-      options: ["Run slower", "Run faster, by about 38 microseconds a day", "Run at exactly the same speed", "Stop working in space"],
+      options: ["Lose about 38 microseconds a day", "Gain about 38 microseconds a day", "Gain about 38 seconds a day", "Tick at exactly the same rate"],
       answer: 1,
       explain: "Weaker gravity speeds them up more than their speed slows them down.",
     },
@@ -59,21 +59,21 @@ export const gpsRelativity: Thought = {
     {
       question: "Why must GPS correct for relativity?",
       options: [
-        "The satellites get too hot",
-        "Time runs at a different speed for the satellites",
-        "Signals bounce off clouds",
-        "Earth's magnetic field bends them",
+        "Sunlight heats up the satellite clocks",
+        "Time runs faster for the satellites",
+        "Clouds slow down the radio signals",
+        "Earth's magnetic field bends the signals",
       ],
       answer: 1,
     },
     {
       question: "How much do GPS satellite clocks gain per day?",
-      options: ["About 38 microseconds", "About 1 second", "About 1 minute", "Nothing"],
+      options: ["About 38 microseconds", "About 38 milliseconds", "About a tenth of a second", "About 1 minute"],
       answer: 0,
     },
     {
       question: "Which effect makes GPS satellite clocks run faster?",
-      options: ["Their high speed", "Weaker gravity high above Earth", "Solar wind", "The cold of space"],
+      options: ["Their high orbital speed", "Weaker gravity in orbit", "Pressure from the solar wind", "The cold of outer space"],
       answer: 1,
     },
   ],

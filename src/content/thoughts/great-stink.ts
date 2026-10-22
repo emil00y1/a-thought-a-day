@@ -30,7 +30,7 @@ export const greatStink: Thought = {
     {
       type: "choice",
       question: "What did most experts in 1858 think caused cholera?",
-      options: ["Dirty water", "Bad air (miasma)", "Rats", "Spoiled food"],
+      options: ["Dirty drinking water", "Bad air (miasma)", "Fleas carried by rats", "Spoiled food"],
       answer: 1,
       explain: "Miasma theory blamed foul smells. It was wrong, but it got the sewers built.",
     },
@@ -70,16 +70,16 @@ export const greatStink: Thought = {
     {
       question: "What was the Great Stink?",
       options: [
-        "A London fire in 1666",
-        "A hot summer when the sewage-filled Thames reeked",
-        "A cholera hospital",
-        "A Victorian perfume scandal",
+        "A huge London fire in 1666",
+        "When the Thames reeked of sewage",
+        "The 1854 cholera outbreak in Soho",
+        "A thick fog of coal smoke over London",
       ],
       answer: 1,
     },
     {
       question: "What actually spreads cholera?",
-      options: ["Bad smells", "Contaminated water", "Cold weather", "Insects"],
+      options: ["Foul air from rivers", "Contaminated water", "Cold, damp weather", "Bites from insects"],
       answer: 1,
     },
     {

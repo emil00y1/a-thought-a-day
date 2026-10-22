@@ -42,10 +42,10 @@ export const birthdayParadox: Thought = {
       type: "choice",
       question: "Why is the number so low?",
       options: [
-        "Birthdays cluster in summer",
-        "There are many possible pairs, not just you against everyone else",
-        "People lie about their birthdays",
-        "Leap years",
+        "Birthdays cluster in the summer months",
+        "Any pair can match, not just you",
+        "Everyone is compared to the same person",
+        "Leap years add extra matches",
       ],
       answer: 1,
       explain: "Every pair is a chance, and the number of pairs grows much faster than the number of people.",
@@ -64,17 +64,17 @@ export const birthdayParadox: Thought = {
   recall: [
     {
       question: "How many people for a 50% chance that two share a birthday?",
-      options: ["23", "183", "365", "100"],
+      options: ["23", "183", "365", "70"],
       answer: 0,
     },
     {
       question: "Why does the birthday paradox need so few people?",
-      options: ["There are many possible pairs", "Birthdays aren't random", "Twins are common", "It's a myth"],
+      options: ["There are many possible pairs", "Birthdays aren't really random", "Twins are very common", "Leap years add extra matches"],
       answer: 0,
     },
     {
       question: "How many people for a 50% chance someone shares YOUR birthday?",
-      options: ["23", "About 253", "365", "50"],
+      options: ["About 23", "About 253", "About 183", "About 365"],
       answer: 1,
     },
   ],

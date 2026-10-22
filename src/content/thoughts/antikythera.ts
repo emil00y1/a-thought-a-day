@@ -30,7 +30,7 @@ export const antikythera: Thought = {
     {
       type: "choice",
       question: "What did the Antikythera mechanism do?",
-      options: ["Navigated ships by the stars", "Modeled the sky and predicted eclipses", "Told the hour like a clock", "Measured earthquakes"],
+      options: ["Navigated ships by the stars", "Tracked the Sun, Moon and eclipses", "Told the hour like a clock", "Measured distances on roads"],
       answer: 1,
       explain: "Turn the handle and it showed where the Sun and Moon would be, and when eclipses would happen.",
     },
@@ -69,12 +69,12 @@ export const antikythera: Thought = {
   recall: [
     {
       question: "Where was the Antikythera mechanism found?",
-      options: ["In a Greek shipwreck", "In an Egyptian tomb", "Under the Acropolis", "In a Roman villa"],
+      options: ["In a shipwreck off Greece", "In a pharaoh's tomb in Egypt", "Under the Acropolis in Athens", "In a buried Roman villa"],
       answer: 0,
     },
     {
       question: "What is the Antikythera mechanism often called?",
-      options: ["The first steam engine", "The oldest known analog computer", "The first telescope", "A Roman clock"],
+      options: ["The first steam engine", "The oldest analog computer", "The first telescope ever built", "An ancient ship's compass"],
       answer: 1,
     },
     {
