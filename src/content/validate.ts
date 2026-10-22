@@ -7,6 +7,7 @@ import type { Thought } from "./types"
 export function validateThoughts(thoughts: Thought[]) {
   const errors: string[] = []
   const slugs = new Set<string>()
+  const emojis = new Set<string>()
 
   for (const t of thoughts) {
     const fail = (msg: string) => errors.push(`${t.slug}: ${msg}`)
@@ -14,6 +15,12 @@ export function validateThoughts(thoughts: Thought[]) {
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(t.slug)) fail("slug must be kebab-case")
     if (slugs.has(t.slug)) fail("duplicate slug")
     slugs.add(t.slug)
+
+    // Whether an emoji fits is a judgment call, but it must be one emoji and not reused.
+    const graphemes = [...new Intl.Segmenter().segment(t.emoji)].length
+    if (graphemes !== 1 || !/\p{Extended_Pictographic}/u.test(t.emoji)) fail("emoji must be exactly one emoji")
+    if (emojis.has(t.emoji)) fail(`emoji ${t.emoji} is already used by another thought`)
+    emojis.add(t.emoji)
 
     if (t.body.length === 0) fail("body is empty")
     if (t.facts.length === 0) fail("needs at least one fact")

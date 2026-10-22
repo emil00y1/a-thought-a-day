@@ -14,3 +14,8 @@ export const themeScript = `(() => {
     media.addEventListener("change", apply)
   } catch {}
 })()`
+
+/** Tells the server the visitor's time zone, so a new thought arrives at their own midnight. */
+export const timeZoneScript = `try {
+  document.cookie = "tz=" + Intl.DateTimeFormat().resolvedOptions().timeZone + ";path=/;max-age=31536000;samesite=lax"
+} catch {}`

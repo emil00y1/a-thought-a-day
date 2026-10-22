@@ -28,6 +28,7 @@ const sections = [
     title: "Cookies and storage",
     items: [
       "One cookie keeps you signed in.",
+      "One cookie holds your time zone, so the new thought arrives at your midnight.",
       "Your browser remembers your light or dark mode choice, and which polls you've voted in.",
       "If you play without an account, your result is kept in your browser until you sign in, so it can be saved.",
       "We count visits with Vercel Web Analytics. It uses no cookies and doesn't follow you across other sites.",

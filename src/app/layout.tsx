@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
-import { themeScript } from "@/lib/theme-script"
+import { themeScript, timeZoneScript } from "@/lib/theme-script"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -43,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: timeZoneScript }} />
       </head>
       <body className="flex min-h-full flex-col font-sans">
         <Providers>

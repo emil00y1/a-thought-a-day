@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from "motion/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-function nextUtcMidnight() {
+function nextMidnight() {
   const next = new Date()
-  next.setUTCHours(24, 0, 0, 0)
+  next.setHours(24, 0, 0, 0)
   return next.getTime()
 }
 
@@ -29,17 +29,17 @@ function Digit({ value }: { value: string }) {
   )
 }
 
-/** Time until the next thought (midnight UTC). Refreshes the page when it hits zero. */
+/** Time until the next thought (local midnight). Refreshes the page when it hits zero. */
 export function Countdown() {
   const router = useRouter()
   const [left, setLeft] = useState<number | null>(null)
 
   useEffect(() => {
-    let target = nextUtcMidnight()
+    let target = nextMidnight()
     const tick = () => {
       const ms = target - Date.now()
       if (ms <= 0) {
-        target = nextUtcMidnight()
+        target = nextMidnight()
         router.refresh()
       }
       setLeft(Math.max(0, ms))

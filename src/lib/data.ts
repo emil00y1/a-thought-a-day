@@ -1,7 +1,7 @@
 import "server-only"
 import { getSessionCookie } from "better-auth/cookies"
 import { desc, eq } from "drizzle-orm"
-import { headers } from "next/headers"
+import { cookies, headers } from "next/headers"
 import { connection } from "next/server"
 import { cache } from "react"
 
@@ -19,10 +19,26 @@ export type Stats = {
   learnedToday: boolean
 }
 
-/** Today's UTC date, read at request time. */
+function isTimeZone(zone: string) {
+  try {
+    new Intl.DateTimeFormat("en-US", { timeZone: zone })
+    return true
+  } catch {
+    return false
+  }
+}
+
+/** The visitor's time zone: from their browser (a cookie), else Vercel's guess from their IP, else UTC. */
+export async function getTimeZone() {
+  const [cookieStore, requestHeaders] = await Promise.all([cookies(), headers()])
+  const zone = [cookieStore.get("tz")?.value, requestHeaders.get("x-vercel-ip-timezone")].find((z) => z && isTimeZone(z))
+  return zone ?? "UTC"
+}
+
+/** Today's date in the visitor's time zone, read at request time. */
 export async function getToday() {
   await connection()
-  return todayKey()
+  return todayKey(new Date(), await getTimeZone())
 }
 
 export const getUser = cache(async () => {

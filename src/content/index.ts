@@ -29,7 +29,7 @@ import { veilOfIgnorance } from "./thoughts/veil-of-ignorance"
 import { weirdTime } from "./thoughts/weird-time"
 import { validateThoughts } from "./validate"
 
-/** The day thought #1 goes live (UTC). Each following thought unlocks one day later. */
+/** The day thought #1 goes live, at midnight in each player's time zone. Each following thought unlocks one day later. */
 export const LAUNCH_DATE = "2026-10-20"
 
 /** The schedule. Only ever append to the end once a thought has gone live. */
@@ -68,13 +68,15 @@ const bySlug = new Map(thoughts.map((t) => [t.slug, t]))
 
 const DAY_MS = 86_400_000
 
-/** Today's date as YYYY-MM-DD in UTC. */
-export function todayKey(now = new Date()) {
-  return now.toISOString().slice(0, 10)
+/** The date as YYYY-MM-DD in a time zone. */
+export function todayKey(now = new Date(), timeZone = "UTC") {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now)
+  const part = (type: string) => parts.find((p) => p.type === type)?.value
+  return `${part("year")}-${part("month")}-${part("day")}`
 }
 
 export function addDays(day: string, days: number) {
-  return todayKey(new Date(Date.parse(day) + days * DAY_MS))
+  return new Date(Date.parse(day) + days * DAY_MS).toISOString().slice(0, 10)
 }
 
 /** Index of the thought scheduled for `day`. Negative before launch. */
@@ -91,11 +93,12 @@ export function thoughtForDay(day: string) {
 const GRACE_MS = 60 * 60 * 1000
 
 /** The day a finished thought counts for: today's thought, or yesterday's just after midnight. Otherwise null. */
-export function saveableDay(slug: string, now = new Date()) {
-  const today = todayKey(now)
+export function saveableDay(slug: string, timeZone: string, now = new Date()) {
+  const today = todayKey(now, timeZone)
   if (thoughtForDay(today)?.slug === slug) return today
-  const yesterday = addDays(today, -1)
-  if (now.getTime() - Date.parse(today) < GRACE_MS && thoughtForDay(yesterday)?.slug === slug) return yesterday
+  // An hour ago it may still have been yesterday.
+  const earlier = todayKey(new Date(now.getTime() - GRACE_MS), timeZone)
+  if (thoughtForDay(earlier)?.slug === slug) return earlier
   return null
 }
 

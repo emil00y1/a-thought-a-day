@@ -84,7 +84,7 @@ export const rateLimit = pgTable("rate_limit", {
 
 // App tables
 
-/** One row per thought a user has finished. `day` is the UTC date they learned it. */
+/** One row per thought a user has finished. `day` is the date it was scheduled for (the player's local date). */
 export const learnedThought = pgTable(
   "learned_thought",
   {

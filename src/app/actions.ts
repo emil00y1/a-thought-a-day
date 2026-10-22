@@ -7,7 +7,7 @@ import { saveableDay, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
 import { learnedThought, pollTally, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
-import { getStats, getUser, type Stats } from "@/lib/data"
+import { getStats, getTimeZone, getUser, type Stats } from "@/lib/data"
 
 type Result = { ok: true; stats: Stats } | { ok: false; error: string }
 
@@ -20,7 +20,8 @@ export async function completeThought(input: { slug: string; correct: number; to
   const user = await getUser()
   if (!user) return { ok: false, error: "Sign in to save your progress." }
 
-  const day = saveableDay(input.slug)
+  const timeZone = await getTimeZone()
+  const day = saveableDay(input.slug, timeZone)
   if (!day) return { ok: false, error: "That's no longer today's thought." }
 
   const total = clampInt(input.total, 0, 100)
@@ -32,7 +33,7 @@ export async function completeThought(input: { slug: string; correct: number; to
     .onConflictDoNothing()
 
   // No refresh() here: just after midnight it would swap the page to the new thought mid-celebration.
-  return { ok: true, stats: await getStats(user.id, todayKey()) }
+  return { ok: true, stats: await getStats(user.id, todayKey(new Date(), timeZone)) }
 }
 
 /** Permanently deletes the signed-in user. Sessions, logins and learned thoughts go with it (cascade). */
@@ -63,7 +64,7 @@ export async function votePoll(input: {
 
   const where = and(eq(pollTally.thoughtSlug, input.slug), eq(pollTally.pollIndex, input.pollIndex))
   try {
-    if (input.record && saveableDay(input.slug)) {
+    if (input.record && saveableDay(input.slug, await getTimeZone())) {
       await db
         .insert(pollTally)
         .values({ thoughtSlug: input.slug, pollIndex: input.pollIndex, option: input.option, votes: 1 })

@@ -8,7 +8,7 @@ Topics span science, space, history, philosophy, ethics, ideologies, experiments
 
 ## Features
 
-- **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight UTC.
+- **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight in your own time zone.
 - **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted (once a poll has 10 votes).
 - **Library** of every thought you've learned, with your streak.
 - **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
@@ -59,7 +59,8 @@ If sign-in codes don't arrive, check the Vercel logs for `Failed to run backgrou
 
 ## How the days work
 
-- `LAUNCH_DATE` in [`src/content/index.ts`](src/content/index.ts) is the day thought #1 goes live (UTC). **Set it to your real launch day.**
+- `LAUNCH_DATE` in [`src/content/index.ts`](src/content/index.ts) is the day thought #1 goes live. **Set it to your real launch day.**
+- Days follow each player's local time. The browser saves its time zone in a `tz` cookie. Before that cookie exists, the server uses Vercel's guess from the IP address, then UTC.
 - Each next thought in the `thoughts` array unlocks one day later.
 - Only today's thought can be played. Someone mid-play at midnight can still save yesterday's thought for one hour.
 - If the list runs out, the home page shows "No new thought today", so keep a buffer of thoughts ready.
