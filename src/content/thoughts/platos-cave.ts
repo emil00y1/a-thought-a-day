@@ -42,7 +42,12 @@ export const platosCave: Thought = {
     {
       type: "choice",
       question: "In the allegory, what do the shadows stand for?",
-      options: ["Dreams", "Appearances we mistake for the truth", "Ghosts of ancestors", "Fear of the dark"],
+      options: [
+        "The dreams we have while asleep",
+        "What we mistake for the truth",
+        "The ghosts of our ancestors",
+        "The gods watching over us",
+      ],
       answer: 1,
       explain: "The shadows are the surface of things. Plato thought real understanding lies beyond what we first see.",
     },
@@ -59,17 +64,27 @@ export const platosCave: Thought = {
   recall: [
     {
       question: "In Plato's cave, what do the prisoners believe is real?",
-      options: ["The fire", "Shadows on the wall", "The Sun", "Their dreams"],
+      options: ["The fire behind them", "Shadows on the wall", "The Sun outside the cave", "Their own dreams"],
       answer: 1,
     },
     {
       question: "What happens when the freed prisoner returns to the cave?",
-      options: ["He is crowned king", "The others mock him and resist", "He forgets everything", "He stays silent"],
+      options: [
+        "They make him their leader",
+        "The others laugh at him",
+        "He forgets what he saw",
+        "He chooses to stay quiet",
+      ],
       answer: 1,
     },
     {
       question: "What is Plato's cave mainly about?",
-      options: ["Ancient architecture", "Education and seeing past appearances", "Fire safety", "Greek religion"],
+      options: [
+        "Respect for the Greek gods",
+        "Education and seeing the truth",
+        "How early humans lived in caves",
+        "Why people fear the dark",
+      ],
       answer: 1,
     },
   ],

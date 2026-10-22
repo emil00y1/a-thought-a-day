@@ -31,10 +31,10 @@ export const leftAndRight: Thought = {
       type: "choice",
       question: "Where do the political terms \"left\" and \"right\" come from?",
       options: [
-        "Ancient Rome's senate",
-        "Seating in the French National Assembly",
-        "The two houses of the US Congress",
-        "The British royal court",
+        "Seating in the Roman senate",
+        "Seating in a French assembly",
+        "Benches in the UK House of Commons",
+        "The two parties in the US Congress",
       ],
       answer: 1,
       explain: "In 1789, supporters of the king sat on the right and revolutionaries on the left.",
@@ -73,12 +73,22 @@ export const leftAndRight: Thought = {
   recall: [
     {
       question: "Where did \"left\" and \"right\" in politics begin?",
-      options: ["Seating in the French National Assembly", "Roman legions", "The US Congress", "Greek city-states"],
+      options: [
+        "A French assembly in 1789",
+        "The British House of Commons",
+        "Early US Congress debates",
+        "Greek city-state councils",
+      ],
       answer: 0,
     },
     {
       question: "In 1789, who sat on the right?",
-      options: ["Revolutionaries", "Supporters of the king", "Foreign diplomats", "Journalists"],
+      options: [
+        "Those who wanted radical change",
+        "Supporters of the king",
+        "Foreign ambassadors",
+        "Visiting journalists",
+      ],
       answer: 1,
     },
     {

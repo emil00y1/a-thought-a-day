@@ -74,9 +74,9 @@ export const paleBlueDot: Thought = {
     {
       question: "What is the Pale Blue Dot?",
       options: [
-        "A photo of Earth taken by Voyager 1 from about 6 billion km",
-        "A star close to the Sun",
-        "A NASA mission patch",
+        "A photo of Earth from Voyager 1",
+        "A small blue star near the Sun",
+        "A photo of Neptune from Voyager 2",
         "The first photo taken from the Moon",
       ],
       answer: 0,
@@ -88,7 +88,12 @@ export const paleBlueDot: Thought = {
     },
     {
       question: "How big is Earth in the Pale Blue Dot photo?",
-      options: ["About a tenth of a pixel", "Half the frame", "A clear small circle", "It isn't visible at all"],
+      options: [
+        "About a tenth of a pixel",
+        "About half the frame",
+        "A small but sharp blue circle",
+        "About 100 pixels wide",
+      ],
       answer: 0,
     },
   ],

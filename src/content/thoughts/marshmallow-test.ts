@@ -44,9 +44,9 @@ export const marshmallowTest: Thought = {
       question: "What did the big 2018 replication find?",
       options: [
         "The original link was even stronger",
-        "The link was weaker and mostly explained by background",
-        "Kids today can't wait at all",
-        "Only older kids could wait",
+        "A weaker link, mostly due to background",
+        "Kids today wait far less than in the 1960s",
+        "The link held only for older kids",
       ],
       answer: 1,
       explain: "Once family background and early skills were accounted for, waiting time predicted much less.",
@@ -64,12 +64,22 @@ export const marshmallowTest: Thought = {
   recall: [
     {
       question: "In the marshmallow test, how did kids get two treats?",
-      options: ["By sharing", "By waiting without eating the first one", "By solving a puzzle", "By asking politely"],
+      options: [
+        "By sharing with another child",
+        "By waiting about 15 minutes",
+        "By solving a short puzzle",
+        "By asking the adult politely",
+      ],
       answer: 1,
     },
     {
       question: "What did later research find mattered a lot for waiting?",
-      options: ["Hair color", "Family background and trust", "Time of day", "The type of treat"],
+      options: [
+        "How hungry the kids were that day",
+        "Family background and trust",
+        "The time of day of the test",
+        "The type of treat on offer",
+      ],
       answer: 1,
     },
     {

@@ -67,12 +67,22 @@ export const milgram: Thought = {
     },
     {
       question: "Were the shocks in the Milgram experiment real?",
-      options: ["Yes", "No, the learner was an actor", "Only the small ones", "Only in one version"],
+      options: [
+        "Yes, up to 450 volts",
+        "No, the learner was acting",
+        "Yes, with a doctor standing by",
+        "Only in the first version",
+      ],
       answer: 1,
     },
     {
       question: "What made people in Milgram's studies most likely to stop?",
-      options: ["Higher pay", "Seeing other people refuse", "A bigger lab", "Louder screams"],
+      options: [
+        "Being paid a bit more",
+        "Seeing other people refuse",
+        "Feeling tired after many rounds",
+        "Having done a study before",
+      ],
       answer: 1,
     },
   ],

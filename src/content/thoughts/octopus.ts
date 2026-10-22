@@ -77,7 +77,12 @@ export const octopus: Thought = {
     },
     {
       question: "Why is octopus blood blue?",
-      options: ["It uses copper to carry oxygen", "It's very cold", "It reflects the sea", "It has no oxygen"],
+      options: [
+        "It uses copper instead of iron",
+        "It lives in cold, deep water",
+        "It carries no oxygen at all",
+        "It reflects the color of the sea",
+      ],
       answer: 0,
     },
     {

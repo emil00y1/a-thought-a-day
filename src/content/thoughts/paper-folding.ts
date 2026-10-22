@@ -51,7 +51,7 @@ export const paperFolding: Thought = {
     {
       type: "choice",
       question: "Option A: a million dollars today. Option B: 1 cent today, doubled every day for 30 days. Which is more?",
-      options: ["Option A, the million", "Option B, the doubling cent", "They're about the same"],
+      options: ["Option A, the million dollars", "Option B, the doubling cent", "They're about the same"],
       answer: 1,
       explain: "Day 30 alone pays about $5.4 million, and the 30 days add up to over $10 million.",
     },
@@ -64,12 +64,22 @@ export const paperFolding: Thought = {
     },
     {
       question: "Why does folded paper get so thick so fast?",
-      options: ["Paper expands when folded", "Each fold doubles the thickness", "Air gets trapped", "It doesn't"],
+      options: [
+        "Paper swells a bit with each fold",
+        "Each fold doubles the thickness",
+        "Air gets trapped between layers",
+        "Each fold adds one more layer",
+      ],
       answer: 1,
     },
     {
       question: "What did Britney Gallivan do in 2002?",
-      options: ["Folded paper in half 12 times", "Invented origami", "Sent paper to the Moon", "Made the thinnest paper"],
+      options: [
+        "Folded paper in half 12 times",
+        "Proved 7 folds is the limit",
+        "Made the world's thinnest paper",
+        "Folded a sheet 42 times",
+      ],
       answer: 0,
     },
   ],

@@ -65,9 +65,9 @@ export const montyHall: Thought = {
       question: "Why does switching help in the Monty Hall problem?",
       options: [
         "The host opens a door at random",
-        "The host knows where the car is and always shows a goat",
-        "The car moves between doors",
-        "It doesn't help",
+        "The host knowingly shows a goat",
+        "The car gets moved after your pick",
+        "It doesn't, it's really 50/50",
       ],
       answer: 1,
     },
