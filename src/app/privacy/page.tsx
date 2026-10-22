@@ -21,19 +21,21 @@ const sections = [
   },
   {
     title: "What we don't do",
-    items: ["No ads.", "No tracking or analytics cookies.", "We never sell or share your data with anyone else."],
+    items: ["No ads.", "No tracking cookies.", "We never sell or share your data with anyone else."],
   },
   {
     title: "Cookies and storage",
     items: [
       "One cookie keeps you signed in.",
       "If you play without an account, your result is kept in your browser until you sign in, so it can be saved.",
+      "We count visits with Vercel Web Analytics. It uses no cookies and doesn't follow you across other sites.",
     ],
   },
   {
     title: "Who helps us run it",
     items: [
-      "Our hosting and database providers store the data above.",
+      "Our database provider stores the data above.",
+      "Vercel hosts the app and counts visits.",
       "Resend sends the sign-in emails.",
       "Google, only if you choose to sign in with Google.",
     ],
@@ -76,7 +78,7 @@ export default function PrivacyPage() {
           <Link href="/account" className="underline underline-offset-4 hover:text-foreground">
             Account
           </Link>{" "}
-          page. Last updated 21 October 2026.
+          page. Last updated 22 October 2026.
         </p>
       </div>
     </>

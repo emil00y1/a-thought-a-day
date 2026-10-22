@@ -18,7 +18,7 @@ Topics span science, space, history, philosophy, ethics, ideologies, experiments
 
 ## Tech
 
-[Next.js 16](https://nextjs.org) (App Router, Cache Components), [Better Auth](https://better-auth.com), [Drizzle ORM](https://orm.drizzle.team) on Postgres, [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Motion](https://motion.dev) and [Resend](https://resend.com) for email.
+[Next.js 16](https://nextjs.org) (App Router, Cache Components), [Better Auth](https://better-auth.com), [Drizzle ORM](https://orm.drizzle.team) on Postgres, [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Motion](https://motion.dev), [Resend](https://resend.com) for email and [Vercel Web Analytics](https://vercel.com/docs/analytics) for visit counts. To see the numbers, enable Analytics in the Vercel project.
 
 ## Run it locally
 
