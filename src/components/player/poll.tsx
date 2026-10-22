@@ -1,16 +1,12 @@
 "use client"
 
-import { AnimatePresence, motion } from "motion/react"
+import { motion } from "motion/react"
 import { useState } from "react"
 
 import { votePoll } from "@/app/actions"
 import type { PollActivity } from "@/content/types"
 import { cn } from "@/lib/utils"
 import { ActivityTitle, Feedback, type Result } from "./shared"
-
-function plural(n: number, word: string) {
-  return `${n.toLocaleString("en-US")} ${word}${n === 1 ? "" : "s"}`
-}
 
 export function Poll({
   activity,
@@ -34,17 +30,6 @@ export function Poll({
 
   const total = counts?.reduce((a, b) => a + b, 0) ?? 0
   const share = (n: number) => (total ? Math.round((n / total) * 100) : 0)
-  const top = counts ? Math.max(...counts) : 0
-  const verdict =
-    !counts || picked === null || total === 0
-      ? null
-      : total === 1 && counts[picked] === 1
-        ? "🌱 You're the first to answer"
-        : counts[picked] !== top
-          ? "🦄 You're in the minority"
-          : counts.filter((c) => c === top).length > 1
-            ? "⚖️ It's a tie at the top"
-            : "🙌 You're with the majority"
 
   async function choose(i: number) {
     if (answered) return
@@ -114,30 +99,15 @@ export function Poll({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="relative flex w-14 flex-col items-end leading-tight"
+                  className="relative w-11 text-right font-semibold tabular-nums"
                 >
-                  <span className="font-semibold tabular-nums">{share(n)}%</span>
-                  <span className="text-[11px] font-normal text-muted-foreground tabular-nums">{plural(n, "vote")}</span>
+                  {share(n)}%
                 </motion.span>
               )}
             </motion.button>
           )
         })}
       </div>
-
-      <AnimatePresence>
-        {verdict && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 400, damping: 18, delay: 0.5 }}
-            className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center"
-          >
-            <span className="rounded-full bg-foreground px-3 py-1 text-sm font-semibold text-background">{verdict}</span>
-            <span className="text-xs text-muted-foreground">{plural(total, "answer")} so far</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <Feedback show={answered} title={note ? "Your take" : "Interesting!"}>
         {[note, activity.explain].filter(Boolean).join(" ")}
