@@ -55,9 +55,9 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHeader title="Privacy" subtitle="Short version: we store as little as possible, and you can delete it all." />
-      <div className="space-y-4">
+      <div className="space-y-8">
         {sections.map((s) => (
-          <section key={s.title} className="rounded-3xl border bg-card p-6 shadow-sm">
+          <section key={s.title}>
             <h2 className="font-display text-xl font-semibold">{s.title}</h2>
             <ul className="mt-3 list-disc space-y-1.5 pl-5 text-foreground/80">
               {s.items.map((item) => (
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
             </ul>
           </section>
         ))}
-        <p className="px-2 text-sm text-muted-foreground">
+        <p className="border-t pt-6 text-sm text-muted-foreground">
           {contact ? (
             <>
               Questions or requests? Write to{" "}
