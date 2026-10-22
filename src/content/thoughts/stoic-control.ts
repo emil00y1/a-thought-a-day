@@ -55,7 +55,7 @@ export const stoicControl: Thought = {
     {
       type: "choice",
       question: "According to Epictetus, what is truly up to us?",
-      options: ["Our health", "Our reputation", "Our judgments and choices", "Our wealth"],
+      options: ["Our health and body", "Our reputation with others", "Our judgments and choices", "Our money and possessions"],
       answer: 2,
       explain: "Health, reputation and wealth can all be taken away. How we judge and choose stays ours.",
     },
@@ -73,17 +73,22 @@ export const stoicControl: Thought = {
   recall: [
     {
       question: "What is the Stoic \"dichotomy of control\"?",
-      options: ["Some things are up to us and some are not", "Always control others", "Control your diet", "Nothing is up to us"],
+      options: [
+        "Some things are up to us, some aren't",
+        "Control your mind, then control others",
+        "Split your day between work and rest",
+        "Nothing is up to us, so stop trying",
+      ],
       answer: 0,
     },
     {
       question: "Which modern therapy drew on Stoic ideas?",
-      options: ["Cognitive behavioral therapy", "Hypnosis", "Psychoanalysis", "Electroshock therapy"],
+      options: ["Cognitive behavioral therapy", "Classic Freudian psychoanalysis", "Primal scream therapy", "Hypnotherapy"],
       answer: 0,
     },
     {
       question: "Who wrote the Meditations as a private journal?",
-      options: ["Epictetus", "Marcus Aurelius", "Plato", "Seneca"],
+      options: ["Epictetus", "Marcus Aurelius", "Zeno of Citium", "Seneca the Younger"],
       answer: 1,
     },
   ],

@@ -40,7 +40,7 @@ export const veilOfIgnorance: Thought = {
     {
       type: "choice",
       question: "What does the veil of ignorance hide from you?",
-      options: ["The laws of nature", "Your future place in society", "Other people's opinions", "The price of goods"],
+      options: ["The laws of nature and science", "Your own place in society", "Other people's opinions", "The rules you're choosing"],
       answer: 1,
       explain: "Not knowing where you'll land stops you from designing rules that only suit yourself.",
     },
@@ -69,10 +69,10 @@ export const veilOfIgnorance: Thought = {
     {
       question: "What is the veil of ignorance?",
       options: [
-        "Not knowing your place in the society you design",
-        "A ban on certain books",
-        "Hiding wealth from taxes",
-        "A religious rule",
+        "Not knowing who you'll be in society",
+        "A ban on teaching certain ideas",
+        "Hiding your wealth from the tax office",
+        "Choosing leaders by random lottery",
       ],
       answer: 0,
     },
@@ -83,7 +83,7 @@ export const veilOfIgnorance: Thought = {
     },
     {
       question: "When did Rawls think inequality could be fair?",
-      options: ["Never", "When it helps the worst-off", "When people work hard", "Always"],
+      options: ["Never, all shares must be equal", "When it helps the worst-off", "When it rewards hard work", "When it raises average wealth"],
       answer: 1,
     },
   ],

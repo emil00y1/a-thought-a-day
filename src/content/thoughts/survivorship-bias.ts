@@ -30,7 +30,12 @@ export const survivorshipBias: Thought = {
     {
       type: "choice",
       question: "Returning bombers had holes in the wings but few in the engines. Where should the armor go?",
-      options: ["The wings, where the holes are", "The engines, where the holes aren't", "Spread evenly everywhere", "Nowhere, armor is too heavy"],
+      options: [
+        "The wings, where the holes are",
+        "The engines, where holes are rare",
+        "Spread evenly over the whole plane",
+        "Nowhere, armor is too heavy",
+      ],
       answer: 1,
       explain: "Planes hit in the engines didn't come back to be counted. No holes there means hits there were deadly.",
     },
@@ -69,25 +74,30 @@ export const survivorshipBias: Thought = {
     {
       question: "What is survivorship bias?",
       options: [
-        "Judging only by what survived and missing what didn't",
-        "Being more likely to survive if you're careful",
+        "Judging only by what survived",
+        "Thinking you're luckier than most",
         "Trusting older people more",
-        "Remembering bad events more than good ones",
+        "Remembering bad events more than good",
       ],
       answer: 0,
     },
     {
       question: "Where did Abraham Wald suggest adding armor to bombers?",
-      options: ["Where returning planes had the most holes", "Where returning planes had no holes", "On the tail only", "Nowhere"],
+      options: [
+        "Where returning planes had the most holes",
+        "Where returning planes had no holes",
+        "Evenly over the whole plane",
+        "Nowhere, to keep planes light",
+      ],
       answer: 1,
     },
     {
       question: "Why do dropout billionaires make dropping out look smart?",
       options: [
-        "Dropping out really is smart",
-        "We don't hear about the many dropouts who didn't get rich",
-        "Billionaires hide their degrees",
-        "Universities hide the data",
+        "Dropping out really does pay off",
+        "We don't see the dropouts who failed",
+        "Billionaires hide their college degrees",
+        "Schools hide how well dropouts do",
       ],
       answer: 1,
     },

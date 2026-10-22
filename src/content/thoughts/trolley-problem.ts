@@ -59,22 +59,27 @@ export const trolleyProblem: Thought = {
   recall: [
     {
       question: "In the classic trolley problem, what does pulling the lever do?",
-      options: ["Stops the trolley", "Sends it toward one person instead of five", "Saves everyone", "Derails it safely"],
+      options: [
+        "Stops the trolley in its tracks",
+        "Sends it toward one person instead",
+        "Sends it onto an empty side track",
+        "Slows it so the five can step aside",
+      ],
       answer: 1,
     },
     {
       question: "Why do most people refuse to push the man off the bridge?",
       options: [
-        "Fewer people would be saved",
-        "Directly using someone as a tool feels wrong",
-        "It's against the law",
-        "They don't think it would work",
+        "It would save fewer people overall",
+        "Using someone as a tool feels wrong",
+        "They're afraid of going to prison",
+        "They doubt a man could stop a trolley",
       ],
       answer: 1,
     },
     {
       question: "Which theory judges actions only by their outcomes?",
-      options: ["Deontology", "Consequentialism", "Virtue ethics", "Stoicism"],
+      options: ["Deontology", "Consequentialism", "Virtue ethics", "Divine command theory"],
       answer: 1,
     },
   ],

@@ -67,10 +67,10 @@ export const prisonersDilemma: Thought = {
     {
       question: "In the prisoner's dilemma, what happens if both act purely selfishly?",
       options: [
-        "Both go free",
-        "Both end up worse off than if they'd cooperated",
-        "One wins big",
-        "Nothing happens",
+        "Both walk free",
+        "Both end up worse off",
+        "Both get 1 year each",
+        "One goes free, one gets 3 years",
       ],
       answer: 1,
     },
@@ -82,10 +82,10 @@ export const prisonersDilemma: Thought = {
     {
       question: "What does Tit for Tat do?",
       options: [
-        "Cooperates first, then copies the other player's last move",
-        "Always betrays",
-        "Picks at random",
-        "Never changes its move",
+        "Cooperates, then copies your last move",
+        "Betrays first, then copies your last move",
+        "Always cooperates, whatever you do",
+        "Picks a random move each round",
       ],
       answer: 0,
     },

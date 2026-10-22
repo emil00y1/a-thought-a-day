@@ -42,10 +42,10 @@ export const tardigrades: Thought = {
       type: "choice",
       question: "What's the tardigrade's main survival trick?",
       options: [
-        "A thick armored shell",
-        "Drying out into a paused state called a tun",
+        "A thick, armored outer shell",
+        "Drying out into a paused ball",
         "Living inside other animals",
-        "Glowing to scare off predators",
+        "Laying eggs that survive anything",
       ],
       answer: 1,
       explain: "As a tun, a tardigrade can wait out conditions that would kill it when active.",
@@ -84,7 +84,7 @@ export const tardigrades: Thought = {
     },
     {
       question: "Where have dried tardigrades survived?",
-      options: ["Only in labs on Earth", "The vacuum of space", "Inside volcanoes", "On the Sun's surface"],
+      options: ["Only in labs on Earth", "The vacuum of space", "Inside volcanoes", "On the surface of Mars"],
       answer: 1,
     },
   ],

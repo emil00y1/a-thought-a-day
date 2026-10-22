@@ -67,7 +67,12 @@ export const shipOfTheseus: Thought = {
   recall: [
     {
       question: "What happens to the Ship of Theseus?",
-      options: ["It sinks and is rebuilt", "Every plank is replaced over time", "It's split into two ships", "It's painted a new color"],
+      options: [
+        "It sinks and is rebuilt from scratch",
+        "Every plank is replaced over time",
+        "It's captured and renamed by Sparta",
+        "It's sold to pay for a new fleet",
+      ],
       answer: 1,
     },
     {
@@ -78,10 +83,10 @@ export const shipOfTheseus: Thought = {
     {
       question: "What twist did Thomas Hobbes add?",
       options: [
-        "The ship is moved to Rome",
-        "The old planks are rebuilt into a second ship",
-        "The ship was never real",
-        "Theseus sells the ship",
+        "The ship is taken to Rome as a prize",
+        "The old planks form a second ship",
+        "The ship was a myth all along",
+        "Theseus's crew is replaced too",
       ],
       answer: 1,
     },

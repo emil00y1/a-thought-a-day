@@ -30,7 +30,7 @@ export const tulipMania: Thought = {
     {
       type: "choice",
       question: "What caused the prized flame-like stripes on tulips?",
-      options: ["Careful breeding", "A virus", "Special soil", "Paint"],
+      options: ["Careful breeding", "A plant virus", "Special soil", "Cold winter frosts"],
       answer: 1,
       explain: "The tulip breaking virus, spread by tiny insects. Beautiful, but bad for the plant.",
     },
@@ -74,10 +74,10 @@ export const tulipMania: Thought = {
     {
       question: "What do historians now say about tulip mania?",
       options: [
-        "It destroyed the Dutch economy",
-        "It was real but smaller and less damaging than the legend",
-        "It never happened",
-        "It lasted 50 years",
+        "It wrecked the Dutch economy for decades",
+        "It was real but smaller than the legend",
+        "It was made up by an 1841 book",
+        "It went on for about 50 years",
       ],
       answer: 1,
     },
