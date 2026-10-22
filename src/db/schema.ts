@@ -99,3 +99,15 @@ export const learnedThought = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.thoughtSlug] })]
 )
+
+/** Anonymous vote counts for poll games. `pollIndex` is the poll's position in the thought's activities. */
+export const pollTally = pgTable(
+  "poll_tally",
+  {
+    thoughtSlug: text("thought_slug").notNull(),
+    pollIndex: integer("poll_index").notNull(),
+    option: integer("option").notNull(),
+    votes: integer("votes").notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.thoughtSlug, t.pollIndex, t.option] })]
+)

@@ -14,6 +14,7 @@ const sections = [
     items: [
       "Your email address. If you sign in with Google, also your name and profile picture.",
       "Which thoughts you've learned, on which day, and your score.",
+      "Poll answers, counted anonymously. We only store the total votes per option, not who voted.",
       "Your sign-in sessions, including the IP address and browser they came from, so you stay signed in and we can spot abuse.",
       "Sign-in codes, stored scrambled (hashed). They expire after 5 minutes.",
       "Short counters per IP address that limit how many sign-in emails can be requested.",
@@ -27,6 +28,7 @@ const sections = [
     title: "Cookies and storage",
     items: [
       "One cookie keeps you signed in.",
+      "Your browser remembers your light or dark mode choice, and which polls you've voted in.",
       "If you play without an account, your result is kept in your browser until you sign in, so it can be saved.",
       "We count visits with Vercel Web Analytics. It uses no cookies and doesn't follow you across other sites.",
     ],

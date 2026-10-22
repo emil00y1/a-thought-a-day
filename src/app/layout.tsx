@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
+import { themeScript } from "@/lib/theme-script"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -34,7 +35,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${fraunces.variable} ${grandstander.variable} h-full antialiased`}>
+    // The theme script adds the "dark" class before React loads, hence suppressHydrationWarning.
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${fraunces.variable} ${grandstander.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col font-sans">
         <Providers>
           <SiteHeader />

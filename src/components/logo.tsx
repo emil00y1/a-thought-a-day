@@ -38,8 +38,10 @@ export function Logo({ className }: { className?: string }) {
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={className}>
-      <Logo className="size-8 shrink-0 text-foreground transition-transform group-hover:scale-110 group-hover:-rotate-6" />
-      <span className="font-brand text-xl leading-none font-bold tracking-tight">Just a thought</span>
+      <Logo className="size-7 shrink-0 text-foreground transition-transform group-hover:scale-110 group-hover:-rotate-6 sm:size-8" />
+      <span className="font-brand text-lg leading-none font-bold tracking-tight whitespace-nowrap sm:text-xl">
+        Just a thought
+      </span>
     </span>
   )
 }

@@ -1,11 +1,11 @@
 "use server"
 
-import { eq } from "drizzle-orm"
+import { and, eq, sql } from "drizzle-orm"
 import { headers } from "next/headers"
 
-import { saveableDay, todayKey } from "@/content"
+import { saveableDay, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought, user } from "@/db/schema"
+import { learnedThought, pollTally, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { getStats, getUser, type Stats } from "@/lib/data"
 
@@ -44,4 +44,38 @@ export async function deleteAccount(): Promise<{ ok: boolean }> {
   await auth.api.signOut({ headers: await headers() })
   await db.delete(user).where(eq(user.id, current.id))
   return { ok: true }
+}
+
+/**
+ * Records an anonymous poll vote and returns the vote count for each option.
+ * Votes only count on today's thought; with `record: false` it just reads the counts.
+ */
+export async function votePoll(input: {
+  slug: string
+  pollIndex: number
+  option: number
+  record: boolean
+}): Promise<number[] | null> {
+  const poll = thoughtBySlug(input.slug)?.activities[input.pollIndex]
+  if (poll?.type !== "poll" || !Number.isInteger(input.option) || input.option < 0 || input.option >= poll.options.length) {
+    return null
+  }
+
+  const where = and(eq(pollTally.thoughtSlug, input.slug), eq(pollTally.pollIndex, input.pollIndex))
+  try {
+    if (input.record && saveableDay(input.slug)) {
+      await db
+        .insert(pollTally)
+        .values({ thoughtSlug: input.slug, pollIndex: input.pollIndex, option: input.option, votes: 1 })
+        .onConflictDoUpdate({
+          target: [pollTally.thoughtSlug, pollTally.pollIndex, pollTally.option],
+          set: { votes: sql`${pollTally.votes} + 1` },
+        })
+    }
+    const rows = await db.select({ option: pollTally.option, votes: pollTally.votes }).from(pollTally).where(where)
+    return poll.options.map((_, i) => rows.find((r) => r.option === i)?.votes ?? 0)
+  } catch (error) {
+    console.error("Poll vote failed", error)
+    return null
+  }
 }

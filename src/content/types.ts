@@ -54,8 +54,8 @@ export type EstimateActivity = {
 export type PollActivity = {
   type: "poll"
   question: string
-  /** `pct` shows a result bar, `note` shows a reaction to that choice. Not scored. */
-  options: { text: string; pct?: number; note?: string }[]
+  /** `note` is shown as a reaction to that choice. Not scored; players see how others voted. */
+  options: { text: string; note?: string }[]
   explain?: string
 }
 

@@ -164,7 +164,13 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
 
           {step.kind === "activity" && (
             <StepCard thought={thought} label={activityMeta[step.activity.type].label} icon={activityMeta[step.activity.type].icon}>
-              <ActivityView activity={step.activity} onDone={(r) => markReady(index, r)} />
+              <ActivityView
+                activity={step.activity}
+                onDone={(r) => markReady(index, r)}
+                slug={thought.slug}
+                activityIndex={thought.activities.indexOf(step.activity)}
+                preview={preview}
+              />
             </StepCard>
           )}
 
@@ -212,7 +218,19 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
   )
 }
 
-function ActivityView({ activity, onDone }: { activity: Activity; onDone: (r: Result) => void }) {
+function ActivityView({
+  activity,
+  onDone,
+  slug,
+  activityIndex,
+  preview,
+}: {
+  activity: Activity
+  onDone: (r: Result) => void
+  slug: string
+  activityIndex: number
+  preview?: boolean
+}) {
   switch (activity.type) {
     case "choice":
       return <Choice activity={activity} onDone={onDone} />
@@ -225,7 +243,7 @@ function ActivityView({ activity, onDone }: { activity: Activity; onDone: (r: Re
     case "estimate":
       return <Estimate activity={activity} onDone={onDone} />
     case "poll":
-      return <Poll activity={activity} onDone={onDone} />
+      return <Poll activity={activity} onDone={onDone} slug={slug} pollIndex={activityIndex} record={!preview} />
   }
 }
 

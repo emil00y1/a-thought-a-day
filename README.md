@@ -9,11 +9,11 @@ Topics span science, space, history, philosophy, ethics, ideologies, experiments
 ## Features
 
 - **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight UTC.
-- **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls.
+- **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted.
 - **Library** of every thought you've learned, with your streak.
 - **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
 - **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, and their result is saved when they sign up.
-- **Light and dark mode**, following the device setting, with lots of small animations (respecting reduced motion).
+- **Light and dark mode** with a switch in the header (follows the device until you choose), and lots of small animations (respecting reduced motion).
 - **Account deletion** and a plain-language privacy page.
 
 ## Tech
@@ -80,11 +80,11 @@ A thought has a title, emoji, category, a one-line hook, 2 or 3 short paragraphs
 | `order` | Drags items into the right order | Yes, per position |
 | `match` | Taps pairs together | Yes, minus wrong guesses |
 | `estimate` | Guesses a number on a slider | Yes, within a tolerance |
-| `poll` | Gives an opinion, sees what others think | No |
+| `poll` | Gives an opinion, then sees how many players chose each option | No |
 
 Content is checked automatically. A mistake like an answer pointing past the options shows an error in `npm run dev` and fails the build, naming the thought and the problem.
 
-**Rules:** never rename a `slug` or reorder thoughts that are already live. Progress is stored by slug, and the schedule follows the order of the list.
+**Rules:** once a thought is live, never rename its `slug`, move it in the list, or reorder its games or poll options. Progress is stored by slug, the schedule follows the list order, and poll votes are stored by position.
 
 ## Changing the database
 

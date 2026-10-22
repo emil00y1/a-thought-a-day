@@ -55,8 +55,7 @@ export function validateThoughts(thoughts: Thought[]) {
           break
         case "poll":
           if (a.options.length < 2) fail(`${where}: needs at least 2 options`)
-          if (a.options.some((o) => o.pct !== undefined && (o.pct < 0 || o.pct > 100)))
-            fail(`${where}: pct must be between 0 and 100`)
+          if (new Set(a.options.map((o) => o.text)).size !== a.options.length) fail(`${where}: has duplicate options`)
           break
       }
     })

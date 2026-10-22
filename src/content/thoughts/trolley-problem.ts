@@ -31,19 +31,20 @@ export const trolleyProblem: Thought = {
       type: "poll",
       question: "The trolley is coming. Do you pull the lever?",
       options: [
-        { text: "Pull it: save five, lose one", pct: 89 },
-        { text: "Don't pull: I won't cause a death", pct: 11 },
+        { text: "Pull it: save five, lose one" },
+        { text: "Don't pull: I won't cause a death" },
       ],
-      explain: "Results from a large online survey (Hauser and colleagues, 2007).",
+      explain: "In a large online survey (Hauser and colleagues, 2007), 89% said pulling the lever is okay.",
     },
     {
       type: "poll",
       question: "Now you're on a bridge. Do you push the man to stop the trolley?",
       options: [
-        { text: "Push: save five, lose one", pct: 11 },
-        { text: "Don't push", pct: 89 },
+        { text: "Push: save five, lose one" },
+        { text: "Don't push" },
       ],
-      explain: "Same outcome, opposite answer. Using someone as a tool feels very different from redirecting harm.",
+      explain:
+        "In the same survey, only 11% said pushing is okay. Same outcome, opposite answer: using someone as a tool feels very different from redirecting harm.",
     },
     {
       type: "match",

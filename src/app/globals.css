@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Dark mode follows a .dark class on <html>, set from the saved choice or the system setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-fraunces);
@@ -32,6 +35,7 @@
 }
 
 :root {
+  color-scheme: light;
   --radius: 0.875rem;
   --background: oklch(0.985 0.008 85);
   --foreground: oklch(0.22 0.02 265);
@@ -55,29 +59,28 @@
   --dot: oklch(0.88 0.012 85);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.17 0.015 265);
-    --foreground: oklch(0.96 0.008 85);
-    --card: oklch(0.21 0.015 265);
-    --card-foreground: oklch(0.96 0.008 85);
-    --popover: oklch(0.21 0.015 265);
-    --popover-foreground: oklch(0.96 0.008 85);
-    --primary: oklch(0.96 0.008 85);
-    --primary-foreground: oklch(0.17 0.015 265);
-    --secondary: oklch(0.26 0.015 265);
-    --secondary-foreground: oklch(0.96 0.008 85);
-    --muted: oklch(0.26 0.015 265);
-    --muted-foreground: oklch(0.7 0.02 265);
-    --accent: oklch(0.28 0.015 265);
-    --accent-foreground: oklch(0.96 0.008 85);
-    --destructive: oklch(0.7 0.19 22);
-    --success: oklch(0.72 0.16 152);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.55 0.03 265);
-    --dot: oklch(1 0 0 / 7%);
-  }
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.17 0.015 265);
+  --foreground: oklch(0.96 0.008 85);
+  --card: oklch(0.21 0.015 265);
+  --card-foreground: oklch(0.96 0.008 85);
+  --popover: oklch(0.21 0.015 265);
+  --popover-foreground: oklch(0.96 0.008 85);
+  --primary: oklch(0.96 0.008 85);
+  --primary-foreground: oklch(0.17 0.015 265);
+  --secondary: oklch(0.26 0.015 265);
+  --secondary-foreground: oklch(0.96 0.008 85);
+  --muted: oklch(0.26 0.015 265);
+  --muted-foreground: oklch(0.7 0.02 265);
+  --accent: oklch(0.28 0.015 265);
+  --accent-foreground: oklch(0.96 0.008 85);
+  --destructive: oklch(0.7 0.19 22);
+  --success: oklch(0.72 0.16 152);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.55 0.03 265);
+  --dot: oklch(1 0 0 / 7%);
 }
 
 @layer base {
