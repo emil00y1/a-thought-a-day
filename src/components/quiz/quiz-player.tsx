@@ -5,7 +5,7 @@ import { ArrowRight, Check, RotateCcw } from "lucide-react"
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "motion/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import { CategoryBadge } from "@/components/category-badge"
 import { OptionButton } from "@/components/player/shared"
@@ -19,6 +19,11 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
   const [finished, setFinished] = useState(false)
   const q = questions[index]
   const answered = picked !== null
+  const moved = useRef(false)
+  // Keyboard and screen reader users start each new question at the top.
+  const focusCard = useCallback((el: HTMLDivElement | null) => {
+    if (el && moved.current) el.focus({ preventScroll: true })
+  }, [])
 
   function choose(i: number) {
     if (answered) return
@@ -30,6 +35,7 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
     if (index + 1 === questions.length) {
       setFinished(true)
     } else {
+      moved.current = true
       setIndex(index + 1)
       setPicked(null)
     }
@@ -59,11 +65,13 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
+          ref={focusCard}
+          tabIndex={-1}
           initial={{ opacity: 0, x: 32 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -32 }}
           transition={{ type: "spring", stiffness: 320, damping: 32 }}
-          className="rounded-3xl border bg-card p-6 shadow-sm sm:p-8"
+          className="rounded-3xl border bg-card p-6 shadow-sm outline-none sm:p-8"
         >
           <div className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
             Question {index + 1} of {questions.length}
@@ -84,6 +92,10 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
               </OptionButton>
             ))}
           </div>
+
+          <p aria-live="polite" className="sr-only">
+            {answered && (picked === q.answer ? "Correct!" : `Not quite. The answer is ${q.options[q.answer]}.`)}
+          </p>
 
           <AnimatePresence>
             {answered && (

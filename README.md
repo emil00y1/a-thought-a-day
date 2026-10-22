@@ -2,17 +2,18 @@
 
 ![Just a thought](src/app/opengraph-image.png)
 
-One new idea every day, learned in about five minutes. Read a short explanation, flip a few fact cards, play two or three tiny games, and walk away knowing something new. Sign in to keep a streak, and after 7 thoughts, memory quizzes unlock that mix questions from everything you've learned.
+One new idea every day, learned in a few minutes. Read a short explanation, flip a few fact cards, play two or three tiny games, and walk away knowing something new. Sign in to keep a streak, and after 7 thoughts, memory quizzes unlock that mix questions from everything you've learned.
 
 Topics span science, space, history, philosophy, ethics, ideologies, experiments, research and curious facts.
 
 ## Features
 
 - **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight UTC.
-- **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted.
+- **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted (once a poll has 10 votes).
 - **Library** of every thought you've learned, with your streak.
 - **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
-- **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, and their result is saved when they sign up.
+- **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, their result is remembered in the browser, and it's saved to their account when they sign up.
+- **Share** today's thought and score from the finish screen.
 - **Light and dark mode** with a switch in the header (follows the device until you choose), and lots of small animations (respecting reduced motion).
 - **Account deletion** and a plain-language privacy page.
 
@@ -80,7 +81,7 @@ A thought has a title, emoji, category, a one-line hook, 2 or 3 short paragraphs
 | `order` | Drags items into the right order | Yes, per position |
 | `match` | Taps pairs together | Yes, minus wrong guesses |
 | `estimate` | Guesses a number on a slider | Yes, within a tolerance |
-| `poll` | Gives an opinion, then sees how many players chose each option | No |
+| `poll` | Gives an opinion, then sees what share of players chose each option | No |
 
 Content is checked automatically. A mistake like an answer pointing past the options shows an error in `npm run dev` and fails the build, naming the thought and the problem.
 

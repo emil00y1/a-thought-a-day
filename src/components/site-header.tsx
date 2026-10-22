@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 const links = [
   { href: "/", label: "Today", icon: House, phone: false },
   { href: "/library", label: "Library", icon: BookOpen, phone: true },
-  { href: "/review", label: "Review", icon: Brain, phone: true },
+  { href: "/review", label: "Quiz", icon: Brain, phone: true },
 ]
 
 export function SiteHeader() {

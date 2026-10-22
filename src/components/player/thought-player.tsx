@@ -12,13 +12,14 @@ import {
   Layers,
   Link2,
   RotateCcw,
+  Share2,
   Sparkles,
   ThumbsUp,
   Vote,
 } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { toast } from "sonner"
 
 import { completeThought } from "@/app/actions"
@@ -29,7 +30,7 @@ import { StatsStrip } from "@/components/stats-strip"
 import { Button } from "@/components/ui/button"
 import type { Activity, Thought } from "@/content/types"
 import type { Stats } from "@/lib/data"
-import { savePending } from "@/lib/pending"
+import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
 import { cn } from "@/lib/utils"
 import { Choice } from "./choice"
 import { Estimate } from "./estimate"
@@ -77,6 +78,15 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
   const [results, setResults] = useState<Record<number, Result>>({})
   const [savedStats, setSavedStats] = useState<Stats | null>(null)
   const stats = savedStats ?? serverStats
+  // A guest's result lives in this browser until they sign in. The server can't see it, so it's null there.
+  const pending = parsePending(useSyncExternalStore(subscribeNever, pendingSnapshot, () => null))
+  const guestResult = !signedIn && !preview && pending?.slug === thought.slug ? pending : null
+  const moved = useRef(false)
+
+  // Move focus to each new step, so keyboard and screen reader users start at the top of it.
+  const focusStep = useCallback((el: HTMLDivElement | null) => {
+    if (el && moved.current) el.focus({ preventScroll: true })
+  }, [])
 
   const step = steps[index]
   const isReady = step.kind === "read" || ready[index]
@@ -92,6 +102,7 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
   }
 
   function go(to: number) {
+    moved.current = true
     setIndex(to)
     window.scrollTo({ top: 0, behavior: "smooth" })
     if (steps[to].kind === "done") void finish()
@@ -122,17 +133,23 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={`${round}-${index}`}
+          ref={focusStep}
+          tabIndex={-1}
+          role="group"
+          aria-label={stepLabel(step, thought)}
           initial={{ opacity: 0, x: 32 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -32 }}
           transition={{ type: "spring", stiffness: 320, damping: 32 }}
+          className="outline-none"
         >
           {step.kind === "intro" && (
             <Intro
               thought={thought}
               number={number}
               dateLabel={dateLabel}
-              learned={stats?.learnedToday ?? false}
+              learned={stats?.learnedToday ?? guestResult !== null}
+              result={guestResult}
               onStart={() => go(1)}
             />
           )}
@@ -188,14 +205,11 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
         </motion.div>
       </AnimatePresence>
 
-      {step.kind !== "intro" && step.kind !== "done" && (
+      {/* Games show their own next step, so Continue only appears once they're done. */}
+      {(step.kind === "read" || step.kind === "facts" || (step.kind === "activity" && isReady)) && (
         <div className="mt-5 flex items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            {isReady
-              ? ""
-              : step.kind === "facts"
-                ? `Flip all ${thought.facts.length} cards to continue`
-                : "Answer to continue"}
+            {isReady ? "" : `Flip all ${thought.facts.length} cards to continue`}
           </p>
           <motion.div
             key={isReady ? "ready" : "waiting"}
@@ -247,6 +261,23 @@ function ActivityView({
   }
 }
 
+const subscribeNever = () => () => {}
+
+function stepLabel(step: Step, thought: Thought) {
+  switch (step.kind) {
+    case "intro":
+      return thought.title
+    case "read":
+      return "The idea"
+    case "facts":
+      return "Quick facts"
+    case "activity":
+      return activityMeta[step.activity.type].label
+    case "done":
+      return "Done"
+  }
+}
+
 function Progress({ total, current }: { total: number; current: number }) {
   return (
     <div className="mb-4 flex gap-1.5" aria-label={`Step ${current} of ${total}`}>
@@ -295,12 +326,15 @@ function Intro({
   number,
   dateLabel,
   learned,
+  result,
   onStart,
 }: {
   thought: Thought
   number: number
   dateLabel: string
   learned: boolean
+  /** A guest's score from earlier today. */
+  result: Result | null
   onStart: () => void
 }) {
   return (
@@ -350,11 +384,12 @@ function Intro({
           transition={{ delay: 0.3 }}
           className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground"
         >
-          <Chip icon={Clock}>~5 min</Chip>
+          <Chip icon={Clock}>~3 min</Chip>
           <Chip icon={Layers}>{thought.activities.length} mini games</Chip>
           {learned && (
             <Chip icon={Check} className="bg-success/15 text-foreground">
               Learned today
+              {result && result.total > 0 && ` · ${result.correct}/${result.total} right`}
             </Chip>
           )}
         </motion.div>
@@ -471,7 +506,7 @@ function Done({
             transition={{ delay: 0.3 }}
             className="mt-6 font-display text-4xl font-semibold tracking-tight"
           >
-            Thought learned!
+            {signedIn || preview ? "Thought learned!" : "All done!"}
           </motion.h2>
           {score.total > 0 && (
             <motion.p
@@ -493,6 +528,12 @@ function Done({
             <div className="mb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">Remember this</div>
             <p className="font-display text-xl leading-snug font-medium">{thought.takeaway}</p>
           </motion.blockquote>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
+            <Button variant="outline" size="lg" onClick={() => shareThought(thought, score)} className="mt-6">
+              <Share2 /> Share
+            </Button>
+          </motion.div>
         </div>
       </div>
 
@@ -505,7 +546,7 @@ function Done({
           <div className="rounded-3xl border-2 border-dashed p-6 text-center">
             <p className="font-display text-xl font-semibold">Don&apos;t let it fade</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Create a free account to save this thought, keep a streak and unlock memory quizzes.
+              Create a free account to save it, keep a streak and unlock memory quizzes.
             </p>
             <Button asChild size="lg" className="mt-4">
               <Link href="/sign-in">Save my progress</Link>
@@ -535,4 +576,21 @@ function Done({
       </motion.div>
     </div>
   )
+}
+
+async function shareThought(thought: Thought, score: Result) {
+  const result = score.total > 0 ? ` and got ${score.correct}/${score.total}` : ""
+  const text = `${thought.emoji} I learned about ${thought.title} on Just a thought${result}.`
+  const url = window.location.origin
+  if (navigator.share) {
+    // Closing the share sheet throws, which is fine.
+    await navigator.share({ text, url }).catch(() => {})
+    return
+  }
+  try {
+    await navigator.clipboard.writeText(`${text} ${url}`)
+    toast.success("Copied. Paste it anywhere.")
+  } catch {
+    toast.error("Couldn't copy. Try again.")
+  }
 }

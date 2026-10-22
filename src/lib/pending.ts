@@ -10,12 +10,27 @@ export function savePending(pending: Pending) {
   } catch {}
 }
 
-export function takePending(): Pending | null {
+/** The stored JSON, as a string so it can be a useSyncExternalStore snapshot. */
+export function pendingSnapshot() {
   try {
-    const raw = localStorage.getItem(KEY)
-    localStorage.removeItem(KEY)
+    return localStorage.getItem(KEY)
+  } catch {
+    return null
+  }
+}
+
+export function parsePending(raw: string | null): Pending | null {
+  try {
     return raw ? (JSON.parse(raw) as Pending) : null
   } catch {
     return null
   }
+}
+
+export function takePending(): Pending | null {
+  const pending = parsePending(pendingSnapshot())
+  try {
+    localStorage.removeItem(KEY)
+  } catch {}
+  return pending
 }

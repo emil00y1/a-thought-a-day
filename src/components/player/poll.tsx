@@ -8,6 +8,9 @@ import type { PollActivity } from "@/content/types"
 import { cn } from "@/lib/utils"
 import { ActivityTitle, Feedback, type Result } from "./shared"
 
+// With fewer votes, percentages like 100% / 0% look broken, so hide them.
+const MIN_VOTES = 10
+
 export function Poll({
   activity,
   onDone,
@@ -30,6 +33,7 @@ export function Poll({
 
   const total = counts?.reduce((a, b) => a + b, 0) ?? 0
   const share = (n: number) => (total ? Math.round((n / total) * 100) : 0)
+  const showResults = counts !== null && total >= MIN_VOTES
 
   async function choose(i: number) {
     if (answered) return
@@ -76,7 +80,7 @@ export function Poll({
                 picked === i && "border-foreground"
               )}
             >
-              {counts && total > 0 && (
+              {showResults && (
                 <motion.span
                   initial={{ width: 0 }}
                   animate={{ width: `${share(n)}%` }}
@@ -94,7 +98,7 @@ export function Poll({
                   You
                 </motion.span>
               )}
-              {counts && total > 0 && (
+              {showResults && (
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -108,6 +112,11 @@ export function Poll({
           )
         })}
       </div>
+      {counts && !showResults && (
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 text-center text-sm text-muted-foreground">
+          Too few votes to show results yet. Check back later.
+        </motion.p>
+      )}
 
       <Feedback show={answered} title={note ? "Your take" : "Interesting!"}>
         {[note, activity.explain].filter(Boolean).join(" ")}

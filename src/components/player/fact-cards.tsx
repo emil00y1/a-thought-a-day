@@ -32,7 +32,7 @@ export function FactCards({ facts, onAllFlipped }: { facts: { q: string; a: stri
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.98 }}
           className="grid cursor-pointer text-left transform-3d [grid-template-areas:'card']"
-          aria-label={flipped[i] ? fact.a : `${fact.q} (tap to reveal)`}
+          aria-label={flipped[i] ? `${fact.q} ${fact.a}` : `${fact.q} (tap to reveal)`}
         >
           <div className="flex items-center gap-4 rounded-2xl border-2 bg-card px-5 py-4 backface-hidden [grid-area:card]">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-muted font-display text-lg font-semibold">
@@ -48,10 +48,11 @@ export function FactCards({ facts, onAllFlipped }: { facts: { q: string; a: stri
           </div>
           <div
             className={cn(
-              "flex rotate-y-180 items-center rounded-2xl border-2 border-foreground bg-primary px-5 py-4 text-[15px] leading-relaxed text-primary-foreground backface-hidden [grid-area:card]"
+              "flex rotate-y-180 flex-col justify-center gap-1 rounded-2xl border-2 border-foreground bg-primary px-5 py-4 text-primary-foreground backface-hidden [grid-area:card]"
             )}
           >
-            {fact.a}
+            <span className="text-xs font-semibold opacity-70">{fact.q}</span>
+            <span className="text-[15px] leading-relaxed">{fact.a}</span>
           </div>
         </motion.button>
       ))}

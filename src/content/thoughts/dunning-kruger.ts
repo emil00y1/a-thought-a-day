@@ -7,7 +7,7 @@ export const dunningKruger: Thought = {
   emoji: "📈",
   hook: "Why the people who know least are often the most confident.",
   body: [
-    "In 1999, psychologists **David Dunning** and **Justin Kruger** tested people on logic, grammar and humor, then asked how well they thought they'd done. The worst performers, scoring around the bottom 12%, guessed they'd beaten about **62%** of others.",
+    "In 1999, psychologists **David Dunning** and **Justin Kruger** tested people on logic, grammar and humor, then asked how well they thought they'd done. The bottom quarter of scorers had beaten only about **12%** of others on average, yet guessed they'd beaten about **62%**.",
     "Their explanation: the skills you need to do something well are often the same skills you need to **notice** you're doing it badly. Meanwhile, the best performers slightly **underrated** themselves, assuming the test was easy for everyone.",
     "The internet turned it into a graph with a confident \"Mount Stupid\" peak. That curve isn't in the paper, and some researchers argue part of the effect is a statistical quirk. The core lesson still holds: feeling sure isn't the same as being right.",
   ],
@@ -29,7 +29,7 @@ export const dunningKruger: Thought = {
   activities: [
     {
       type: "estimate",
-      question: "People who scored in the bottom 12% estimated they'd beaten what share of others?",
+      question: "The bottom quarter had beaten only 12% of others. What share did they think they'd beaten?",
       min: 0,
       max: 100,
       step: 1,

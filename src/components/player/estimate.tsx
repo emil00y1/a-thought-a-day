@@ -16,7 +16,12 @@ function format(n: number) {
 export function Estimate({ activity, onDone }: { activity: EstimateActivity; onDone: (r: Result) => void }) {
   const { min, max, step, answer, tolerance, unit } = activity
   const snap = (v: number) => Math.round(v / step) * step
-  const [guess, setGuess] = useState(() => snap((min + max) / 2))
+  const [guess, setGuess] = useState(() => {
+    const mid = (min + max) / 2
+    if (Math.abs(mid - answer) > tolerance * 2) return snap(mid)
+    // Never start on or near the answer.
+    return snap(answer < mid ? min + (max - min) * 0.8 : min + (max - min) * 0.2)
+  })
   const [locked, setLocked] = useState(false)
   const shown = useMotionValue(guess)
   const shownText = useTransform(shown, (v) => format(snap(v)))

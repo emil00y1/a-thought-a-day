@@ -131,7 +131,7 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
         </AnimatePresence>
       </div>
 
-      {answer === null ? (
+      {answer === null && (
         <div className="mt-8 grid grid-cols-2 gap-3">
           <Button variant="outline" size="lg" onClick={() => choose(false)} className="hover:border-destructive hover:text-destructive">
             <X /> False
@@ -140,11 +140,14 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
             <Check /> True
           </Button>
         </div>
-      ) : (
-        <div className="mt-4">
-          <Feedback show correct={answer === statement.answer}>
-            {statement.explain}
-          </Feedback>
+      )}
+      <div className="mt-4">
+        <Feedback show={answer !== null} correct={answer === statement.answer}>
+          {statement.explain}
+        </Feedback>
+      </div>
+      {answer !== null && (
+        <div>
           {!isLast && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
               <Button variant="secondary" onClick={next} className="mt-4 w-full">

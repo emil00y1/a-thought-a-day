@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   // Absolute base for share image links. Without it, Next uses the Vercel production URL.
   metadataBase: process.env.BETTER_AUTH_URL ? new URL(process.env.BETTER_AUTH_URL) : undefined,
   title: { default: "Just a thought", template: "%s · Just a thought" },
-  description: "One new idea every day. Five minutes, a few tiny games, and memory quizzes to make it stick.",
+  description: "One new idea every day. A few minutes, a few tiny games, and memory quizzes to make it stick.",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

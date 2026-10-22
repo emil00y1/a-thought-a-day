@@ -15,7 +15,7 @@ export const octopus: Thought = {
   facts: [
     {
       q: "Octopi or octopuses?",
-      a: "Octopuses. The word comes from Greek, not Latin, so \"octopi\" is a mistake. \"Octopodes\" also works.",
+      a: "Both are in dictionaries, but \"octopuses\" is the standard. \"Octopi\" treats the Greek word as if it were Latin.",
     },
     {
       q: "Why three hearts?",
@@ -62,9 +62,9 @@ export const octopus: Thought = {
           explain: "Smart, but short-lived. Many die soon after breeding.",
         },
         {
-          text: "The correct plural is \"octopi\".",
+          text: "The word \"octopus\" comes from Latin.",
           answer: false,
-          explain: "It's \"octopuses\". The word is Greek, so the Latin \"-i\" ending doesn't fit.",
+          explain: "It's Greek, meaning \"eight feet\". That's why \"octopuses\" is the standard plural, not \"octopi\".",
         },
       ],
     },

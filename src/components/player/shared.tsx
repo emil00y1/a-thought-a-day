@@ -75,7 +75,7 @@ export function OptionButton({
   )
 }
 
-/** Slides open under an answer to explain it. */
+/** Slides open under an answer to explain it. Screen readers announce it too. */
 export function Feedback({
   show,
   correct,
@@ -88,31 +88,33 @@ export function Feedback({
   children: React.ReactNode
 }) {
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 28 }}
-          className="overflow-hidden"
-        >
-          <div
-            className={cn(
-              "mt-4 rounded-2xl px-4 py-3 text-sm leading-relaxed",
-              correct === undefined && "bg-muted",
-              correct === true && "bg-success/12",
-              correct === false && "bg-destructive/10"
-            )}
+    <div aria-live="polite">
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 28 }}
+            className="overflow-hidden"
           >
-            <p className="mb-0.5 font-semibold">
-              {title ?? (correct === undefined ? "Good to know" : correct ? "Correct!" : "Not quite.")}
-            </p>
-            <p className="text-muted-foreground">{children}</p>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <div
+              className={cn(
+                "mt-4 rounded-2xl px-4 py-3 text-sm leading-relaxed",
+                correct === undefined && "bg-muted",
+                correct === true && "bg-success/12",
+                correct === false && "bg-destructive/10"
+              )}
+            >
+              <p className="mb-0.5 font-semibold">
+                {title ?? (correct === undefined ? "Good to know" : correct ? "Correct!" : "Not quite.")}
+              </p>
+              <p className="text-muted-foreground">{children}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 

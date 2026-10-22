@@ -56,8 +56,8 @@ export function StatsStrip({ learned, streak, unlockAt, className }: Props) {
             className="group flex h-full flex-col items-center justify-center gap-1 rounded-2xl bg-primary px-2 py-3 text-primary-foreground transition-transform hover:-translate-y-0.5 active:scale-95"
           >
             <Sparkles className="size-5 transition-transform group-hover:rotate-12" />
-            <span className="text-sm font-semibold">Quiz time</span>
-            <span className="text-xs opacity-70">train memory</span>
+            <span className="text-sm font-semibold">Memory quiz</span>
+            <span className="text-xs opacity-70">10 questions</span>
           </Link>
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-1.5 rounded-2xl border border-dashed bg-card/40 px-2 py-3">
@@ -71,7 +71,7 @@ export function StatsStrip({ learned, streak, unlockAt, className }: Props) {
               />
             </div>
             <span className="text-center text-xs text-muted-foreground">
-              {unlockAt - learned} more to unlock quizzes
+              {unlockAt - learned} more to unlock the memory quiz
             </span>
           </div>
         )}

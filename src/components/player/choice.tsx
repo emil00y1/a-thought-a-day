@@ -3,9 +3,12 @@
 import { useState } from "react"
 
 import type { ChoiceActivity } from "@/content/types"
+import { shuffle } from "@/lib/utils"
 import { ActivityTitle, Feedback, OptionButton, type Result } from "./shared"
 
 export function Choice({ activity, onDone }: { activity: ChoiceActivity; onDone: (r: Result) => void }) {
+  // Content lists the answer anywhere, so shuffle. Seeded so server and browser agree.
+  const [order] = useState(() => shuffle(activity.options.map((_, i) => i), activity.question))
   const [picked, setPicked] = useState<number | null>(null)
   const answered = picked !== null
 
@@ -19,15 +22,15 @@ export function Choice({ activity, onDone }: { activity: ChoiceActivity; onDone:
     <div>
       <ActivityTitle>{activity.question}</ActivityTitle>
       <div className="mt-6 grid gap-2.5">
-        {activity.options.map((option, i) => (
+        {order.map((i, position) => (
           <OptionButton
             key={i}
-            index={i}
+            index={position}
             disabled={answered}
             onClick={() => choose(i)}
             state={!answered ? "idle" : i === activity.answer ? "correct" : i === picked ? "wrong" : "dim"}
           >
-            {option}
+            {activity.options[i]}
           </OptionButton>
         ))}
       </div>
