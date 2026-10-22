@@ -1,7 +1,7 @@
 "use client"
 
 import { REGEXP_ONLY_DIGITS } from "input-otp"
-import { ArrowLeft, Mail } from "lucide-react"
+import { ArrowLeft, CircleAlert, Mail } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
 import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
+import { cn } from "@/lib/utils"
 
 const RESEND_AFTER = 30
 
@@ -21,12 +22,23 @@ const codeErrors: Record<string, string> = {
   TOO_MANY_ATTEMPTS: "Too many tries. Send a new code.",
 }
 
+const TOO_MANY_REQUESTS = "Too many attempts. Wait a few minutes and try again."
+
+/** Which field an error belongs to, so it shows right under it. */
+type FieldError = { at: "google" | "email" | "code"; message: string }
+
+function emailProblem(email: string) {
+  if (!email.trim()) return "Enter your email address."
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return "That doesn't look like an email address."
+  return null
+}
+
 export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [step, setStep] = useState<"email" | "code">("email")
   const [code, setCode] = useState("")
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<FieldError | null>(null)
   const [pending, setPending] = useState(false)
   const [cooldown, setCooldown] = useState(0)
 
@@ -37,11 +49,19 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
   }, [cooldown])
 
   async function sendCode() {
+    const at = step === "email" ? "email" : "code"
+    const problem = emailProblem(email)
+    if (problem) return setError({ at, message: problem })
     setPending(true)
     setError(null)
-    const { error } = await authClient.emailOtp.sendVerificationOtp({ email, type: "sign-in" })
+    const { error } = await authClient.emailOtp.sendVerificationOtp({ email: email.trim(), type: "sign-in" })
     setPending(false)
-    if (error) return setError(error.message ?? "Couldn't send the code. Try again.")
+    if (error) {
+      return setError({
+        at,
+        message: error.status === 429 ? TOO_MANY_REQUESTS : "Couldn't send the code. Try again.",
+      })
+    }
     setStep("code")
     setCode("")
     setCooldown(RESEND_AFTER)
@@ -51,11 +71,15 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
     if (pending) return
     setPending(true)
     setError(null)
-    const { error } = await authClient.signIn.emailOtp({ email, otp })
+    const { error } = await authClient.signIn.emailOtp({ email: email.trim(), otp })
     if (error) {
       setPending(false)
       setCode("")
-      return setError((error.code && codeErrors[error.code]) ?? "That code didn't work. Try again.")
+      const message =
+        error.status === 429
+          ? TOO_MANY_REQUESTS
+          : ((error.code && codeErrors[error.code]) ?? "That code didn't work. Try again.")
+      return setError({ at: "code", message })
     }
     router.push("/")
     router.refresh()
@@ -66,7 +90,7 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
     const { error } = await authClient.signIn.social({ provider: "google", callbackURL: "/" })
     if (error) {
       setPending(false)
-      setError(error.message ?? "Google sign-in failed. Try again.")
+      setError({ at: "google", message: "Google sign-in didn't work. Try again." })
     }
   }
 
@@ -86,12 +110,14 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
                 <Button variant="outline" size="lg" onClick={google} disabled={pending} className="w-full">
                   <GoogleIcon /> Continue with Google
                 </Button>
+                <ErrorText error={error?.at === "google" ? error.message : null} className="mt-2" />
                 <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
                   <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
                 </div>
               </>
             )}
             <form
+              noValidate
               onSubmit={(e) => {
                 e.preventDefault()
                 void sendCode()
@@ -106,13 +132,17 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
                   autoComplete="email"
                   placeholder="you@example.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                    if (error?.at === "email") setError(null)
+                  }}
+                  aria-invalid={error?.at === "email"}
+                  aria-describedby={error?.at === "email" ? "email-error" : undefined}
                 />
+                <ErrorText id="email-error" error={error?.at === "email" ? error.message : null} />
               </div>
-              <ErrorText error={error} />
               <Button type="submit" size="lg" disabled={pending} className="w-full">
-                <Mail /> {pending ? "Sending..." : "Email me a code"}
+                <Mail /> {pending ? "Sending..." : "Send code"}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
                 No password needed. New here? This creates your account.{" "}
@@ -148,7 +178,10 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
               maxLength={6}
               pattern={REGEXP_ONLY_DIGITS}
               value={code}
-              onChange={setCode}
+              onChange={(value) => {
+                setCode(value)
+                if (error?.at === "code") setError(null)
+              }}
               onComplete={verify}
               autoFocus
               containerClassName="mt-6 justify-center"
@@ -156,14 +189,12 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
             >
               <InputOTPGroup>
                 {Array.from({ length: 6 }, (_, i) => (
-                  <InputOTPSlot key={i} index={i} aria-invalid={Boolean(error)} />
+                  <InputOTPSlot key={i} index={i} aria-invalid={error?.at === "code"} />
                 ))}
               </InputOTPGroup>
             </InputOTP>
 
-            <div className="mt-4">
-              <ErrorText error={error} />
-            </div>
+            <ErrorText error={error?.at === "code" ? error.message : null} className="mt-3 justify-center" />
 
             <div className="mt-6 flex items-center justify-between text-sm">
               <Button
@@ -187,16 +218,22 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
   )
 }
 
-function ErrorText({ error }: { error: string | null }) {
+/** A small red message right under the field it belongs to. */
+function ErrorText({ error, id, className }: { error: string | null; id?: string; className?: string }) {
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {error && (
         <motion.p
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0, x: [0, -6, 6, -3, 3, 0] }}
-          exit={{ opacity: 0 }}
-          className="rounded-xl bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          key={error}
+          id={id}
+          role="alert"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto", x: [0, -4, 4, -2, 2, 0] }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className={cn("flex items-center gap-1.5 overflow-hidden text-sm text-destructive", className)}
         >
+          <CircleAlert className="size-4 shrink-0" />
           {error}
         </motion.p>
       )}
