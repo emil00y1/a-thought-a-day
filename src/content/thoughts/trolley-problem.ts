@@ -8,14 +8,14 @@ export const trolleyProblem: Thought = {
   hook: "Would you pull a lever to save five people if it kills one?",
   body: [
     "A runaway trolley is heading toward five people on the track. You can pull a lever to send it onto a side track, where it will kill one person instead. Do you pull it?",
-    "Philosopher **Philippa Foot** described this in 1967. **Judith Jarvis Thomson** later named it and added a twist: you're on a bridge, and the only way to stop the trolley is to push a large man onto the track. Same math: one dies, five live. Yet most people who'd pull the lever refuse to push.",
+    "Philosopher **Philippa Foot** described a version of this in 1967. **Judith Jarvis Thomson** later named it and added a twist: you're on a bridge, and the only way to stop the trolley is to push a large man onto the track. Same math: one dies, five live. Yet most people who'd pull the lever refuse to push.",
     "Why? The puzzle pits two big ideas against each other: judging actions by their **outcomes** (consequentialism) or by **rules** like \"don't use people as tools\" (deontology). Today it shapes debates about self-driving cars.",
   ],
   takeaway: "Same numbers, different feelings: how harm is caused matters to us, not just how much.",
   facts: [
     {
       q: "How many people pull the lever?",
-      a: "In large online surveys, about 9 in 10 say pulling the lever is okay. Only about 1 in 10 say the same about pushing the man.",
+      a: "In one large 2007 online survey, about 9 in 10 said pulling the lever is okay, but only about 1 in 10 said the same about pushing the man. Later studies found more support for pushing, but still less than for pulling.",
     },
     {
       q: "What was the Moral Machine?",

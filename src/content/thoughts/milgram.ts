@@ -23,7 +23,7 @@ export const milgram: Thought = {
     },
     {
       q: "Could it be done today?",
-      a: "Not as it was. It helped inspire strict ethics rules for research. A 2009 version stopped at 150 volts, and 70% were still willing to go on.",
+      a: "Not as it was. It helped inspire strict ethics rules for research. A 2006 version stopped at 150 volts, and 70% were still willing to go on.",
     },
   ],
   activities: [
@@ -66,7 +66,7 @@ export const milgram: Thought = {
       answer: 2,
     },
     {
-      question: "Were the shocks in the Milgram experiment real?",
+      question: "Were the learner's shocks in the Milgram experiment real?",
       options: [
         "Yes, up to 450 volts",
         "No, the learner was acting",

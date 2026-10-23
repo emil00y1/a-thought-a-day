@@ -9,7 +9,7 @@ export const marshmallowTest: Thought = {
   body: [
     "In the late 1960s at Stanford, psychologist **Walter Mischel** offered preschoolers a deal: eat one treat now, or wait alone for about 15 minutes and get two. Some kids ate it at once. Others covered their eyes, sang or kicked the table to hold out.",
     "Years later, follow-ups found that kids who waited longer tended to do better in school. The story went viral: **self-control** in childhood predicts success.",
-    "Then came the twist. A 2018 study with around 900 more diverse children found the link was much weaker, and mostly explained by **family background**. Another study found kids wait far less if an adult has just broken a promise to them. Waiting makes sense when you **trust** the reward will come.",
+    "Then came the twist. A 2018 study with around 900 more diverse children found the link was much weaker, and mostly explained by **family background** and early skills. Another study found kids wait far less if an adult has just broken a promise to them. Waiting makes sense when you **trust** the reward will come.",
   ],
   takeaway: "Waiting isn't just willpower. It depends on whether you trust the reward will come.",
   facts: [
@@ -75,10 +75,10 @@ export const marshmallowTest: Thought = {
     {
       question: "What did later research find mattered a lot for waiting?",
       options: [
-        "How hungry the kids were that day",
+        "Whether it was sunny outside",
         "Family background and trust",
         "The time of day of the test",
-        "The type of treat on offer",
+        "The color of the room they sat in",
       ],
       answer: 1,
     },

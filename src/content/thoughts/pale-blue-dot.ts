@@ -46,7 +46,7 @@ export const paleBlueDot: Thought = {
         { text: "The Sun", detail: "150 million km" },
         { text: "Neptune", detail: "~4.5 billion km" },
         { text: "Voyager 1 in 1990", detail: "~6 billion km" },
-        { text: "Voyager 1 today", detail: "~25 billion km" },
+        { text: "Voyager 1 today", detail: "~26 billion km" },
       ],
     },
     {

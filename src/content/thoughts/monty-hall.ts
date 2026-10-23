@@ -23,7 +23,7 @@ export const montyHall: Thought = {
     },
     {
       q: "Who's better at it than us?",
-      a: "Pigeons. In a 2010 study, pigeons learned to switch almost every time. Humans kept sticking with their first pick.",
+      a: "Pigeons. In a 2010 study, pigeons learned to switch almost every time. Even with lots of practice, humans switched only about two-thirds of the time.",
     },
   ],
   activities: [

@@ -9,7 +9,7 @@ export const octopus: Thought = {
   body: [
     "The octopus is a **mollusk**, related to snails and clams, yet it's one of the smartest animals in the sea. Octopuses open jars, escape tanks and even carry coconut shells around as portable shelters.",
     "Its body is wonderfully strange. It has **three hearts** and **blue blood**, which uses copper instead of iron to carry oxygen. About **two-thirds of its neurons** are in its arms, so each arm can touch, taste and react partly on its own.",
-    "It can change color and texture in a fraction of a second, even though it's thought to be **colorblind**. And it does all this in a short life: most octopuses live only one to two years.",
+    "It can change color and texture in a fraction of a second, even though most species are thought to be **colorblind**. And it does all this in a short life: most octopuses live only one to two years.",
   ],
   takeaway: "An octopus thinks with its whole body: three hearts, blue blood and smart arms.",
   facts: [
@@ -62,9 +62,9 @@ export const octopus: Thought = {
           explain: "Smart, but short-lived. Many die soon after breeding.",
         },
         {
-          text: "The word \"octopus\" comes from Latin.",
+          text: "The word \"octopus\" is originally Latin.",
           answer: false,
-          explain: "It's Greek, meaning \"eight feet\". That's why \"octopuses\" is the standard plural, not \"octopi\".",
+          explain: "It's originally Greek, meaning \"eight feet\". That's why \"octopuses\" is the standard plural, not \"octopi\".",
         },
       ],
     },

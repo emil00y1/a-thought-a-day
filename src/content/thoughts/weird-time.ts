@@ -5,7 +5,7 @@ export const weirdTime: Thought = {
   title: "Time Is Weirder Than It Feels",
   category: "curious",
   emoji: "⏳",
-  hook: "Cleopatra lived closer in time to the Moon landing than to the building of the pyramids.",
+  hook: "Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.",
   body: [
     "Our sense of the past gets squashed. Things that feel \"ancient\" seem to have happened around the same time. They didn't.",
     "The Great Pyramid of Giza was built around **2560 BC**. Cleopatra died in **30 BC**, about 2,500 years later. The Moon landing came less than 2,000 years after her. To Cleopatra, the pyramids were already ancient monuments.",
@@ -52,7 +52,7 @@ export const weirdTime: Thought = {
           explain: "Alexander Bain patented an early fax design in 1843. The telephone came in 1876.",
         },
         {
-          text: "Cleopatra lived closer to the pyramids' construction than to the Moon landing.",
+          text: "Cleopatra lived closer to the Great Pyramid's construction than to the Moon landing.",
           answer: false,
           explain: "About 2,500 years from the pyramid, under 2,000 to the Moon landing.",
         },

@@ -9,7 +9,7 @@ export const tardigrades: Thought = {
   body: [
     "Tardigrades, or **water bears**, are animals about half a millimeter long, with eight stubby legs and a chubby body. They live almost everywhere: in moss, on mountains, in the deep sea and in Antarctica.",
     "Their superpower is drying out. When their home dries up, they curl into a lifeless-looking ball called a **tun** and almost stop their metabolism. In this state they've survived extreme cold, crushing pressure and even the **vacuum of space**.",
-    "But they're not invincible. Awake and active, they're quite fragile. Their trick isn't being tough all the time, it's knowing how to **pause**.",
+    "But they're not invincible. Awake and active, they're much more fragile. Their trick isn't being tough all the time, it's knowing how to **pause**.",
   ],
   takeaway: "Tardigrades survive the impossible by pausing life and waiting for better times.",
   facts: [
@@ -19,11 +19,11 @@ export const tardigrades: Thought = {
     },
     {
       q: "How long can they stay paused?",
-      a: "In 2016, Japanese scientists revived tardigrades that had been frozen in Antarctic moss for 30 years.",
+      a: "In 2016, Japanese scientists reported reviving tardigrades from Antarctic moss that had been kept frozen for 30 years.",
     },
     {
       q: "Are there tardigrades on the Moon?",
-      a: "Probably. In 2019, the Israeli lander Beresheet crashed on the Moon carrying thousands of dried tardigrades.",
+      a: "Probably. In 2019, the Israeli lander Beresheet crashed on the Moon carrying thousands of dried tardigrades. They likely didn't survive the crash.",
     },
   ],
   activities: [
@@ -66,7 +66,7 @@ export const tardigrades: Thought = {
         {
           text: "Active tardigrades can survive almost anything.",
           answer: false,
-          explain: "Awake, they're fragile. Their toughness comes from the dried-out tun state.",
+          explain: "Awake, they're much more fragile. Most of their toughness comes from the dried-out tun state.",
         },
       ],
     },

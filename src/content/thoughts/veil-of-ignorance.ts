@@ -31,7 +31,7 @@ export const veilOfIgnorance: Thought = {
       type: "poll",
       question: "Behind the veil, which society do you choose?",
       options: [
-        { text: "Equal shares for everyone", note: "Maximum safety, but little reward for effort. Few experiment groups chose this." },
+        { text: "Equal shares for everyone", note: "Maximum safety, but little reward for effort." },
         { text: "A safety net, then earn the rest", note: "The most common pick in experiments: a guaranteed floor plus room to get ahead." },
         { text: "Best possible life for the worst-off", note: "Rawls' own answer. Inequality is fine only if it lifts the bottom." },
         { text: "Highest average wealth, no floor", note: "A gamble. Great on average, rough if you land at the bottom." },
@@ -77,7 +77,7 @@ export const veilOfIgnorance: Thought = {
       answer: 0,
     },
     {
-      question: "Who came up with the veil of ignorance?",
+      question: "Which philosopher named the veil of ignorance?",
       options: ["Karl Marx", "John Rawls", "Adam Smith", "John Locke"],
       answer: 1,
     },

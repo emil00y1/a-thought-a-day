@@ -7,7 +7,7 @@ export const stoicControl: Thought = {
   emoji: "🏛️",
   hook: "A 2,000-year-old idea for worrying less, still used in therapy today.",
   body: [
-    "Nearly 2,000 years ago, the Greek philosopher **Epictetus**, who was born a slave, opened his handbook with a simple split: some things are **up to us**, and some are not.",
+    "Nearly 2,000 years ago, the Greek philosopher **Epictetus**, who was born a slave, taught a simple split: some things are **up to us**, and some are not.",
     "Up to us: our judgments, choices and efforts. Not up to us: other people, the weather, the past, our reputation. The Stoics argued that much of our suffering comes from mixing the two up, worrying about what we **can't control** and neglecting what we can.",
     "This wasn't giving up. Roman emperor **Marcus Aurelius** lived by it while running an empire. Today it lives on in **cognitive behavioral therapy**, whose founders openly credited the Stoics.",
   ],
@@ -19,7 +19,7 @@ export const stoicControl: Thought = {
     },
     {
       q: "Was Marcus Aurelius writing for us?",
-      a: "No. His Meditations were a private journal of reminders to himself, never meant to be published.",
+      a: "No. His Meditations were a private journal of reminders to himself, probably never meant to be published.",
     },
     {
       q: "Where else does the idea appear?",
@@ -92,5 +92,5 @@ export const stoicControl: Thought = {
       answer: 1,
     },
   ],
-  sources: [{ label: "Dichotomy of control (Wikipedia)", url: "https://en.wikipedia.org/wiki/Dichotomy_of_control" }],
+  sources: [{ label: "Enchiridion of Epictetus (Wikipedia)", url: "https://en.wikipedia.org/wiki/Enchiridion_of_Epictetus" }],
 }
