@@ -7,8 +7,8 @@ export const fermiParadox: Thought = {
   emoji: "👽",
   hook: "The galaxy is huge and ancient. So where is everybody?",
   body: [
-    "In 1950, over lunch at Los Alamos, physicist **Enrico Fermi** was chatting about UFOs when he suddenly asked: \"But where is everybody?\"",
-    "The puzzle: the Milky Way has **hundreds of billions of stars**, many with planets, and it's over 13 billion years old. Even slow spaceships could cross it in a few million years. If intelligent life were common, someone should have shown up by now.",
+    "In 1950, physicist **Enrico Fermi** chatted about UFOs on the way to lunch at Los Alamos. Later, at the table, he suddenly asked: \"But where is everybody?\"",
+    "The puzzle: the Milky Way has **hundreds of billions of stars**, many with planets, and it's over 13 billion years old. Even with slow spaceships, a civilization could spread across it in 5 to 50 million years. If intelligent life were common, someone should have shown up by now.",
     "Yet we see no signals, no probes, no visitors. That gap between \"should be everywhere\" and \"seen nowhere\" is the **Fermi paradox**. Maybe life is rare, maybe civilizations destroy themselves, or maybe they're hiding.",
   ],
   takeaway: "If aliens should be common, their total absence is a clue. We just don't know to what.",

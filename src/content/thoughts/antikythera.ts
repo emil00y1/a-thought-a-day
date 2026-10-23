@@ -11,7 +11,7 @@ export const antikythera: Thought = {
     "Over a century of study, including X-ray scans, revealed what it was: a hand-cranked device, over 2,000 years old, that showed the positions of the **Sun and Moon**, the Moon's phases, predicted **eclipses**, and even tracked the dates of the Olympic Games.",
     "It's often called the world's oldest known **analog computer**. Nothing with gearing this complex is known again for over a thousand years, until the astronomical clocks of medieval Europe. It shows how much ancient knowledge was lost.",
   ],
-  takeaway: "Ancient Greeks built a gear-driven computer, and the know-how then vanished for a millennium.",
+  takeaway: "Ancient Greeks built a gear-driven computer, and nothing as complex appeared again for over 1,000 years.",
   facts: [
     {
       q: "How much of it survives?",

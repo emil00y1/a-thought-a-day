@@ -7,7 +7,7 @@ export const forgettingCurve: Thought = {
   emoji: "🧠",
   hook: "Why will you forget most of today by next week, and how do you stop it?",
   body: [
-    "In 1885, German psychologist **Hermann Ebbinghaus** turned himself into a lab rat. He memorized long lists of meaningless syllables like \"DAX\" and \"ZOF\", then tested how much he still knew hours and days later.",
+    "In the 1880s, German psychologist **Hermann Ebbinghaus** turned himself into a lab rat. He memorized long lists of meaningless syllables like \"DAX\" and \"ZOF\", then tested how much he still knew hours and days later.",
     "The result was the **forgetting curve**: memory drops steeply right after learning, then levels off. Without review, a big chunk of something new is gone within a day.",
     "The good news: every time you pull a memory back out, the curve gets flatter. Short reviews **spaced out over days** beat one long cram, and **testing yourself** beats rereading. That's exactly why this app quizzes you on old thoughts.",
   ],
