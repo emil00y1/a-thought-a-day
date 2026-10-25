@@ -408,23 +408,21 @@ function Intro({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           whileTap={{ scale: 0.98 }}
-          className="group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-primary py-3.5 pr-3.5 pl-6 text-left text-primary-foreground transition-colors hover:bg-primary/90"
+          // The day's category gradient, like the emoji tiles in the library and on share cards.
+          className={cn(
+            "group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gradient-to-r py-3.5 pr-3.5 pl-6 text-left text-[#161b24] transition-[filter] hover:brightness-105",
+            categories[thought.category].gradient
+          )}
         >
           <span>
             <span className="block font-display text-xl leading-tight font-semibold">
               {learned ? "Play again" : "Start today's thought"}
             </span>
-            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-70">
+            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-75">
               <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
             </span>
           </span>
-          {/* The arrow takes the day's category color, so each thought has its own accent. */}
-          <span
-            className={cn(
-              "grid size-11 shrink-0 place-items-center rounded-full text-white transition-transform group-hover:translate-x-0.5",
-              categories[thought.category].solid
-            )}
-          >
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white/85 text-[#161b24] transition-transform group-hover:translate-x-0.5">
             {/* A small nudge every few seconds, inviting a tap. */}
             <motion.span
               animate={{ x: [0, 4, 0, 4, 0] }}
