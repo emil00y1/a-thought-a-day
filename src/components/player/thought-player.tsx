@@ -29,7 +29,9 @@ import { StatsStrip } from "@/components/stats-strip"
 import { Button } from "@/components/ui/button"
 import type { Activity, Thought } from "@/content/types"
 import type { Stats } from "@/lib/data"
+import { categories } from "@/content/categories"
 import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
+import { cn } from "@/lib/utils"
 import { Choice } from "./choice"
 import { Estimate } from "./estimate"
 import { FactCards } from "./fact-cards"
@@ -391,17 +393,24 @@ function Intro({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-[#ffc83d] py-3.5 pr-3.5 pl-6 text-left text-[#161b24] shadow-[0_5px_0_#d29b12] transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[0_7px_0_#d29b12] active:translate-y-1 active:shadow-[0_1px_0_#d29b12]"
+          whileTap={{ scale: 0.98 }}
+          className="group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-primary py-3.5 pr-3.5 pl-6 text-left text-primary-foreground transition-colors hover:bg-primary/90"
         >
           <span>
             <span className="block font-display text-xl leading-tight font-semibold">
               {learned ? "Play again" : "Start today's thought"}
             </span>
-            <span className="mt-0.5 flex items-center gap-1.5 text-sm text-[#161b24]/70">
+            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-70">
               <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
             </span>
           </span>
-          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[#161b24] text-[#ffc83d] transition-transform group-hover:translate-x-0.5">
+          {/* The arrow takes the day's category color, so each thought has its own accent. */}
+          <span
+            className={cn(
+              "grid size-11 shrink-0 place-items-center rounded-full text-white transition-transform group-hover:translate-x-0.5",
+              categories[thought.category].solid
+            )}
+          >
             {/* A small nudge every few seconds, inviting a tap. */}
             <motion.span
               animate={{ x: [0, 4, 0, 4, 0] }}

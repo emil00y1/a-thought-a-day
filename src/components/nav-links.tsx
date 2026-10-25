@@ -1,6 +1,6 @@
 "use client"
 
-import { BookOpen, Brain, House } from "lucide-react"
+import { BookOpen, Brain, House, UserRound } from "lucide-react"
 import { motion } from "motion/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -38,17 +38,41 @@ export function NavLinksView({ pathname }: { pathname: string | null }) {
           >
             <Icon className="size-4" strokeWidth={active ? 2.25 : 2} />
             <span className="hidden sm:inline">{label}</span>
-            {/* An ink bar on the header's bottom edge, like a tab. It slides between links. */}
-            {active && (
-              <motion.span
-                layoutId="nav-active"
-                transition={{ type: "spring", stiffness: 500, damping: 38 }}
-                className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-foreground"
-              />
-            )}
+            {active && <ActiveBar />}
           </Link>
         )
       })}
     </nav>
+  )
+}
+
+/** The account icon, marked active like the other menu links. */
+export function AccountLink({ email }: { email: string }) {
+  const active = usePathname().startsWith("/account")
+  return (
+    <Link
+      href="/account"
+      title={`Signed in as ${email}`}
+      aria-label="Account"
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "relative ml-0.5 flex items-center self-stretch px-2 transition-colors",
+        active ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+      )}
+    >
+      <UserRound className="size-4" strokeWidth={active ? 2.25 : 1.75} />
+      {active && <ActiveBar />}
+    </Link>
+  )
+}
+
+/** An ink bar on the header's bottom edge, like a tab. It slides between links. */
+function ActiveBar() {
+  return (
+    <motion.span
+      layoutId="nav-active"
+      transition={{ type: "spring", stiffness: 500, damping: 38 }}
+      className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-foreground"
+    />
   )
 }
