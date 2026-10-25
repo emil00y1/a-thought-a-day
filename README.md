@@ -87,7 +87,7 @@ A thought has a title, emoji, category, a one-line hook, 2 or 3 short paragraphs
 | `estimate` | Guesses a number on a slider | Yes, within a tolerance |
 | `poll` | Gives an opinion, then sees what share of players chose each option | No |
 
-Content is checked automatically. A mistake like an answer pointing past the options shows an error in `npm run dev` and fails the build, naming the thought and the problem.
+Content is checked automatically. A mistake like an answer pointing past the options, or two thoughts from the same category on back-to-back days, shows an error in `npm run dev` and fails the build, naming the thought and the problem.
 
 **Rules:** once a thought is live, never rename its `slug`, move it in the list, or reorder its games or poll options. Progress is stored by slug, the schedule follows the list order, and poll votes are stored by position.
 

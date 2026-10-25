@@ -9,6 +9,13 @@ export function validateThoughts(thoughts: Thought[]) {
   const slugs = new Set<string>()
   const emojis = new Set<string>()
 
+  thoughts.forEach((t, i) => {
+    const next = thoughts[i + 1]
+    // Back-to-back days from the same category feel repetitive.
+    if (next && next.category === t.category)
+      errors.push(`${next.slug}: same category (${t.category}) as the day before (${t.slug}). Move it further down the list.`)
+  })
+
   for (const t of thoughts) {
     const fail = (msg: string) => errors.push(`${t.slug}: ${msg}`)
 

@@ -10,6 +10,10 @@ const contact = process.env.EMAIL_FROM?.match(/<([^>]+)>/)?.[1] ?? process.env.E
 
 const sections = [
   {
+    title: "Who runs it",
+    items: ["Just a thought is made and run by Emil Kristensen in Denmark, who is responsible for your data."],
+  },
+  {
     title: "What we store",
     items: [
       "Your email address. If you sign in with Google, also your name and profile picture.",
