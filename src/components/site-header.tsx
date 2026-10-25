@@ -3,7 +3,6 @@ import Link from "next/link"
 import { Suspense } from "react"
 
 import { Wordmark } from "@/components/logo"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { UserMenu } from "@/components/user-menu"
 import { UserMenuBoundary } from "@/components/user-menu-boundary"
 import { cn } from "@/lib/utils"
@@ -38,7 +37,6 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <ThemeToggle />
         <UserMenuBoundary>
           <Suspense fallback={<div className="size-8 animate-pulse rounded-full bg-muted" />}>
             <UserMenu />

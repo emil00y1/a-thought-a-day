@@ -11,17 +11,17 @@ export function ThemeToggle() {
     } catch {}
   }
 
-  // Both icons render; CSS shows the right one, so server and client always match.
+  // Both labels render; CSS shows the right one, so server and client always match.
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label="Switch between light and dark mode"
-      title="Light or dark"
-      className="relative grid size-8 cursor-pointer place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground active:scale-90"
+      className="inline-flex cursor-pointer items-center gap-1 hover:text-foreground hover:underline"
     >
-      <Moon className="size-4 transition-all duration-300 dark:scale-0 dark:-rotate-90" />
-      <Sun className="absolute size-4 scale-0 rotate-90 transition-all duration-300 dark:scale-100 dark:rotate-0" />
+      <Moon className="size-3 dark:hidden" />
+      <Sun className="hidden size-3 dark:inline" />
+      <span className="dark:hidden">Dark mode</span>
+      <span className="hidden dark:inline">Light mode</span>
     </button>
   )
 }

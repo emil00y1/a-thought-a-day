@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { indexable, siteUrl } from "@/lib/site"
 import { themeScript, timeZoneScript } from "@/lib/theme-script"
 import "./globals.css"
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/privacy" className="hover:text-foreground hover:underline">
               Privacy
             </Link>
+            <ThemeToggle />
           </footer>
         </Providers>
         <Analytics />
