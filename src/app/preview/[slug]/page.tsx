@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
 import { ThoughtPlayer } from "@/components/player/thought-player"
-import { formatDay, scheduledDay, thoughtBySlug, thoughtNumber } from "@/content"
+import { formatDay, scheduledDay, thoughtBySlug } from "@/content"
 import { QUIZ_UNLOCK } from "@/lib/data"
 
 // Dev-only: play any thought without saving progress.
@@ -25,7 +25,6 @@ async function Preview({ params }: { params: PageProps<"/preview/[slug]">["param
     <ThoughtPlayer
       key={slug}
       thought={thought}
-      number={thoughtNumber(slug)}
       dateLabel={formatDay(scheduledDay(slug))}
       signedIn={false}
       stats={null}

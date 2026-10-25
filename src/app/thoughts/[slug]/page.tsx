@@ -7,7 +7,7 @@ import { Suspense } from "react"
 import { CategoryBadge } from "@/components/category-badge"
 import { RichText } from "@/components/rich-text"
 import { Button } from "@/components/ui/button"
-import { formatDay, scheduledDay, thoughtBySlug, thoughtForDay, thoughtNumber } from "@/content"
+import { formatDay, scheduledDay, thoughtBySlug, thoughtForDay } from "@/content"
 import { getToday } from "@/lib/data"
 
 /** A thought only gets a public page once its day is over, so future ones stay a surprise. */
@@ -55,7 +55,7 @@ async function ThoughtArticle({ params }: { params: PageProps<"/thoughts/[slug]"
           <div className="flex flex-wrap items-center justify-between gap-2">
             <CategoryBadge category={thought.category} />
             <span className="text-xs font-medium text-muted-foreground">
-              Thought #{thoughtNumber(slug)} · {formatDay(scheduledDay(slug))}
+              {formatDay(scheduledDay(slug))}
             </span>
           </div>
           <div className="mt-8 text-6xl">{thought.emoji}</div>

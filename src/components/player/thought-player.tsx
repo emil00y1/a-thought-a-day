@@ -9,7 +9,6 @@ import {
   CircleHelp,
   Clock,
   Gauge,
-  Layers,
   Link2,
   RotateCcw,
   Share2,
@@ -31,7 +30,6 @@ import { Button } from "@/components/ui/button"
 import type { Activity, Thought } from "@/content/types"
 import type { Stats } from "@/lib/data"
 import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
-import { cn } from "@/lib/utils"
 import { Choice } from "./choice"
 import { Estimate } from "./estimate"
 import { FactCards } from "./fact-cards"
@@ -54,7 +52,6 @@ const activityMeta: Record<Activity["type"], { label: string; icon: typeof Clock
 
 type Props = {
   thought: Thought
-  number: number
   dateLabel: string
   signedIn: boolean
   /** Null for guests. */
@@ -64,7 +61,7 @@ type Props = {
   preview?: boolean
 }
 
-export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: serverStats, unlockAt, preview }: Props) {
+export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats, unlockAt, preview }: Props) {
   const steps: Step[] = [
     { kind: "intro" },
     { kind: "read" },
@@ -146,7 +143,6 @@ export function ThoughtPlayer({ thought, number, dateLabel, signedIn, stats: ser
           {step.kind === "intro" && (
             <Intro
               thought={thought}
-              number={number}
               dateLabel={dateLabel}
               learned={stats?.learnedToday ?? guestResult !== null}
               result={guestResult}
@@ -323,14 +319,12 @@ function StepCard({
 
 function Intro({
   thought,
-  number,
   dateLabel,
   learned,
   result,
   onStart,
 }: {
   thought: Thought
-  number: number
   dateLabel: string
   learned: boolean
   /** A guest's score from earlier today. */
@@ -344,7 +338,7 @@ function Intro({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <CategoryBadge category={thought.category} />
           <span className="text-xs font-medium text-muted-foreground">
-            Thought #{number} · {dateLabel}
+            {dateLabel}
           </span>
         </div>
 
@@ -378,43 +372,47 @@ function Intro({
           {thought.hook}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground"
-        >
-          <Chip icon={Clock}>~3 min</Chip>
-          <Chip icon={Layers}>{thought.activities.length} mini games</Chip>
-          {learned && (
-            <Chip icon={Check} className="bg-success/15 text-foreground">
-              Learned today
-              {result && result.total > 0 && ` · ${result.correct}/${result.total} right`}
-            </Chip>
-          )}
-        </motion.div>
+        {learned && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-5 flex items-center gap-1.5 text-sm font-medium text-success"
+          >
+            <Check className="size-4" strokeWidth={3} />
+            Learned today
+            {result && result.total > 0 && ` · ${result.correct}/${result.total} right`}
+          </motion.p>
+        )}
 
-        <motion.div
+        <motion.button
+          type="button"
+          onClick={onStart}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
+          className="group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-[#ffc83d] py-3.5 pr-3.5 pl-6 text-left text-[#161b24] shadow-[0_5px_0_#d29b12] transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[0_7px_0_#d29b12] active:translate-y-1 active:shadow-[0_1px_0_#d29b12]"
         >
-          <Button size="lg" onClick={onStart} className="group mt-8 h-12 px-7 text-base">
-            {learned ? "Play again" : "Start"}
-            <ArrowRight className="transition-transform group-hover:translate-x-1" />
-          </Button>
-        </motion.div>
+          <span>
+            <span className="block font-display text-xl leading-tight font-semibold">
+              {learned ? "Play again" : "Start today's thought"}
+            </span>
+            <span className="mt-0.5 flex items-center gap-1.5 text-sm text-[#161b24]/70">
+              <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
+            </span>
+          </span>
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[#161b24] text-[#ffc83d] transition-transform group-hover:translate-x-0.5">
+            {/* A small nudge every few seconds, inviting a tap. */}
+            <motion.span
+              animate={{ x: [0, 4, 0, 4, 0] }}
+              transition={{ duration: 0.9, repeat: Infinity, repeatDelay: 3.5, delay: 1.5, ease: "easeInOut" }}
+            >
+              <ArrowRight className="size-5" />
+            </motion.span>
+          </span>
+        </motion.button>
       </div>
     </div>
-  )
-}
-
-function Chip({ icon: Icon, className, children }: { icon: typeof Clock; className?: string; children: React.ReactNode }) {
-  return (
-    <span className={cn("inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1.5", className)}>
-      <Icon className="size-3.5" />
-      {children}
-    </span>
   )
 }
 

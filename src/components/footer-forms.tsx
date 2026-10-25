@@ -51,6 +51,11 @@ export function FooterForm({ kind }: { kind: Kind }) {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:animate-in data-[state=open]:fade-in" />
         <Dialog.Content
+          // Don't jump into the text box (and pop the phone keyboard); focus the sheet itself.
+          onOpenAutoFocus={(e) => {
+            e.preventDefault()
+            ;(e.currentTarget as HTMLElement).focus()
+          }}
           className={cn(
             "fixed inset-x-0 bottom-0 z-50 max-h-[90dvh] overflow-y-auto rounded-t-3xl bg-background p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-2xl outline-none",
             "data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom data-[state=open]:duration-300",
@@ -117,7 +122,6 @@ function Form({ kind, onDone }: { kind: Kind; onDone: () => void }) {
         <textarea
           id={`${kind}-message`}
           required
-          autoFocus
           rows={4}
           maxLength={2000}
           value={message}

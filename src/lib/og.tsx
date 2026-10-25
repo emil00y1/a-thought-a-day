@@ -43,7 +43,7 @@ function Logo() {
 }
 
 /** A share card for one thought: its emoji, title and hook. Without a thought, a plain brand card. */
-export async function ogImage(thought: Thought | null, number?: number) {
+export async function ogImage(thought: Thought | null) {
   const [fraunces, grandstander] = await fonts
   const [from, to] = gradients[thought?.category ?? "curious"]
 
@@ -85,7 +85,6 @@ export async function ogImage(thought: Thought | null, number?: number) {
             <Logo />
             Just a thought
           </div>
-          {number && <div style={{ fontSize: 28, color: muted }}>{`Thought #${number}`}</div>}
         </div>
       </div>
     ),

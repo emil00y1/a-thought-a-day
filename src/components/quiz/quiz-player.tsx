@@ -115,7 +115,7 @@ export function QuizPlayer({ questions, history }: { questions: QuizQuestion[]; 
                   <div className="space-y-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-semibold">{q.thought.title}</span>
-                      <CategoryBadge category={q.thought.category} className="px-2 py-0.5 text-[10px]" />
+                      <CategoryBadge category={q.thought.category} className="text-[10px]" />
                     </div>
                     <p className="text-sm text-muted-foreground">{q.thought.takeaway}</p>
                   </div>

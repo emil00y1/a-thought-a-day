@@ -1,4 +1,4 @@
-import { scheduledDay, thoughtBySlug, thoughtNumber } from "@/content"
+import { scheduledDay, thoughtBySlug } from "@/content"
 import { getToday } from "@/lib/data"
 import { ogImage, ogSize } from "@/lib/og"
 
@@ -11,5 +11,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const thought = thoughtBySlug(slug)
   // Future thoughts stay a surprise, so they get the plain brand card.
   if (!thought || scheduledDay(slug) > (await getToday())) return ogImage(null)
-  return ogImage(thought, thoughtNumber(slug))
+  return ogImage(thought)
 }

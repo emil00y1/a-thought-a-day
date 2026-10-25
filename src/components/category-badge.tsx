@@ -1,18 +1,27 @@
+import * as motion from "motion/react-client"
+
 import { categories } from "@/content/categories"
 import type { Category } from "@/content/types"
 import { cn } from "@/lib/utils"
 
+/** The category as colored small caps after a short bar. No pill. */
 export function CategoryBadge({ category, className }: { category: Category; className?: string }) {
   const style = categories[category]
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide uppercase",
+        "inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase",
         style.badge,
+        "bg-transparent",
         className
       )}
     >
-      <span className={cn("size-1.5 rounded-full", style.solid)} />
+      <motion.span
+        initial={{ width: 0 }}
+        animate={{ width: 16 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24, delay: 0.15 }}
+        className={cn("h-0.5 rounded-full", style.solid)}
+      />
       {style.label}
     </span>
   )

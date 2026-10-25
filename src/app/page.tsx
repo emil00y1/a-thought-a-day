@@ -5,7 +5,7 @@ import { Suspense } from "react"
 import { Countdown } from "@/components/countdown"
 import { PendingSync } from "@/components/pending-sync"
 import { ThoughtPlayer } from "@/components/player/thought-player"
-import { dayIndex, formatDay, thoughtForDay, thoughtNumber } from "@/content"
+import { dayIndex, formatDay, thoughtForDay } from "@/content"
 import { getStats, getToday, getUser, QUIZ_UNLOCK } from "@/lib/data"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -48,7 +48,6 @@ async function Today() {
       <ThoughtPlayer
         key={thought.slug}
         thought={thought}
-        number={thoughtNumber(thought.slug)}
         dateLabel={formatDay(today)}
         signedIn={user !== null}
         stats={stats}
