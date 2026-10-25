@@ -102,6 +102,12 @@ export function saveableDay(slug: string, timeZone: string, now = new Date()) {
   return null
 }
 
+/** Thoughts whose day is over, newest first. Today's is left out: it's still being played. */
+export function pastThoughts(today: string) {
+  const index = Math.min(dayIndex(today), thoughts.length)
+  return index > 0 ? thoughts.slice(0, index).reverse() : []
+}
+
 export function thoughtBySlug(slug: string) {
   return bySlug.get(slug) ?? null
 }

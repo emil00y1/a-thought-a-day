@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import { getLearned, getUser, QUIZ_UNLOCK } from "@/lib/data"
 import { buildQuiz } from "@/lib/quiz"
 
-export const metadata: Metadata = { title: "Memory quiz" }
+export const metadata: Metadata = { title: "Memory quiz", robots: { index: false } }
 
 export default function ReviewPage() {
   return (

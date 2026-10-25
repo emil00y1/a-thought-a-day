@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { formatDay } from "@/content"
 import { getLearned, getToday, getUser, QUIZ_UNLOCK, streakFrom } from "@/lib/data"
 
-export const metadata: Metadata = { title: "Your library" }
+export const metadata: Metadata = { title: "Your library", robots: { index: false } }
 
 export default function LibraryPage() {
   return (

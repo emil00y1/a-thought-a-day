@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
+import { indexable, siteUrl } from "@/lib/site"
 import { themeScript, timeZoneScript } from "@/lib/theme-script"
 import "./globals.css"
 
@@ -27,10 +28,12 @@ const fraunces = Fraunces({
 })
 
 export const metadata: Metadata = {
-  // Absolute base for share image links. Without it, Next uses the Vercel production URL.
-  metadataBase: process.env.BETTER_AUTH_URL ? new URL(process.env.BETTER_AUTH_URL) : undefined,
+  metadataBase: new URL(siteUrl),
   title: { default: "Just a thought", template: "%s · Just a thought" },
-  description: "One new idea every day. A few minutes, a few tiny games, and memory quizzes to make it stick.",
+  description:
+    "Learn one new idea every day in a few minutes. Science, history, philosophy and curious facts, with tiny games and memory quizzes to make it stick.",
+  openGraph: { siteName: "Just a thought", type: "website" },
+  robots: indexable ? undefined : { index: false, follow: false },
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -49,7 +52,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Providers>
           <SiteHeader />
           <main className="mx-auto w-full max-w-2xl flex-1 px-4 pt-4 pb-12 sm:pt-8">{children}</main>
-          <footer className="pb-8 text-center text-xs text-muted-foreground">
+          <footer className="flex justify-center gap-4 pb-8 text-xs text-muted-foreground">
+            <Link href="/thoughts" className="hover:text-foreground hover:underline">
+              Past thoughts
+            </Link>
             <Link href="/privacy" className="hover:text-foreground hover:underline">
               Privacy
             </Link>

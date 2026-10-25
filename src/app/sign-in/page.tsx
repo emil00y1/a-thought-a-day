@@ -4,7 +4,7 @@ import { Logo } from "@/components/logo"
 import { SignInForm } from "@/components/sign-in-form"
 import { googleEnabled } from "@/lib/auth"
 
-export const metadata: Metadata = { title: "Sign in" }
+export const metadata: Metadata = { title: "Sign in", robots: { index: false } }
 
 export default function SignInPage() {
   return (

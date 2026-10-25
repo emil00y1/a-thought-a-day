@@ -11,6 +11,7 @@ Topics span science, space, history, philosophy, ethics, ideologies, experiments
 - **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight in your own time zone.
 - **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted (once a poll has 10 votes).
 - **Library** of every thought you've learned, with your streak.
+- **Past thoughts** at `/thoughts`: every thought whose day is over gets a public page to read (not play). Good for people who missed a day, and for search engines.
 - **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
 - **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, their result is remembered in the browser, and it's saved to their account when they sign up.
 - **Share** today's thought and score from the finish screen.
@@ -49,7 +50,7 @@ Without a database you can still play today's thought as a guest, and browse eve
 | --- | --- | --- |
 | `DATABASE_URL` | Yes | Postgres connection string. Set automatically by the Neon integration. |
 | `BETTER_AUTH_SECRET` | Yes | A random string of 32+ characters. Generate one with `openssl rand -base64 32`. |
-| `BETTER_AUTH_URL` | Yes | The public URL of the app, e.g. `https://just-a-thought.vercel.app`. |
+| `BETTER_AUTH_URL` | Yes | The public URL of the app, e.g. `https://justathought.day`. Also used for canonical links and the sitemap. |
 | `RESEND_API_KEY` | In production | API key from [Resend](https://resend.com), used to email sign-in codes. |
 | `EMAIL_FROM` | In production | Sender, e.g. `Just a thought <hello@yourdomain.com>`, on a domain verified in Resend. Also shown as the contact address on `/privacy`. |
 | `GOOGLE_CLIENT_ID` | Optional | Enables "Continue with Google". |
@@ -115,7 +116,8 @@ Commit the new file in `./drizzle`. The next deploy applies it to production aut
 
 ```
 src/
-  app/                 pages: / (today), /library, /review, /account, /privacy, /sign-in, /preview
+  app/                 pages: / (today), /thoughts (past), /library, /review, /account, /privacy, /sign-in, /preview
+    robots.ts, sitemap.ts  search engine files; only the production deployment is indexable
     actions.ts         saving a learned thought, deleting an account
   components/
     player/            the daily flow and the six mini games

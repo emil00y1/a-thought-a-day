@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Clock } from "lucide-react"
 import { Suspense } from "react"
 
@@ -6,6 +7,11 @@ import { PendingSync } from "@/components/pending-sync"
 import { ThoughtPlayer } from "@/components/player/thought-player"
 import { dayIndex, formatDay, thoughtForDay, thoughtNumber } from "@/content"
 import { getStats, getToday, getUser, QUIZ_UNLOCK } from "@/lib/data"
+
+export const metadata: Metadata = {
+  title: { absolute: "Just a thought · Learn one new idea every day" },
+  alternates: { canonical: "/" },
+}
 
 export default function Home() {
   return (

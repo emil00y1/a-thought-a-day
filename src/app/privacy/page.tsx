@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { PageHeader } from "@/components/page-header"
 
-export const metadata: Metadata = { title: "Privacy" }
+export const metadata: Metadata = { title: "Privacy", alternates: { canonical: "/privacy" } }
 
 // The sender address doubles as the contact address, e.g. "Just a thought <hello@example.com>".
 const contact = process.env.EMAIL_FROM?.match(/<([^>]+)>/)?.[1] ?? process.env.EMAIL_FROM

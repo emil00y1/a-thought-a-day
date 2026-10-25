@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { getUser } from "@/lib/data"
 
-export const metadata: Metadata = { title: "Account" }
+export const metadata: Metadata = { title: "Account", robots: { index: false } }
 
 export default function AccountPage() {
   return (
