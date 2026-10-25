@@ -1,6 +1,6 @@
 "use client"
 
-import { LogOut, Trash2 } from "lucide-react"
+import { LogOut } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -10,9 +10,8 @@ import { deleteAccount } from "@/app/actions"
 import { Button } from "@/components/ui/button"
 import { authClient } from "@/lib/auth-client"
 
-export function AccountActions() {
+export function SignOutButton() {
   const router = useRouter()
-  const [confirming, setConfirming] = useState(false)
   const [pending, setPending] = useState(false)
 
   async function signOut() {
@@ -21,6 +20,19 @@ export function AccountActions() {
     router.push("/")
     router.refresh()
   }
+
+  return (
+    <Button variant="outline" size="lg" onClick={signOut} disabled={pending} className="w-full">
+      <LogOut /> Sign out
+    </Button>
+  )
+}
+
+/** A small link at the bottom of the page, so it doesn't take focus. Asks once before deleting. */
+export function DeleteAccount() {
+  const router = useRouter()
+  const [confirming, setConfirming] = useState(false)
+  const [pending, setPending] = useState(false)
 
   async function remove() {
     setPending(true)
@@ -35,42 +47,41 @@ export function AccountActions() {
     router.refresh()
   }
 
-  return (
-    <>
-      <Button variant="outline" size="lg" onClick={signOut} disabled={pending} className="w-full">
-        <LogOut /> Sign out
-      </Button>
+  const link = "cursor-pointer underline underline-offset-4 disabled:cursor-default"
 
-      <div className="rounded-3xl border border-destructive/30 p-6">
-        <p className="font-medium">Delete account</p>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Removes your account, every thought you&apos;ve learned and your streak. This can&apos;t be undone.
-        </p>
-        <AnimatePresence mode="wait" initial={false}>
-          {confirming ? (
-            <motion.div
-              key="confirm"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              className="mt-4 flex flex-wrap gap-2"
+  return (
+    <div className="pt-8 text-center text-xs text-muted-foreground">
+      <AnimatePresence mode="wait" initial={false}>
+        {confirming ? (
+          <motion.p key="confirm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            Delete your account and all your progress for good?{" "}
+            <button type="button" onClick={remove} disabled={pending} className={`${link} font-semibold text-destructive`}>
+              {pending ? "Deleting..." : "Yes, delete"}
+            </button>
+            {" · "}
+            <button
+              type="button"
+              onClick={() => setConfirming(false)}
+              disabled={pending}
+              className={`${link} hover:text-foreground`}
             >
-              <Button variant="destructive" onClick={remove} disabled={pending}>
-                <Trash2 /> {pending ? "Deleting..." : "Yes, delete everything"}
-              </Button>
-              <Button variant="ghost" onClick={() => setConfirming(false)} disabled={pending}>
-                Cancel
-              </Button>
-            </motion.div>
-          ) : (
-            <motion.div key="ask" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}>
-              <Button variant="outline" onClick={() => setConfirming(true)} className="mt-4 text-destructive hover:text-destructive">
-                <Trash2 /> Delete my account
-              </Button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </>
+              Cancel
+            </button>
+          </motion.p>
+        ) : (
+          <motion.button
+            key="ask"
+            type="button"
+            onClick={() => setConfirming(true)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`${link} hover:text-destructive`}
+          >
+            Delete account
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }

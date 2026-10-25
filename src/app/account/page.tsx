@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 
-import { AccountActions } from "@/components/account-actions"
+import { DeleteAccount, SignOutButton } from "@/components/account-actions"
 import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { getUser } from "@/lib/data"
@@ -34,7 +34,7 @@ async function Account() {
           {user.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
         </div>
       </div>
-      <AccountActions />
+      <SignOutButton />
       <p className="text-center text-sm text-muted-foreground">
         See what we store in the{" "}
         <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground">
@@ -42,6 +42,7 @@ async function Account() {
         </Link>
         .
       </p>
+      <DeleteAccount />
     </div>
   )
 }

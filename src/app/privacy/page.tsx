@@ -46,7 +46,7 @@ const sections = [
   {
     title: "Deleting your data",
     items: [
-      "Go to Account and choose Delete my account. Your account, progress and sessions are deleted right away.",
+      "Go to Account and choose Delete account at the bottom. Your account, progress and sessions are deleted right away.",
       "Copies can stay in our database provider's backups for a short time before they expire.",
     ],
   },
