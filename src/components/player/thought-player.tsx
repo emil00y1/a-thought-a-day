@@ -22,6 +22,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 import { toast } from "sonner"
 
 import { completeThought } from "@/app/actions"
+import { HOME_EVENT } from "@/components/nav-links"
 import { CategoryBadge, CategoryGlow } from "@/components/category-badge"
 import { Countdown } from "@/components/countdown"
 import { RichText } from "@/components/rich-text"
@@ -106,6 +107,19 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
     window.scrollTo({ top: 0, behavior: "smooth" })
     if (steps[to].kind === "done") void finish()
   }
+
+  // The logo or Today link, clicked mid-game, takes you back to the first screen.
+  useEffect(() => {
+    function backToStart() {
+      setRound((r) => r + 1)
+      setReady({})
+      setResults({})
+      setIndex(0)
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+    window.addEventListener(HOME_EVENT, backToStart)
+    return () => window.removeEventListener(HOME_EVENT, backToStart)
+  }, [])
 
   function restart() {
     setRound((r) => r + 1)

@@ -4,8 +4,27 @@ import { BookOpen, Brain, House, UserRound } from "lucide-react"
 import { motion } from "motion/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import type { ComponentProps } from "react"
 
 import { cn } from "@/lib/utils"
+
+/** Sent when a home link is clicked while already home, so the game goes back to its first screen. */
+export const HOME_EVENT = "jat:home"
+
+/** A link to the home page that also resets the game when you're already on it. */
+export function HomeLink(props: Omit<ComponentProps<typeof Link>, "href">) {
+  const pathname = usePathname()
+  return (
+    <Link
+      {...props}
+      href="/"
+      onClick={(e) => {
+        props.onClick?.(e)
+        if (pathname === "/") window.dispatchEvent(new Event(HOME_EVENT))
+      }}
+    />
+  )
+}
 
 // On phones the logo doubles as the Today link, so that one only shows from `sm` up.
 const links = [
@@ -28,6 +47,7 @@ export function NavLinksView({ pathname }: { pathname: string | null }) {
           <Link
             key={href}
             href={href}
+            onClick={() => href === "/" && pathname === "/" && window.dispatchEvent(new Event(HOME_EVENT))}
             aria-label={label}
             aria-current={active ? "page" : undefined}
             className={cn(
