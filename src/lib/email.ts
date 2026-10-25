@@ -25,6 +25,23 @@ export async function sendSignInCode(email: string, code: string) {
   if (!res.ok) throw new Error(`Couldn't send the sign-in email (${res.status}): ${await res.text()}`)
 }
 
+/** A plain-text note to the site's own inbox (EMAIL_FROM), e.g. new feedback. Skipped in local dev. */
+export async function sendToOwner(subject: string, text: string, replyTo?: string) {
+  const key = process.env.RESEND_API_KEY
+  const from = process.env.EMAIL_FROM
+  if (!key || !from) {
+    console.log(`\n  ${subject}\n  ${text.replaceAll("\n", "\n  ")}\n`)
+    return
+  }
+  const to = from.match(/<([^>]+)>/)?.[1] ?? from
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from, to, subject, text, ...(replyTo && { reply_to: replyTo }) }),
+  })
+  if (!res.ok) throw new Error(`Couldn't send the note (${res.status}): ${await res.text()}`)
+}
+
 // Brand colors from globals.css, as hex since email clients don't support oklch.
 const ink = "#161b24"
 const cream = "#fdfaf4"

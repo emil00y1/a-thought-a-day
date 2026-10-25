@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Fraunces, Geist, Grandstander } from "next/font/google"
 import Link from "next/link"
 
+import { FooterForm } from "@/components/footer-forms"
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -59,10 +60,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Providers>
           <SiteHeader />
           <main className="mx-auto w-full max-w-2xl flex-1 px-4 pt-4 pb-12 sm:pt-8">{children}</main>
-          <footer className="flex justify-center gap-4 pb-8 text-xs text-muted-foreground">
+          <footer className="mx-auto flex max-w-sm flex-wrap justify-center gap-x-4 gap-y-2 px-4 pb-8 text-xs text-muted-foreground">
             <Link href="/thoughts" className="hover:text-foreground hover:underline">
               Past thoughts
             </Link>
+            <FooterForm kind="thought" />
+            <FooterForm kind="feedback" />
             <Link href="/privacy" className="hover:text-foreground hover:underline">
               Privacy
             </Link>

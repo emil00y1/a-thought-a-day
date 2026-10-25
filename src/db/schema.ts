@@ -115,6 +115,16 @@ export const quizResult = pgTable(
   (t) => [index("quiz_result_user_id_idx").on(t.userId)]
 )
 
+/** Feedback and thought suggestions from the footer forms. */
+export const submission = pgTable("submission", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  kind: text("kind", { enum: ["feedback", "thought"] }).notNull(),
+  message: text("message").notNull(),
+  email: text("email"),
+  mayContact: boolean("may_contact").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+})
+
 /** Anonymous vote counts for poll games. `pollIndex` is the poll's position in the thought's activities. */
 export const pollTally = pgTable(
   "poll_tally",

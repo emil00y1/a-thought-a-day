@@ -89,8 +89,14 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size: 22px 22px;
+    /* Dots near the top only, fading into a plain background so long pages read cleanly. */
+    background-image:
+      linear-gradient(to bottom, transparent, var(--background) 360px),
+      radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      22px 22px;
+    background-repeat: no-repeat, repeat;
   }
 }
 

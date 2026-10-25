@@ -22,6 +22,7 @@ const sections = [
       "Your sign-in sessions, including the IP address and browser they came from, so you stay signed in and we can spot abuse.",
       "Sign-in codes, stored scrambled (hashed). They expire after 5 minutes.",
       "Short counters per IP address that limit how many sign-in emails can be requested.",
+      "Feedback and thought suggestions you send, with your email and contact choice if you add them.",
     ],
   },
   {

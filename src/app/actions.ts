@@ -1,12 +1,13 @@
 "use server"
 
-import { and, eq, sql } from "drizzle-orm"
+import { and, count, eq, gt, sql } from "drizzle-orm"
 import { headers } from "next/headers"
 
 import { saveableDay, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought, pollTally, quizResult, user } from "@/db/schema"
+import { learnedThought, pollTally, quizResult, submission, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
+import { sendToOwner } from "@/lib/email"
 import { getStats, getTimeZone, getUser, type Stats } from "@/lib/data"
 
 type Result = { ok: true; stats: Stats } | { ok: false; error: string }
@@ -87,4 +88,41 @@ export async function votePoll(input: {
     console.error("Poll vote failed", error)
     return null
   }
+}
+
+/**
+ * Saves feedback or a thought suggestion and emails it to the owner.
+ * `website` is a hidden field only bots fill in.
+ */
+export async function sendMessage(input: {
+  kind: "feedback" | "thought"
+  message: string
+  email: string
+  mayContact: boolean
+  website: string
+}): Promise<{ ok: boolean }> {
+  const message = input.message.trim().slice(0, 2000)
+  const email = input.email.trim().slice(0, 200)
+  if (input.website || !message || !["feedback", "thought"].includes(input.kind)) return { ok: !!input.website }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false }
+
+  // A loose cap, so a flood can't eat the daily email allowance.
+  const [{ recent }] = await db
+    .select({ recent: count() })
+    .from(submission)
+    .where(gt(submission.createdAt, new Date(Date.now() - 60 * 60 * 1000)))
+  if (recent >= 30) return { ok: false }
+
+  const mayContact = Boolean(email) && input.mayContact
+  await db.insert(submission).values({ kind: input.kind, message, email: email || null, mayContact })
+
+  const label = input.kind === "feedback" ? "Feedback" : "Thought idea"
+  const from = email ? `${email} (${mayContact ? "you may contact them" : "do NOT contact them"})` : "anonymous"
+  try {
+    await sendToOwner(`${label}: ${message.slice(0, 60)}`, `${message}\n\nFrom: ${from}`, mayContact ? email : undefined)
+  } catch (error) {
+    // It's saved in the database either way.
+    console.error("Couldn't email the message", error)
+  }
+  return { ok: true }
 }
