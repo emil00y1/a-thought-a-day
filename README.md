@@ -44,6 +44,8 @@ Without a database you can still play today's thought as a guest, and browse eve
 3. Add the other environment variables below under **Settings → Environment Variables**.
 4. Deploy. Every build first runs the database migrations, so the tables are created and kept up to date automatically.
 
+Server code runs in Frankfurt (`fra1`, set in [`vercel.json`](vercel.json)) to sit next to the Neon database. If your database is elsewhere, change the region to match, or every page waits on a long round trip.
+
 ### Environment variables
 
 | Variable | Needed | What it is |

@@ -37,10 +37,19 @@ const sections = [
   {
     title: "Who helps us run it",
     items: [
-      "Our database provider stores the data above.",
+      "Neon stores the data above.",
       "Vercel hosts the app and counts visits.",
       "Resend sends the sign-in emails.",
+      "ImprovMX forwards emails sent to our contact address.",
       "Google, only if you choose to sign in with Google.",
+    ],
+  },
+  {
+    title: "Where your data lives",
+    items: [
+      "Your data is stored in Frankfurt, Germany, and the app runs there too.",
+      "Sign-in emails are sent from Ireland.",
+      "Some of these providers are US companies.",
     ],
   },
   {
@@ -81,7 +90,7 @@ export default function PrivacyPage() {
           <Link href="/account" className="underline underline-offset-4 hover:text-foreground">
             Account
           </Link>{" "}
-          page. Last updated 22 October 2026.
+          page. Last updated 25 October 2026.
         </p>
       </div>
     </>

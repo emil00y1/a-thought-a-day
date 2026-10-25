@@ -30,7 +30,7 @@ import { weirdTime } from "./thoughts/weird-time"
 import { validateThoughts } from "./validate"
 
 /** The day thought #1 goes live, at midnight in each player's time zone. Each following thought unlocks one day later. */
-export const LAUNCH_DATE = "2026-10-20"
+export const LAUNCH_DATE = "2026-10-26"
 
 /** The schedule. Only ever append to the end once a thought has gone live. */
 export const thoughts: Thought[] = [
