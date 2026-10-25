@@ -22,7 +22,7 @@ export function SignOutButton() {
   }
 
   return (
-    <Button variant="outline" size="lg" onClick={signOut} disabled={pending} className="w-full">
+    <Button variant="outline" onClick={signOut} disabled={pending}>
       <LogOut /> Sign out
     </Button>
   )
@@ -50,7 +50,7 @@ export function DeleteAccount() {
   const link = "cursor-pointer underline underline-offset-4 disabled:cursor-default"
 
   return (
-    <div className="pt-8 text-center text-xs text-muted-foreground">
+    <div className="pt-16 text-xs text-muted-foreground">
       <AnimatePresence mode="wait" initial={false}>
         {confirming ? (
           <motion.p key="confirm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

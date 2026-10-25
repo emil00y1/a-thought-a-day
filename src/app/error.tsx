@@ -11,7 +11,7 @@ export default function ErrorPage({ error, retry }: { error: unknown; retry: () 
   }, [error])
 
   return (
-    <div className="rounded-3xl border bg-card p-10 text-center shadow-sm">
+    <div className="py-12 text-center">
       <div className="text-6xl">🌧️</div>
       <h1 className="mt-5 font-display text-3xl font-semibold">Something went wrong</h1>
       <p className="mt-2 text-muted-foreground">We couldn&apos;t load this page. It&apos;s probably temporary.</p>

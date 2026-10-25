@@ -33,12 +33,9 @@ async function Archive() {
   const past = pastThoughts(today)
 
   return (
-    <div className="space-y-3">
+    <div>
       {current && (
-        <Link
-          href="/"
-          className="group flex items-center gap-4 rounded-3xl border-2 border-foreground bg-card p-4 shadow-sm sm:p-5"
-        >
+        <Link href="/" className="group flex items-center gap-4 border-t py-4">
           <Tile thought={current} />
           <span className="min-w-0 flex-1">
             <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Today</span>
@@ -53,16 +50,15 @@ async function Archive() {
       {past.length === 0 ? (
         <p className="py-10 text-center text-muted-foreground">Past thoughts show up here from tomorrow.</p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="divide-y border-y">
           {past.map((t) => (
             <li key={t.slug}>
-              <Link
-                href={`/thoughts/${t.slug}`}
-                className="flex items-center gap-4 rounded-3xl border bg-card p-4 shadow-sm transition-colors hover:bg-accent sm:p-5"
-              >
+              <Link href={`/thoughts/${t.slug}`} className="group flex items-center gap-4 py-4">
                 <Tile thought={t} />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate font-display text-lg font-semibold">{t.title}</span>
+                  <span className="block truncate font-display text-lg font-semibold group-hover:underline group-hover:underline-offset-4">
+                    {t.title}
+                  </span>
                   <span className="line-clamp-1 text-sm text-muted-foreground">{t.hook}</span>
                 </span>
                 <span className="hidden shrink-0 text-xs text-muted-foreground sm:block">
@@ -92,9 +88,9 @@ function Tile({ thought }: { thought: Thought }) {
 
 function ListSkeleton() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {[0, 1, 2, 3].map((i) => (
-        <div key={i} className="h-20 animate-pulse rounded-3xl border bg-card" />
+        <div key={i} className="h-16 animate-pulse rounded-xl bg-muted" />
       ))}
     </div>
   )

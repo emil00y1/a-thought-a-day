@@ -19,7 +19,7 @@ export function LibraryList({ items }: { items: Item[] }) {
   const [open, setOpen] = useState<string | null>(null)
 
   return (
-    <ul className="space-y-3">
+    <ul className="divide-y border-y">
       {items.map((item, i) => {
         const isOpen = open === item.slug
         return (
@@ -29,13 +29,13 @@ export function LibraryList({ items }: { items: Item[] }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05, layout: { type: "spring", stiffness: 300, damping: 30 } }}
-            className="overflow-hidden rounded-3xl border bg-card shadow-sm"
+            className="overflow-hidden"
           >
             <motion.button
               layout="position"
               type="button"
               onClick={() => setOpen(isOpen ? null : item.slug)}
-              className="flex w-full cursor-pointer items-center gap-4 p-4 text-left sm:p-5"
+              className="flex w-full cursor-pointer items-center gap-4 py-4 text-left"
               aria-expanded={isOpen}
             >
               <span
@@ -66,7 +66,7 @@ export function LibraryList({ items }: { items: Item[] }) {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 32 }}
                 >
-                  <div className="space-y-4 border-t px-5 pt-4 pb-6">
+                  <div className="space-y-4 pb-6">
                     <CategoryBadge category={item.category} />
                     <p className="font-display text-xl leading-snug font-medium">{item.takeaway}</p>
                     <div className="space-y-3 leading-relaxed text-foreground/80">
@@ -78,7 +78,7 @@ export function LibraryList({ items }: { items: Item[] }) {
                     </div>
                     <ul className="space-y-2">
                       {item.facts.map((f) => (
-                        <li key={f.q} className="rounded-2xl bg-muted px-4 py-3 text-sm">
+                        <li key={f.q} className="text-sm">
                           <span className="font-semibold">{f.q}</span>{" "}
                           <span className="text-muted-foreground">{f.a}</span>
                         </li>

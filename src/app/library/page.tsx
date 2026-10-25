@@ -30,7 +30,7 @@ async function Library() {
   const [learned, today] = await Promise.all([getLearned(user.id), getToday()])
   if (learned.length === 0) {
     return (
-      <div className="rounded-3xl border-2 border-dashed p-10 text-center">
+      <div className="py-12 text-center">
         <div className="text-5xl">📚</div>
         <p className="mt-4 font-display text-2xl font-semibold">Nothing here yet</p>
         <p className="mt-1 text-muted-foreground">Learn today&apos;s thought to start your collection.</p>
@@ -72,7 +72,7 @@ function ListSkeleton() {
   return (
     <div className="space-y-3">
       {[0, 1, 2].map((i) => (
-        <div key={i} className="h-20 animate-pulse rounded-3xl border bg-card" />
+        <div key={i} className="h-16 animate-pulse rounded-xl bg-muted" />
       ))}
     </div>
   )

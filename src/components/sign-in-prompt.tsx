@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export function SignInPrompt({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-3xl border-2 border-dashed p-8 text-center">
+    <div className="py-12 text-center">
       <div className="mx-auto grid size-12 place-items-center rounded-full bg-muted">
         <LogIn className="size-5" />
       </div>

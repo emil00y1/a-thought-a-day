@@ -32,7 +32,7 @@ export function StatsStrip({ learned, streak, unlockAt, className }: Props) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 + i * 0.08 }}
-          className="flex flex-col items-center gap-1 rounded-2xl border bg-card/70 px-2 py-3"
+          className="flex flex-col items-center gap-1 px-2 py-3"
         >
           <motion.span
             initial={{ scale: 0.4, rotate: -20 }}
@@ -60,7 +60,7 @@ export function StatsStrip({ learned, streak, unlockAt, className }: Props) {
             <span className="text-xs opacity-70">10 questions</span>
           </Link>
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-1.5 rounded-2xl border border-dashed bg-card/40 px-2 py-3">
+          <div className="flex h-full flex-col items-center justify-center gap-1.5 px-2 py-3">
             <Lock className="size-4 text-muted-foreground" />
             <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
               <motion.div

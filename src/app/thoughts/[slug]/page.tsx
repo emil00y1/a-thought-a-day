@@ -4,7 +4,7 @@ import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { Suspense } from "react"
 
-import { CategoryBadge, CategoryGlow } from "@/components/category-badge"
+import { CategoryBadge } from "@/components/category-badge"
 import { RichText } from "@/components/rich-text"
 import { Button } from "@/components/ui/button"
 import { formatDay, scheduledDay, thoughtBySlug, thoughtForDay, thoughtNumber } from "@/content"
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/thoughts/[slug]">
 
 export default function ThoughtPage({ params }: PageProps<"/thoughts/[slug]">) {
   return (
-    <Suspense fallback={<div className="h-96 animate-pulse rounded-3xl border bg-card" />}>
+    <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-muted" />}>
       <ThoughtArticle params={params} />
     </Suspense>
   )
@@ -45,14 +45,13 @@ async function ThoughtArticle({ params }: { params: PageProps<"/thoughts/[slug]"
   if (!thought) notFound()
 
   return (
-    <article className="space-y-5">
+    <article>
       <Link href="/thoughts" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4" /> Past thoughts
       </Link>
 
-      <div className="relative overflow-clip rounded-3xl border bg-card p-6 shadow-sm sm:p-10">
-        <CategoryGlow category={thought.category} />
-        <div className="relative">
+      <header className="mt-6">
+        <div>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <CategoryBadge category={thought.category} />
             <span className="text-xs font-medium text-muted-foreground">
@@ -64,21 +63,27 @@ async function ThoughtArticle({ params }: { params: PageProps<"/thoughts/[slug]"
             {thought.title}
           </h1>
           <p className="mt-3 text-lg text-pretty text-muted-foreground">{thought.hook}</p>
-          <div className="mt-8 space-y-4 text-[17px] leading-relaxed text-foreground/80">
-            {thought.body.map((p, i) => (
-              <p key={i}>
-                <RichText text={p} />
-              </p>
-            ))}
-          </div>
         </div>
+      </header>
+
+      <div className="mt-8 space-y-4 text-[17px] leading-relaxed text-foreground/80">
+        {thought.body.map((p, i) => (
+          <p key={i}>
+            <RichText text={p} />
+          </p>
+        ))}
       </div>
 
-      <section className="rounded-3xl border bg-card p-6 shadow-sm sm:p-8">
+      <blockquote className="mt-10 border-l-4 border-foreground pl-5">
+        <div className="mb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">Remember this</div>
+        <p className="font-display text-xl leading-snug font-medium">{thought.takeaway}</p>
+      </blockquote>
+
+      <section className="mt-10">
         <h2 className="font-display text-2xl font-semibold">Quick facts</h2>
-        <dl className="mt-4 space-y-3">
+        <dl className="mt-3 divide-y border-y">
           {thought.facts.map((f) => (
-            <div key={f.q} className="rounded-2xl bg-muted px-4 py-3">
+            <div key={f.q} className="py-3">
               <dt className="font-semibold">{f.q}</dt>
               <dd className="mt-0.5 text-muted-foreground">{f.a}</dd>
             </div>
@@ -86,13 +91,8 @@ async function ThoughtArticle({ params }: { params: PageProps<"/thoughts/[slug]"
         </dl>
       </section>
 
-      <blockquote className="rounded-3xl bg-muted px-6 py-5">
-        <div className="mb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">Remember this</div>
-        <p className="font-display text-xl leading-snug font-medium">{thought.takeaway}</p>
-      </blockquote>
-
       {thought.sources && (
-        <div className="flex flex-wrap gap-x-4 gap-y-1 px-1 text-xs text-muted-foreground">
+        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
           <span>Learn more:</span>
           {thought.sources.map((s) => (
             <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-foreground">
@@ -102,7 +102,7 @@ async function ThoughtArticle({ params }: { params: PageProps<"/thoughts/[slug]"
         </div>
       )}
 
-      <div className="rounded-3xl border-2 border-dashed p-6 text-center">
+      <div className="mt-14 text-center">
         <p className="font-display text-xl font-semibold">A new idea every day</p>
         <p className="mt-1 text-sm text-muted-foreground">Read it, play a few tiny games, and remember it. Takes about 3 minutes.</p>
         <Button asChild size="lg" className="mt-4">

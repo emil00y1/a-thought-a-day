@@ -543,7 +543,7 @@ function Done({
         ) : signedIn ? (
           stats && <StatsStrip learned={stats.learned} streak={stats.streak} unlockAt={unlockAt} />
         ) : (
-          <div className="rounded-3xl border-2 border-dashed p-6 text-center">
+          <div className="border-t pt-6 text-center">
             <p className="font-display text-xl font-semibold">Don&apos;t let it fade</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Create a free account to save it, keep a streak and unlock memory quizzes.

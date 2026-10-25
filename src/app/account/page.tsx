@@ -13,7 +13,7 @@ export default function AccountPage() {
   return (
     <>
       <PageHeader title="Account" subtitle="Your sign-in and your data." />
-      <Suspense fallback={<div className="h-64 animate-pulse rounded-3xl border bg-card" />}>
+      <Suspense fallback={<div className="h-32 animate-pulse rounded-xl bg-muted" />}>
         <Account />
       </Suspense>
     </>
@@ -25,23 +25,25 @@ async function Account() {
   if (!user) return <SignInPrompt>Sign in to see your account.</SignInPrompt>
 
   return (
-    <div className="space-y-4">
-      <div className="rounded-3xl border bg-card p-6 shadow-sm">
-        <div className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Signed in as</div>
-        <div className="mt-1 text-lg font-medium break-all">{user.email}</div>
-        <div className="mt-1 text-sm text-muted-foreground">
-          Member since{" "}
-          {user.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+    <div>
+      <dl className="divide-y border-y">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 py-4">
+          <dt className="text-sm text-muted-foreground">Email</dt>
+          <dd className="font-medium break-all">{user.email}</dd>
         </div>
-      </div>
-      <SignOutButton />
-      <p className="text-center text-sm text-muted-foreground">
-        See what we store in the{" "}
-        <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground">
-          privacy note
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 py-4">
+          <dt className="text-sm text-muted-foreground">Member since</dt>
+          <dd className="font-medium">
+            {user.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+          </dd>
+        </div>
+      </dl>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+        <SignOutButton />
+        <Link href="/privacy" className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground">
+          What we store
         </Link>
-        .
-      </p>
+      </div>
       <DeleteAccount />
     </div>
   )

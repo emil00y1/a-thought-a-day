@@ -60,7 +60,7 @@ async function Today() {
 
 function NoThought({ beforeLaunch }: { beforeLaunch: boolean }) {
   return (
-    <div className="rounded-3xl border bg-card p-10 text-center shadow-sm">
+    <div className="py-12 text-center">
       <div className="text-6xl">{beforeLaunch ? "🌱" : "🌙"}</div>
       <h1 className="mt-5 font-display text-3xl font-semibold">
         {beforeLaunch ? "The first thought is on its way" : "No new thought today"}

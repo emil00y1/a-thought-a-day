@@ -40,7 +40,7 @@ function Locked({ learned }: { learned: number }) {
   const r = 52
   const circumference = 2 * Math.PI * r
   return (
-    <div className="rounded-3xl border bg-card p-8 text-center shadow-sm sm:p-10">
+    <div className="py-8 text-center">
       <div className="relative mx-auto size-36">
         <svg viewBox="0 0 120 120" className="size-full -rotate-90">
           <circle cx="60" cy="60" r={r} className="fill-none stroke-muted" strokeWidth="10" />
