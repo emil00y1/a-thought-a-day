@@ -8,9 +8,20 @@ import { ThoughtPlayer } from "@/components/player/thought-player"
 import { dayIndex, formatDay, thoughtForDay, thoughtNumber } from "@/content"
 import { getStats, getToday, getUser, QUIZ_UNLOCK } from "@/lib/data"
 
-export const metadata: Metadata = {
-  title: { absolute: "Just a thought · Learn one new idea every day" },
-  alternates: { canonical: "/" },
+export async function generateMetadata(): Promise<Metadata> {
+  const thought = thoughtForDay(await getToday())
+  return {
+    title: { absolute: "Just a thought · Learn one new idea every day" },
+    alternates: { canonical: "/" },
+    // Shared links show today's thought instead of the generic card.
+    ...(thought && {
+      openGraph: {
+        siteName: "Just a thought",
+        type: "website",
+        images: [{ url: `/thoughts/${thought.slug}/opengraph-image`, width: 1200, height: 630, alt: thought.title }],
+      },
+    }),
+  }
 }
 
 export default function Home() {

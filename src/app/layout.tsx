@@ -32,7 +32,13 @@ export const metadata: Metadata = {
   title: { default: "Just a thought", template: "%s · Just a thought" },
   description:
     "Learn one new idea every day in a few minutes. Science, history, philosophy and curious facts, with tiny games and memory quizzes to make it stick.",
-  openGraph: { siteName: "Just a thought", type: "website" },
+  // The default share image. The home page and past thoughts swap in a card for their own thought.
+  openGraph: {
+    siteName: "Just a thought",
+    type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Just a thought: one new idea every day" }],
+  },
+  twitter: { card: "summary_large_image" },
   robots: indexable ? undefined : { index: false, follow: false },
 }
 

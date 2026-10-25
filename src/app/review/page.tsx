@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/page-header"
 import { QuizPlayer } from "@/components/quiz/quiz-player"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
-import { getLearned, getUser, QUIZ_UNLOCK } from "@/lib/data"
+import { getLearned, getQuizHistory, getUser, QUIZ_UNLOCK } from "@/lib/data"
 import { buildQuiz } from "@/lib/quiz"
 
 export const metadata: Metadata = { title: "Memory quiz", robots: { index: false } }
@@ -28,12 +28,12 @@ async function Review() {
   const user = await getUser()
   if (!user) return <SignInPrompt>Sign in to track your thoughts and unlock memory quizzes.</SignInPrompt>
 
-  const learned = await getLearned(user.id)
+  const [learned, history] = await Promise.all([getLearned(user.id), getQuizHistory(user.id)])
   if (learned.length < QUIZ_UNLOCK) return <Locked learned={learned.length} />
 
   await connection()
   const questions = buildQuiz(learned.map((l) => l.thought))
-  return <QuizPlayer key={crypto.randomUUID()} questions={questions} />
+  return <QuizPlayer key={crypto.randomUUID()} questions={questions} history={history} />
 }
 
 function Locked({ learned }: { learned: number }) {

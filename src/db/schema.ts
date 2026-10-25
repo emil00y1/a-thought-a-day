@@ -100,6 +100,21 @@ export const learnedThought = pgTable(
   (t) => [primaryKey({ columns: [t.userId, t.thoughtSlug] })]
 )
 
+/** One row per finished memory quiz, so players can see their memory improve. */
+export const quizResult = pgTable(
+  "quiz_result",
+  {
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    correct: integer("correct").notNull(),
+    total: integer("total").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => [index("quiz_result_user_id_idx").on(t.userId)]
+)
+
 /** Anonymous vote counts for poll games. `pollIndex` is the poll's position in the thought's activities. */
 export const pollTally = pgTable(
   "poll_tally",

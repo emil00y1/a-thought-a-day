@@ -17,7 +17,7 @@ const sections = [
     title: "What we store",
     items: [
       "Your email address. If you sign in with Google, also your name and profile picture.",
-      "Which thoughts you've learned, on which day, and your score.",
+      "Which thoughts you've learned, on which day, and your score. Also your memory quiz scores.",
       "Poll answers, counted anonymously. We only store the total votes per option, not who voted.",
       "Your sign-in sessions, including the IP address and browser they came from, so you stay signed in and we can spot abuse.",
       "Sign-in codes, stored scrambled (hashed). They expire after 5 minutes.",

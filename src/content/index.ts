@@ -27,6 +27,16 @@ import { trolleyProblem } from "./thoughts/trolley-problem"
 import { tulipMania } from "./thoughts/tulip-mania"
 import { veilOfIgnorance } from "./thoughts/veil-of-ignorance"
 import { weirdTime } from "./thoughts/weird-time"
+import { olbersParadox } from "./thoughts/olbers-paradox"
+import { yearWithoutSummer } from "./thoughts/year-without-summer"
+import { aschConformity } from "./thoughts/asch-conformity"
+import { zenosParadoxes } from "./thoughts/zenos-paradoxes"
+import { iceFloats } from "./thoughts/ice-floats"
+import { experienceMachine } from "./thoughts/experience-machine"
+import { bananasAreBerries } from "./thoughts/bananas-are-berries"
+import { socialContract } from "./thoughts/social-contract"
+import { benfordsLaw } from "./thoughts/benfords-law"
+import { placeboEffect } from "./thoughts/placebo-effect"
 import { validateThoughts } from "./validate"
 
 /** The day thought #1 goes live, at midnight in each player's time zone. Each following thought unlocks one day later. */
@@ -60,6 +70,16 @@ export const thoughts: Thought[] = [
   prisonersDilemma,
   tulipMania,
   dunningKruger,
+  olbersParadox,
+  yearWithoutSummer,
+  aschConformity,
+  zenosParadoxes,
+  iceFloats,
+  experienceMachine,
+  bananasAreBerries,
+  socialContract,
+  benfordsLaw,
+  placeboEffect,
 ]
 
 validateThoughts(thoughts)

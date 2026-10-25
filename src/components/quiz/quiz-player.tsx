@@ -7,12 +7,16 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState } from "react"
 
+import { saveQuizResult } from "@/app/actions"
 import { CategoryBadge } from "@/components/category-badge"
 import { OptionButton } from "@/components/player/shared"
 import { Button } from "@/components/ui/button"
 import type { QuizQuestion } from "@/lib/quiz"
+import { cn } from "@/lib/utils"
 
-export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
+type Score = { correct: number; total: number }
+
+export function QuizPlayer({ questions, history }: { questions: QuizQuestion[]; history: Score[] }) {
   const [index, setIndex] = useState(0)
   const [picked, setPicked] = useState<number | null>(null)
   const [score, setScore] = useState(0)
@@ -34,6 +38,7 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
   function next() {
     if (index + 1 === questions.length) {
       setFinished(true)
+      void saveQuizResult({ correct: score, total: questions.length })
     } else {
       moved.current = true
       setIndex(index + 1)
@@ -41,7 +46,7 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
     }
   }
 
-  if (finished) return <QuizResult score={score} total={questions.length} />
+  if (finished) return <QuizResult score={score} total={questions.length} history={history} />
 
   return (
     <div>
@@ -131,7 +136,7 @@ export function QuizPlayer({ questions }: { questions: QuizQuestion[] }) {
   )
 }
 
-function QuizResult({ score, total }: { score: number; total: number }) {
+function QuizResult({ score, total, history }: { score: number; total: number; history: Score[] }) {
   const router = useRouter()
   const ratio = score / total
   const r = 52
@@ -184,6 +189,7 @@ function QuizResult({ score, total }: { score: number; total: number }) {
         </div>
       </div>
       <p className="mt-6 font-display text-2xl font-semibold text-balance">{message}</p>
+      {history.length > 0 && <History scores={[...history, { correct: score, total }]} />}
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Button size="lg" onClick={() => router.refresh()}>
           <RotateCcw /> New quiz
@@ -193,5 +199,29 @@ function QuizResult({ score, total }: { score: number; total: number }) {
         </Button>
       </div>
     </motion.div>
+  )
+}
+
+/** Small bars of recent scores, ending with this one, so progress is visible at a glance. */
+function History({ scores }: { scores: Score[] }) {
+  const best = Math.max(...scores.map((s) => s.correct / s.total))
+  const label = `Your last ${scores.length} quizzes: ${scores.map((s) => `${s.correct} of ${s.total}`).join(", ")}`
+  return (
+    <div className="mx-auto mt-6 max-w-xs">
+      <div className="flex h-20 items-end gap-1.5" role="img" aria-label={label}>
+        {scores.map((s, i) => (
+          <motion.div
+            key={i}
+            initial={{ height: 0 }}
+            animate={{ height: `${Math.max(6, (s.correct / s.total) * 100)}%` }}
+            transition={{ type: "spring", stiffness: 160, damping: 20, delay: 0.3 + i * 0.06 }}
+            className={cn("flex-1 rounded-md", i === scores.length - 1 ? "bg-success" : "bg-muted-foreground/25")}
+          />
+        ))}
+      </div>
+      <p className="mt-2 text-xs text-muted-foreground">
+        Your last {scores.length} quizzes · best {Math.round(best * 100)}%
+      </p>
+    </div>
   )
 }

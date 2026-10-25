@@ -10,11 +10,11 @@ Topics span science, space, history, philosophy, ethics, ideologies, experiments
 
 - **One thought a day.** Everyone gets the same thought, and only today's can be played. A new one arrives at midnight in your own time zone.
 - **Six mini games:** multiple choice, swipe true/false, drag into order, match pairs, guess the number on a slider, and opinion polls that show how other players voted (once a poll has 10 votes).
-- **Library** of every thought you've learned, with your streak.
+- **Library** of every thought you've learned, with your streak. Missing one day is forgiven; two in a row end the streak.
 - **Past thoughts** at `/thoughts`: every thought whose day is over gets a public page to read (not play). Good for people who missed a day, and for search engines.
-- **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick.
+- **Memory quizzes** unlock after 7 thoughts and pull from all of them, because recalling is how memories stick. Scores are saved, and the result screen shows your last few.
 - **Passwordless sign-in** with a 6-digit email code, or Google. Guests can play, their result is remembered in the browser, and it's saved to their account when they sign up.
-- **Share** today's thought and score from the finish screen.
+- **Share** today's thought and score from the finish screen. Shared links show a card with that day's thought (`src/lib/og.tsx`).
 - **Light and dark mode** with a switch in the header (follows the device until you choose), and lots of small animations (respecting reduced motion).
 - **Account deletion** and a plain-language privacy page.
 

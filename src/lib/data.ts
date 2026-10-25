@@ -7,7 +7,7 @@ import { cache } from "react"
 
 import { addDays, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought } from "@/db/schema"
+import { learnedThought, quizResult } from "@/db/schema"
 import { auth } from "@/lib/auth"
 
 /** Learned thoughts needed before memory quizzes unlock. */
@@ -66,13 +66,33 @@ export async function getLearned(userId: string) {
   })
 }
 
-/** Consecutive days with a learned thought, ending today (or yesterday if today isn't done yet). */
+/** The user's latest memory quiz scores, oldest first. */
+export async function getQuizHistory(userId: string, limit = 7) {
+  const rows = await db
+    .select({ correct: quizResult.correct, total: quizResult.total })
+    .from(quizResult)
+    .where(eq(quizResult.userId, userId))
+    .orderBy(desc(quizResult.createdAt), desc(quizResult.id))
+    .limit(limit)
+  return rows.reverse()
+}
+
+/**
+ * Learned days in the current streak, ending today (or yesterday if today isn't done yet).
+ * One missed day is forgiven; two in a row end the streak.
+ */
 export function streakFrom(days: string[], today: string) {
   const set = new Set(days)
   let day = set.has(today) ? today : addDays(today, -1)
   let streak = 0
-  while (set.has(day)) {
-    streak++
+  let missed = 0
+  while (missed < 2) {
+    if (set.has(day)) {
+      streak++
+      missed = 0
+    } else {
+      missed++
+    }
     day = addDays(day, -1)
   }
   return streak

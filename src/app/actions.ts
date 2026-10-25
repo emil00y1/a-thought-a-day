@@ -5,7 +5,7 @@ import { headers } from "next/headers"
 
 import { saveableDay, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought, pollTally, user } from "@/db/schema"
+import { learnedThought, pollTally, quizResult, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { getStats, getTimeZone, getUser, type Stats } from "@/lib/data"
 
@@ -34,6 +34,14 @@ export async function completeThought(input: { slug: string; correct: number; to
 
   // No refresh() here: just after midnight it would swap the page to the new thought mid-celebration.
   return { ok: true, stats: await getStats(user.id, todayKey(new Date(), timeZone)) }
+}
+
+/** Saves a finished memory quiz score. */
+export async function saveQuizResult(input: { correct: number; total: number }) {
+  const user = await getUser()
+  if (!user) return
+  const total = clampInt(input.total, 1, 50)
+  await db.insert(quizResult).values({ userId: user.id, correct: clampInt(input.correct, 0, total), total })
 }
 
 /** Permanently deletes the signed-in user. Sessions, logins and learned thoughts go with it (cascade). */
