@@ -56,7 +56,6 @@
   --border: oklch(0.9 0.012 85);
   --input: oklch(0.88 0.012 85);
   --ring: oklch(0.6 0.03 265);
-  --dot: oklch(0.88 0.012 85);
 }
 
 .dark {
@@ -80,7 +79,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.55 0.03 265);
-  --dot: oklch(1 0 0 / 7%);
 }
 
 @layer base {
@@ -89,14 +87,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Dots near the top only, fading into a plain background so long pages read cleanly. */
-    background-image:
-      linear-gradient(to bottom, transparent, var(--background) 360px),
-      radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size:
-      100% 100%,
-      22px 22px;
-    background-repeat: no-repeat, repeat;
   }
 }
 

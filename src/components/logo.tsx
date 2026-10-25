@@ -9,7 +9,8 @@ const BUBBLE =
 export function Logo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
-      <g stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" fill="#ffc83d">
+      {/* Always an ink outline, also in dark mode, so the bubble stays yellow and black. */}
+      <g stroke="#161b24" strokeWidth="2.4" strokeLinejoin="round" fill="#ffc83d">
         <motion.circle
           cx="8.5"
           cy="34"
