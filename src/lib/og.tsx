@@ -91,6 +91,10 @@ export async function ogImage(thought: Thought | null, number?: number) {
     ),
     {
       ...ogSize,
+      // A thought's card doesn't change, so let the CDN keep it. The plain card is short-lived, since it turns into a real one on release day.
+      headers: {
+        "Cache-Control": thought ? "public, max-age=3600, s-maxage=604800" : "public, max-age=300, s-maxage=300",
+      },
       emoji: "twemoji",
       fonts: [
         { name: "Fraunces", data: fraunces, weight: 600 },

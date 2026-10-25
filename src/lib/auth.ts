@@ -22,6 +22,8 @@ export const auth = betterAuth({
   socialProviders: google ? { google } : {},
   // On in production only. Stored in the database because serverless instances don't share memory.
   rateLimit: { storage: "database" },
+  // Keep the session in a signed cookie for 5 minutes, so pages don't hit the database just to check who's signed in.
+  session: { cookieCache: { enabled: true, maxAge: 5 * 60 } },
   plugins: [
     emailOTP({
       storeOTP: "hashed",
