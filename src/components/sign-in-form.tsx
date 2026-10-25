@@ -173,6 +173,7 @@ export function SignInForm({ googleEnabled }: { googleEnabled: boolean }) {
             <p className="mt-1 text-sm text-muted-foreground">
               We sent a 6-digit code to <span className="font-medium text-foreground">{email}</span>
             </p>
+            <p className="mt-1 text-xs text-muted-foreground">Can&apos;t find it? Check your spam folder.</p>
 
             <InputOTP
               maxLength={6}
