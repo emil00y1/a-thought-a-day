@@ -59,17 +59,26 @@ export function Countdown() {
           .map((n) => String(Math.floor(n)).padStart(2, "0"))
           .join(":")
 
+  const spoken =
+    left === null
+      ? ""
+      : `${Math.floor(left / 3_600_000)} hours and ${Math.floor((left / 60_000) % 60)} minutes`
+
   return (
-    <span className="inline-flex font-mono font-medium" aria-label={`Next thought in ${text}`}>
-      {text.split("").map((ch, i) =>
-        ch === ":" ? (
-          <span key={i} className="px-px opacity-50">
-            :
-          </span>
-        ) : (
-          <Digit key={i} value={ch} />
-        )
-      )}
+    <span className="inline-flex font-mono font-medium">
+      {/* Screen readers get plain words; the rolling digits are visual only. */}
+      <span className="sr-only">{spoken}</span>
+      <span aria-hidden className="inline-flex">
+        {text.split("").map((ch, i) =>
+          ch === ":" ? (
+            <span key={i} className="px-px opacity-50">
+              :
+            </span>
+          ) : (
+            <Digit key={i} value={ch} />
+          )
+        )}
+      </span>
     </span>
   )
 }

@@ -59,7 +59,7 @@ export function Poll({
   return (
     <div>
       <ActivityTitle>{activity.question}</ActivityTitle>
-      <p className="mt-1 text-sm text-muted-foreground">No wrong answers. See how others voted.</p>
+      <p className="mt-1 text-sm text-muted-foreground">No wrong answers.</p>
       <div className="mt-6 grid gap-2.5">
         {activity.options.map((option, i) => {
           const n = counts?.[i] ?? 0
@@ -114,7 +114,7 @@ export function Poll({
       </div>
       {counts && !showResults && (
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 text-center text-sm text-muted-foreground">
-          Too few votes to show results yet. Check back later.
+          You&apos;re one of the first to answer. Results show once more people have.
         </motion.p>
       )}
 

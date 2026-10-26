@@ -15,7 +15,7 @@ export const trolleyProblem: Thought = {
   facts: [
     {
       q: "How many people pull the lever?",
-      a: "In one large 2007 online survey, about 9 in 10 said pulling the lever is okay, but only about 1 in 10 said the same about pushing the man. Later studies found more support for pushing, but still less than for pulling.",
+      a: "In one large 2007 online survey, about 9 in 10 said pulling the lever is okay, but only about 1 in 10 said the same about pushing the man. A 2020 study of 70,000 people found more support for pushing, but still less than for pulling.",
     },
     {
       q: "What was the Moral Machine?",

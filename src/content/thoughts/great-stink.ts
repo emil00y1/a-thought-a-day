@@ -40,7 +40,7 @@ export const greatStink: Thought = {
       items: [
         { text: "John Snow traces cholera to a water pump", detail: "1854" },
         { text: "The Great Stink hits Parliament", detail: "1858" },
-        { text: "Bazalgette's sewer system opens", detail: "1865" },
+        { text: "Bazalgette's main sewers officially open", detail: "1865" },
         { text: "London's last major cholera outbreak", detail: "1866" },
       ],
       explain: "The 1866 outbreak hit East London, the area not yet connected to the new sewers.",

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { PageHeader } from "@/components/page-header"
+import { googleEnabled } from "@/lib/auth"
 
 export const metadata: Metadata = { title: "Privacy", alternates: { canonical: "/privacy" } }
 
@@ -16,7 +17,7 @@ const sections = [
   {
     title: "What we store",
     items: [
-      "Your email address. If you sign in with Google, also your name and profile picture.",
+      googleEnabled ? "Your email address. If you sign in with Google, also your name and profile picture." : "Your email address.",
       "Which thoughts you've learned, on which day, and your score. Also your memory quiz scores.",
       "Poll answers, counted anonymously. We only store the total votes per option, not who voted.",
       "Your sign-in sessions, including the IP address and browser they came from, so you stay signed in and we can spot abuse.",
@@ -46,7 +47,7 @@ const sections = [
       "Vercel hosts the app and counts visits.",
       "Resend sends the sign-in emails.",
       "ImprovMX forwards emails sent to our contact address.",
-      "Google, only if you choose to sign in with Google.",
+      ...(googleEnabled ? ["Google, only if you choose to sign in with Google."] : []),
     ],
   },
   {

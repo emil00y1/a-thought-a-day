@@ -13,7 +13,7 @@ type Side = "left" | "right"
 export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (r: Result) => void }) {
   const { pairs } = activity
   // Right column shows the same pair indexes in a scrambled order.
-  const [rightOrder] = useState(() => {
+  const [rightOrder, setRightOrder] = useState(() => {
     const order = shuffle(
       pairs.map((_, i) => i),
       activity.prompt
@@ -23,8 +23,10 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
   const [selected, setSelected] = useState<{ side: Side; index: number } | null>(null)
   const [matched, setMatched] = useState<number[]>([])
   const [wrong, setWrong] = useState<{ side: Side; index: number }[]>([])
-  const [mistakes, setMistakes] = useState(0)
+  // Pairs whose left tile was part of a wrong guess. Each pair can lose its point only once.
+  const [slipped, setSlipped] = useState<number[]>([])
   const done = matched.length === pairs.length
+  const firstTry = pairs.length - slipped.length
 
   function pick(side: Side, index: number) {
     if (matched.includes(index) || wrong.length) return
@@ -37,10 +39,13 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
       const next = [...matched, index]
       setMatched(next)
       if (next.length === pairs.length) {
-        onDone({ correct: Math.max(0, pairs.length - mistakes), total: pairs.length })
+        onDone({ correct: firstTry, total: pairs.length })
+        // Line the answers up side by side, so the finished board reads as an answer key.
+        setRightOrder(pairs.map((_, i) => i))
       }
     } else {
-      setMistakes(mistakes + 1)
+      const leftIndex = side === "left" ? index : selected.index
+      if (!slipped.includes(leftIndex)) setSlipped([...slipped, leftIndex])
       setWrong([selected, { side, index }])
       setTimeout(() => setWrong([]), 550)
     }
@@ -53,6 +58,7 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
     return (
       <motion.button
         key={`${side}-${index}`}
+        layout
         type="button"
         onClick={() => pick(side, index)}
         disabled={isMatched}
@@ -99,10 +105,12 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
       </div>
       <Feedback
         show={done}
-        correct={mistakes === 0}
-        title={mistakes === 0 ? "Flawless!" : `All matched, with ${mistakes} slip${mistakes === 1 ? "" : "s"}`}
+        correct={firstTry === pairs.length}
+        title={firstTry === pairs.length ? "Flawless!" : `${firstTry} of ${pairs.length} on the first try`}
       >
-        {mistakes === 0 ? "Every pair on the first try." : "Each wrong guess costs a point, but you got there."}
+        {firstTry === pairs.length
+          ? "Every pair on the first try."
+          : "A pair only scores if you matched it without a wrong guess. They're lined up side by side now."}
       </Feedback>
     </div>
   )

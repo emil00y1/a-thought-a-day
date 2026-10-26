@@ -19,7 +19,7 @@ export const paleBlueDot: Thought = {
     },
     {
       q: "Where is Voyager 1 now?",
-      a: "In interstellar space since 2012, so far away that its radio signals take almost a full day to reach us.",
+      a: "In interstellar space since 2012, so far away that by 2026 its radio signals took almost a full day to reach us.",
     },
     {
       q: "Was it a single photo?",
@@ -46,7 +46,7 @@ export const paleBlueDot: Thought = {
         { text: "The Sun", detail: "150 million km" },
         { text: "Neptune", detail: "~4.5 billion km" },
         { text: "Voyager 1 in 1990", detail: "~6 billion km" },
-        { text: "Voyager 1 today", detail: "~26 billion km" },
+        { text: "Voyager 1 in 2026", detail: "~26 billion km" },
       ],
     },
     {

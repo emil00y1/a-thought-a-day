@@ -153,7 +153,8 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
   async function finish() {
     if (preview) return
     if (!signedIn) {
-      savePending({ slug: thought.slug, ...score })
+      // The first play counts, like for signed-in players; replays don't overwrite it.
+      if (parsePending(pendingSnapshot())?.slug !== thought.slug) savePending({ slug: thought.slug, ...score })
       return
     }
     const res = await completeThought({ slug: thought.slug, ...score })
@@ -420,6 +421,20 @@ function Intro({
           </motion.p>
         )}
 
+        {learned ? (
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <Button size="lg" onClick={() => shareThought(thought, result)} className="mt-8 h-12 w-full rounded-2xl text-base">
+              <Share2 /> Share today&apos;s thought
+            </Button>
+            <button
+              type="button"
+              onClick={onStart}
+              className="mt-3 flex w-full cursor-pointer items-center justify-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <RotateCcw className="size-3.5" /> Play again
+            </button>
+          </motion.div>
+        ) : (
         <motion.button
           type="button"
           onClick={onStart}
@@ -431,7 +446,7 @@ function Intro({
         >
           <span>
             <span className="block font-display text-xl leading-tight font-semibold">
-              {learned ? "Play again" : "Start today's thought"}
+              Start today&apos;s thought
             </span>
             <span className="mt-0.5 flex items-center gap-1.5 text-sm">
               <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
@@ -444,6 +459,7 @@ function Intro({
             </span>
           </span>
         </motion.button>
+        )}
       </div>
     </div>
   )
@@ -503,13 +519,16 @@ function Done({
   unlockAt: number
   onReplay: () => void
 }) {
+  const lowScore = score.total > 0 && score.correct / score.total < 0.4
+
   useEffect(() => {
+    if (lowScore) return
     void import("canvas-confetti").then(({ default: confetti }) => {
       const opts = { particleCount: 70, spread: 70, startVelocity: 45, disableForReducedMotion: true }
       void confetti({ ...opts, angle: 60, origin: { x: 0, y: 0.7 } })
       void confetti({ ...opts, angle: 120, origin: { x: 1, y: 0.7 } })
     })
-  }, [])
+  }, [lowScore])
 
   return (
     <div className="space-y-5">
@@ -539,7 +558,7 @@ function Done({
             transition={{ delay: 0.3 }}
             className="mt-6 font-display text-4xl font-semibold tracking-tight"
           >
-            {signedIn || preview ? "Thought learned!" : "All done!"}
+            {lowScore ? "A tricky one!" : signedIn || preview ? "Thought learned!" : "All done!"}
           </motion.h2>
           {score.total > 0 && (
             <motion.p
@@ -611,10 +630,11 @@ function Done({
   )
 }
 
-async function shareThought(thought: Thought, score: Result) {
-  const result = score.total > 0 ? ` and got ${score.correct}/${score.total}` : ""
-  const text = `${thought.emoji} I learned about ${thought.title} on Just a thought${result}.`
-  const url = window.location.origin
+async function shareThought(thought: Thought, score: Result | null) {
+  const result = score && score.correct > 0 ? ` I got ${score.correct}/${score.total}.` : ""
+  const text = `${thought.emoji} ${thought.title}: ${thought.hook}${result}`
+  // The thought's own page: today it opens the game, later it's the readable archive page.
+  const url = `${window.location.origin}/thoughts/${thought.slug}`
   if (navigator.share) {
     // Closing the share sheet throws, which is fine.
     await navigator.share({ text, url }).catch(() => {})
