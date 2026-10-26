@@ -29,18 +29,23 @@ export const tulipMania: Thought = {
   activities: [
     {
       type: "choice",
-      question: "What caused the prized flame-like stripes on tulips in the 1630s?",
-      options: ["Careful breeding", "A plant virus", "Special soil", "Cold winter frosts"],
+      question: "Which of these looks most like tulip mania?",
+      options: [
+        "Bread prices rise after a drought ruins the wheat",
+        "People buy rare seeds only to resell them for more",
+        "Umbrella prices jump on a rainy day at the beach",
+        "A famous old painting slowly gains value over years",
+      ],
       answer: 1,
-      explain: "The tulip breaking virus, spread by tiny insects. Beautiful, but bad for the plant.",
+      explain: "In a bubble, people buy mainly because they expect someone to pay more later, like the tavern bulb traders. The bread and umbrella prices have a real cause, and the painting rises slowly, not in a buying frenzy.",
     },
     {
       type: "truefalse",
       statements: [
         {
-          text: "Tulip prices crashed in February 1637.",
+          text: "A bubble like tulip mania needs a steady stream of new buyers willing to pay more.",
           answer: true,
-          explain: "Buyers stopped showing up, and prices fell within weeks.",
+          explain: "When people buy only to resell, prices keep rising only while new buyers keep coming. In February 1637 they stopped showing up, and prices collapsed within weeks.",
         },
         {
           text: "Tulip mania ruined the Dutch economy.",

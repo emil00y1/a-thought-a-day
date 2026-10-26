@@ -29,15 +29,15 @@ export const yearWithoutSummer: Thought = {
   activities: [
     {
       type: "choice",
-      question: "How did a volcano in Indonesia cool the whole planet?",
+      question: "A huge volcano erupts tomorrow and blasts lots of sulfur high into the sky. What should we most expect?",
       options: [
-        "Its lava heated the oceans",
-        "A sulfur haze reflected sunlight",
-        "It shifted Earth's orbit slightly",
-        "Its ash buried crops worldwide",
+        "A warmer world, as the haze traps heat",
+        "Cooler summers worldwide for a few years",
+        "Cold weather only in lands near the volcano",
+        "A colder world for many centuries after",
       ],
       answer: 1,
-      explain: "Heavy ash falls out within weeks, but a fine sulfur haze high in the sky can linger for a year or more.",
+      explain: "The sulfur haze spreads around the planet and reflects sunlight, but it slowly falls out of the sky, so the cooling fades within a few years. When Mount Pinatubo erupted in 1991, the world cooled by about half a degree for roughly two years.",
     },
     {
       type: "order",

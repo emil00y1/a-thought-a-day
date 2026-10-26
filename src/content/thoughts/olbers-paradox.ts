@@ -29,15 +29,16 @@ export const olbersParadox: Thought = {
   activities: [
     {
       type: "choice",
-      question: "Why can't distance alone explain the dark sky?",
+      question:
+        "Imagine an endless, unchanging universe where stars have always shone, but with only half as many stars. How would the night sky look?",
       options: [
-        "Distant stars are just as bright",
-        "More stars make up for dimmer ones",
-        "Light never fades with distance",
-        "Faraway stars are much bigger",
+        "Half as bright as with all the stars",
+        "Still as bright as a star's surface",
+        "Dark, with wide gaps between stars",
+        "Bright only along the Milky Way",
       ],
       answer: 1,
-      explain: "A shell of stars twice as far away looks a quarter as bright per star but holds four times as many stars.",
+      explain: "Every line of sight would still end on a star, just a bit farther away. Since farther stars look dimmer but there are more of them, distance doesn't help, so the whole sky would still glow.",
     },
     {
       type: "truefalse",

@@ -43,19 +43,19 @@ export const moravecsParadox: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "Moravec thought abstract reasoning is very hard in itself.",
+          text: "By Moravec's idea, a robot smart enough to do your taxes should find folding laundry easy.",
           answer: false,
-          explain: "He said it isn't all that hard. It only seems so because it's new for our brains.",
+          explain: "The opposite. Taxes are abstract rules, the kind of thing computers handle well. Folding a floppy shirt takes the old seeing and grasping skills that are hard to build.",
         },
         {
-          text: "Skills we do without thinking tend to be the hardest to program.",
+          text: "Moravec would expect a computer to master a new board game before a robot can reliably pick ripe strawberries.",
           answer: true,
-          explain: "Because they run below our awareness, we can't easily spell out how we do them.",
+          explain: "A board game is pure reasoning. Spotting a ripe berry among leaves and picking it without crushing it needs vision and gentle movement, the skills evolution polished.",
         },
         {
-          text: "MIT's 1966 project cracked computer vision in a single summer.",
+          text: "Since most people find chess hard, Moravec would expect it to be one of the hardest things to program.",
           answer: false,
-          explain: "It was meant to make big progress in one summer. Getting computers to see well took decades.",
+          explain: "His point is that feeling hard to us is a poor guide. Chess feels hard because reasoning is new for our brains, not because it's hard for a machine.",
         },
       ],
     },

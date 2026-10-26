@@ -38,10 +38,16 @@ export const experienceMachine: Thought = {
     },
     {
       type: "choice",
-      question: "Which idea is the experience machine meant to challenge?",
-      options: ["Stoicism", "Existentialism", "Hedonism", "Nihilism"],
-      answer: 2,
-      explain: "Hedonism says pleasure is the only thing that's good for you. If that were true, plugging in would be the obvious choice.",
+      question:
+        "Two lives feel exactly the same from the inside. In one, your friends truly like you. In the other, they secretly mock you, and you never find out. What would a strict hedonist say?",
+      options: [
+        "The first life is better for you",
+        "Both are equally good for you",
+        "The second is better, as it's harder",
+        "Neither counts, since both are fake",
+      ],
+      answer: 1,
+      explain: "If only pleasure matters, and both lives feel the same, they're equally good. Most people feel the first is better, which is exactly Nozick's point: we care about what's real, not just how it feels.",
     },
     {
       type: "truefalse",

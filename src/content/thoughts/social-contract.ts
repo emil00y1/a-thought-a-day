@@ -39,14 +39,16 @@ export const socialContract: Thought = {
       explain: "John Rawls revived the idea in 1971 with his veil of ignorance: pick society's rules before you know who you'll be in it.",
     },
     {
-      type: "match",
-      prompt: "Match each thinker to their view",
-      pairs: [
-        ["Hobbes", "Without a strong ruler, life is war"],
-        ["Locke", "Governments must protect natural rights"],
-        ["Rousseau", "Laws should express the general will"],
-        ["Hume", "Most real governments began by force"],
+      type: "choice",
+      question: "A government starts taking people's homes without any trial. What would Hobbes say the citizens should do?",
+      options: [
+        "Replace it, since it broke their rights",
+        "Obey, since even a harsh ruler beats chaos",
+        "Meet and vote on what the common good needs",
+        "Ignore it, since nobody signed a contract",
       ],
+      answer: 1,
+      explain: "Hobbes thought life without government is so terrible that people should accept an all-powerful ruler, even a harsh one. Replacing a government that tramples rights is Locke's view, and voting on the common good is Rousseau's.",
     },
     {
       type: "poll",

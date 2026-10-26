@@ -28,15 +28,16 @@ export const dunningKruger: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "The bottom quarter had beaten only 12% of others. What share did they think they'd beaten?",
-      min: 0,
-      max: 100,
-      step: 1,
-      answer: 62,
-      tolerance: 8,
-      unit: "%",
-      explain: "About 62%. They thought they were above average.",
+      type: "choice",
+      question: "A chess beginner and a club champion take the same hard chess quiz. Based on the study, what is most likely?",
+      options: [
+        "Both guess too high by about the same amount",
+        "Beginner guesses high, champion a bit low",
+        "Beginner guesses low, champion far too high",
+        "Both guess their own scores almost exactly",
+      ],
+      answer: 1,
+      explain: "The beginner lacks the skill to spot their own mistakes, so they guess too high. The champion does well but assumes the quiz was easy for everyone, so they guess a bit low.",
     },
     {
       type: "choice",
@@ -54,9 +55,9 @@ export const dunningKruger: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "The best performers overrated themselves the most.",
-          answer: false,
-          explain: "They slightly underrated themselves.",
+          text: "By Dunning and Kruger's idea, teaching a weak writer to write better should also help them judge their own essays.",
+          answer: true,
+          explain: "If spotting mistakes takes the same skill as avoiding them, building the skill helps with both. In a follow-up test, a short logic lesson helped low scorers rate themselves more accurately.",
         },
         {
           text: "The famous \"Mount Stupid\" graph comes from the original paper.",
