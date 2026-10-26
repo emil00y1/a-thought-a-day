@@ -28,15 +28,17 @@ export const pitchDrop: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "Before air conditioning, roughly how many years did each drop take to fall?",
-      min: 1,
-      max: 20,
-      step: 1,
-      answer: 8,
-      tolerance: 1,
-      unit: "years",
-      explain: "Each of the first seven drops took about 7 to 9 years. In the cooler room, the last two took 12 to 13 years each.",
+      type: "choice",
+      question: "Which of these behaves most like the pitch in the funnel?",
+      options: [
+        "Old window glass, thicker at the bottom",
+        "A glacier slowly creeping down a valley",
+        "Butter melting in a hot frying pan",
+        "A rock slowly worn away by the rain",
+      ],
+      answer: 1,
+      explain:
+        "Glacier ice cracks like a solid if you strike it, yet under its own weight it flows downhill over years, just like pitch. Thick old glass is a myth: panes were often made uneven, and glass flows far too slowly to notice.",
     },
     {
       type: "poll",
@@ -61,9 +63,9 @@ export const pitchDrop: Thought = {
           explain: "It sits in a display cabinet in a building foyer, so its flow speeds up and slows down with the seasons.",
         },
         {
-          text: "The first drop fell within a year of the stem being cut.",
-          answer: false,
-          explain: "It took about eight years, from 1930 to 1938.",
+          text: "Moving the funnel to a warm, sunny windowsill would likely make the drops fall more often.",
+          answer: true,
+          explain: "Warmth makes pitch less viscous, so it flows faster. That's why air conditioning did the opposite and stretched the gap between drops.",
         },
       ],
     },

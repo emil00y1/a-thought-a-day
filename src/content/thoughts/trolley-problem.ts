@@ -48,11 +48,11 @@ export const trolleyProblem: Thought = {
     },
     {
       type: "match",
-      prompt: "Match each moral theory to its idea",
+      prompt: "Your friend asks if you like their awful new haircut. Match each reply to the theory behind it",
       pairs: [
-        ["Consequentialism", "The best action has the best outcome"],
-        ["Deontology", "Some acts are wrong whatever the outcome"],
-        ["Virtue ethics", "Do what a good person would do"],
+        ["\"A kind lie leaves everyone happier, so lie.\"", "Consequentialism"],
+        ["\"Lying is wrong, even to spare feelings.\"", "Deontology"],
+        ["\"Do what an honest, caring friend would do.\"", "Virtue ethics"],
       ],
     },
   ],

@@ -28,16 +28,18 @@ export const milgram: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
+      type: "choice",
       question:
-        "Before the study, psychiatrists predicted almost nobody would go all the way to 450 volts. What share actually did?",
-      min: 0,
-      max: 100,
-      step: 1,
-      answer: 65,
-      tolerance: 7,
-      unit: "%",
-      explain: "65%. The psychiatrists had guessed about 1 in 1,000.",
+        "In a new version, the man giving orders wears jeans and says he's just another volunteer, not a scientist. Compared with 65%, what's most likely?",
+      options: [
+        "More people go all the way",
+        "Fewer people go all the way",
+        "About the same share obey",
+        "Nobody stops before 450 volts",
+      ],
+      answer: 1,
+      explain:
+        "Milgram's point is that authority drives obedience. He tried this: when an ordinary man gave the orders, only about 20% went to the end.",
     },
     {
       type: "match",

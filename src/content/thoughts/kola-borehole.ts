@@ -29,14 +29,15 @@ export const kolaBorehole: Thought = {
   activities: [
     {
       type: "estimate",
-      question: "How deep did the Kola Superdeep Borehole get?",
-      min: 1,
-      max: 30,
-      step: 0.1,
-      answer: 12.3,
-      tolerance: 1,
+      question:
+        "The hole reached about 12 km, only a third of the way through the crust there. How much deeper would it have had to go to reach the bottom of the crust?",
+      min: 0,
+      max: 60,
+      step: 1,
+      answer: 24,
+      tolerance: 3,
       unit: "km",
-      explain: "12,262 m, or about 12.3 km. That's deeper than Mount Everest is tall, by more than 3 km.",
+      explain: "If 12 km is a third, the whole crust is about 36 km thick. That leaves about 24 km to go, twice as far again, and it would only get hotter.",
     },
     {
       type: "truefalse",
@@ -60,15 +61,16 @@ export const kolaBorehole: Thought = {
     },
     {
       type: "choice",
-      question: "What made drilling past about 12 km so hard?",
+      question: "A team wants to drill deeper than Kola. Given what stopped Kola, which plan tackles the main problem?",
       options: [
-        "A layer of rock as hard as diamond",
-        "Water flooding the hole from below",
-        "Temperatures far higher than expected",
-        "Earthquakes shaking the drilling rig",
+        "Use a much wider drill to cut rock faster",
+        "Pick a site where rock heats up slowly",
+        "Pick a site with lots of hard granite",
+        "Drill only in winter, when it's colder",
       ],
-      answer: 2,
-      explain: "At 180 °C, the bottom was much hotter than planned for, and equipment kept failing. Then the money ran out too.",
+      answer: 1,
+      explain:
+        "Heat stopped Kola: 180 °C at the bottom broke the equipment. How fast rock heats up with depth varies from place to place, so a cooler site helps. Winter air does nothing for rock kilometers down.",
     },
   ],
   recall: [

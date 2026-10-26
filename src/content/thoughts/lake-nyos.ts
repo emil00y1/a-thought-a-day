@@ -8,7 +8,7 @@ export const lakeNyos: Thought = {
   hook: "One night in 1986, a quiet lake in Cameroon let out a gas cloud that killed 1,746 people.",
   body: [
     "On the evening of August 21, 1986, **Lake Nyos**, a deep crater lake in Cameroon, suddenly released a huge cloud of **carbon dioxide**. The gas is heavier than air, so it poured down the valleys like an invisible flood. It suffocated 1,746 people and about 3,500 livestock, many in their sleep, up to 25 km away.",
-    "This rare event is called a **limnic eruption**. Gas from magma far below seeps into the lake's cold bottom water, where the weight of the water above keeps it dissolved, like soda in a sealed bottle. When something stirred the layers, perhaps a landslide (no one knows for sure), the gas fizzed out all at once. Afterward, the blue lake turned red, as iron-rich water from the bottom rusted at the surface.",
+    "This rare event is called a **limnic eruption**. Gas from magma far below seeps into the lake's cold bottom water, which rarely mixes with the water above. The weight of all that water keeps the gas dissolved, like soda in a sealed bottle. When something stirred the layers, perhaps a landslide (no one knows for sure), the gas fizzed out all at once. Afterward, the blue lake turned red, as iron-rich water from the bottom rusted at the surface.",
     "To prevent a repeat, engineers installed **degassing pipes** that run from a raft down to the deep water. A pump starts the flow, then the rising bubbles keep it going on their own, shooting a fountain of fizzy water into the air. The first pipe was installed in 2001, and two more followed in 2011. By 2019, studies found that one pipe alone could keep the gas at a safe level, with no outside power.",
   ],
   takeaway: "A lake can store deadly gas like a sealed soda, and slow, steady venting keeps it from bursting.",
@@ -42,19 +42,19 @@ export const lakeNyos: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "The gas cloud rose high into the sky and drifted away.",
-          answer: false,
-          explain: "Carbon dioxide is about 50% denser than air, so it hugged the ground and flowed down valleys into villages.",
-        },
-        {
-          text: "Scientists still aren't sure what set off the eruption.",
+          text: "If you lived near the lake that night, climbing up a nearby hill would have been safer than staying in the valley.",
           answer: true,
-          explain: "A landslide is the most common guess. Others suggest cold rain, a small volcanic burst, or no trigger at all.",
+          explain: "Carbon dioxide is heavier than air, so it hugged the ground and flowed down into low places. Higher ground stayed above it.",
         },
         {
-          text: "The degassing pipes need a pump running all the time.",
+          text: "A safe way to empty the gas would be to pump all the deep water to the surface in one go.",
           answer: false,
-          explain: "A pump only starts the flow. After that, the rising gas lifts the water by itself.",
+          explain: "Bringing lots of deep water up at once is what an eruption is: the gas fizzes out together. The pipes work because they vent it slowly and steadily.",
+        },
+        {
+          text: "A lake whose water fully mixes from top to bottom every year is unlikely to build up gas like Lake Nyos.",
+          answer: true,
+          explain: "When the layers mix often, gas reaches the surface bit by bit and escapes harmlessly. Nyos was dangerous because its deep water stayed still and kept filling up.",
         },
       ],
     },

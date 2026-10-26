@@ -28,15 +28,17 @@ export const blueSky: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "How many times more does blue light scatter than red light?",
-      min: 1,
-      max: 10,
-      step: 0.5,
-      answer: 5.5,
-      tolerance: 1,
-      unit: "×",
-      explain: "Roughly 5 to 6 times. Scattering grows steeply as the wavelength gets shorter.",
+      type: "choice",
+      question: "The Moon has no air. If you stood there in the daytime, what color would the sky be?",
+      options: [
+        "Blue, but paler than on Earth",
+        "Black, with nothing to scatter light",
+        "Orange, like a sunset all day long",
+        "White, since all colors arrive at once",
+      ],
+      answer: 1,
+      explain:
+        "The blue comes from air scattering sunlight. With no air, nothing sends light toward you from the rest of the sky, so it's black even with the Sun up.",
     },
     {
       type: "choice",
@@ -59,14 +61,14 @@ export const blueSky: Thought = {
           explain: "Myth. It's the air itself scattering sunlight.",
         },
         {
-          text: "Sunsets are red because blue light gets scattered away on the long path.",
+          text: "From the top of a very high mountain, the sky looks a darker blue than it does at the beach.",
           answer: true,
-          explain: "Low sunlight crosses far more air, so mostly reds and oranges make it through.",
+          explain: "There's less air above you, so less light gets scattered toward your eyes. Climb high enough and the sky turns almost black.",
         },
         {
-          text: "On Mars, sunsets look blue.",
-          answer: true,
-          explain: "Martian dust scatters blue light forward, toward the setting Sun.",
+          text: "If Earth's air were much thicker, sunsets would look less red.",
+          answer: false,
+          explain: "Thicker air means even more blue scattered away on the long sunset path, so sunsets would look redder, not less red.",
         },
       ],
     },

@@ -28,28 +28,32 @@ export const marshmallowTest: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
+      type: "choice",
       question:
-        "Kids who'd just met an unreliable adult waited about 3 minutes. How long did kids with a reliable adult wait?",
-      min: 0,
-      max: 20,
-      step: 1,
-      answer: 12,
-      tolerance: 2,
-      unit: "minutes",
-      explain: "About 12 minutes, four times longer. Trust changed everything.",
+        "Two kids take the test. One lives where food often runs out and promises get broken. The other's parents always keep their word. What's most likely?",
+      options: [
+        "Both wait equally long, since it's all willpower",
+        "The first eats sooner, and that can be sensible",
+        "The first waits longer, since hunger builds patience",
+        "The second eats sooner, since trust makes kids lazy",
+      ],
+      answer: 1,
+      explain:
+        "If promises often fall through, a treat in the hand is the safer bet. Eating it isn't a lack of self-control, it's a reasonable guess that the second treat may never come.",
     },
     {
       type: "choice",
-      question: "What did the big 2018 replication find?",
+      question:
+        "A school sees that kids who waited longest in a marshmallow test later got the best grades. So it starts drilling self-control to raise grades. What's the flaw?",
       options: [
-        "The original link was even stronger",
-        "A weaker link, mostly due to background",
-        "Kids today wait far less than in the 1960s",
-        "The link held only for older kids",
+        "Grades can't be measured fairly at all",
+        "Background may drive both waiting and grades",
+        "Training self-control always backfires badly",
+        "The test only works with real marshmallows",
       ],
       answer: 1,
-      explain: "Once family background and early skills were accounted for, waiting time predicted much less.",
+      explain:
+        "Two things moving together doesn't mean one causes the other. The 2018 study found family background and early skills explained much of the link, so training waiting alone may do little for grades.",
     },
     {
       type: "poll",

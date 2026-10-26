@@ -29,14 +29,15 @@ export const paleBlueDot: Thought = {
   activities: [
     {
       type: "estimate",
-      question: "How far from Earth was Voyager 1 when it took the photo?",
+      question:
+        "Radio signals take about 24 hours to travel 26 billion km. Voyager 1 was about 6 billion km away when it took the photo. About how long did its signal take to get home?",
       min: 0,
-      max: 20,
+      max: 24,
       step: 0.5,
-      answer: 6,
+      answer: 5.5,
       tolerance: 1,
-      unit: "billion km",
-      explain: "About 6 billion km, beyond the orbit of Neptune.",
+      unit: "hours",
+      explain: "6 is a bit less than a quarter of 26, so a bit less than a quarter of 24 hours: about 5.5 hours.",
     },
     {
       type: "order",
@@ -53,9 +54,9 @@ export const paleBlueDot: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "In the photo, Earth takes up less than one pixel.",
-          answer: true,
-          explain: "About 0.12 of a pixel.",
+          text: "If Voyager 1 took the same photo today, from about four times farther away, Earth would look bigger.",
+          answer: false,
+          explain: "The farther away something is, the smaller it looks. Earth would be an even tinier fraction of a pixel.",
         },
         {
           text: "The Pale Blue Dot was Voyager's first photo of Earth.",

@@ -37,14 +37,17 @@ export const marysRoom: Thought = {
       ],
     },
     {
-      type: "match",
-      prompt: "Match each philosopher to their view on Mary",
-      pairs: [
-        ["Frank Jackson", "Imagined Mary in a black-and-white room"],
-        ["Daniel Dennett", "She would spot a blue banana"],
-        ["David Lewis", "She gains abilities, not facts"],
-        ["David Chalmers", "The argument shows physicalism is false"],
+      type: "choice",
+      question: "Why does the argument need Mary to know every physical fact, not just a lot of them?",
+      options: [
+        "So she seems smarter than other scientists",
+        "So anything new she learns can't be physical",
+        "So she'll see red differently from others",
+        "So it proves books teach better than eyes do",
       ],
+      answer: 1,
+      explain:
+        "If Mary only knew a lot, she could just be learning a physical fact she'd missed. Only if she had them all does learning something new point to a fact that isn't physical. Critics like Dennett attack exactly this step.",
     },
   ],
   recall: [

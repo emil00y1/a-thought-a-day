@@ -40,14 +40,17 @@ export const survivorshipBias: Thought = {
       explain: "Planes hit in the engines didn't come back to be counted. No holes there means hits there were deadly.",
     },
     {
-      type: "match",
-      prompt: "Match each example to the data that's missing",
-      pairs: [
-        ["Bombers", "The planes that were shot down"],
-        ["Dropout billionaires", "Dropouts who never got rich"],
-        ["Old buildings", "The ones that fell down"],
-        ["Hit songs from the 70s", "The forgotten flops"],
+      type: "choice",
+      question: "Which of these is survivorship bias?",
+      options: [
+        "Fearing flying because plane crashes make the news",
+        "Keeping a bad stock because you've lost so much on it",
+        "Judging a diet by success stories posted online",
+        "Trusting a claim more because it fits what you think",
       ],
+      answer: 2,
+      explain:
+        "People for whom the diet failed rarely post about it, so you only see the survivors. The others are different mistakes: judging by what's easy to recall, sticking with a loss, and believing what you already think.",
     },
     {
       type: "truefalse",

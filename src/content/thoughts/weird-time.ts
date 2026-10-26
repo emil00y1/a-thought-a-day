@@ -42,9 +42,9 @@ export const weirdTime: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "T. rex lived closer in time to us than to Stegosaurus.",
+          text: "Julius Caesar (died 44 BC) lived closer in time to you than to the building of the Great Pyramid.",
           answer: true,
-          explain: "Stegosaurus was gone by about 145 million years ago. T. rex lived about 68 to 66 million years ago.",
+          explain: "From the pyramid (about 2560 BC) to Caesar is about 2,500 years. From Caesar to today is about 2,070.",
         },
         {
           text: "The fax machine was invented before the telephone.",
@@ -52,22 +52,23 @@ export const weirdTime: Thought = {
           explain: "Alexander Bain patented an early fax design in 1843. The telephone came in 1876.",
         },
         {
-          text: "Cleopatra lived closer to the Great Pyramid's construction than to the Moon landing.",
+          text: "Today, Rome's Colosseum (finished in AD 80) is older than the Great Pyramid was when Cleopatra saw it.",
           answer: false,
-          explain: "About 2,500 years from the pyramid, under 2,000 to the Moon landing.",
+          explain: "The Colosseum is about 1,950 years old. The pyramid was already about 2,500 years old in Cleopatra's day.",
         },
       ],
     },
     {
       type: "estimate",
-      question: "How many years passed between building the Great Pyramid and Cleopatra's death?",
+      question: "To Cleopatra, the Great Pyramid was about 2,500 years old. Roughly how old is it today?",
       min: 0,
-      max: 4000,
+      max: 8000,
       step: 50,
-      answer: 2530,
+      answer: 4600,
       tolerance: 250,
       unit: "years",
-      explain: "About 2,500 years. That's longer than the time from Cleopatra to today.",
+      explain:
+        "About 4,600 years: roughly 2,500 years before Cleopatra plus about 2,050 since her. Cleopatra sits a bit past halfway between the pyramid and you.",
     },
   ],
   recall: [

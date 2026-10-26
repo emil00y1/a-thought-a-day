@@ -8,7 +8,7 @@ export const shipOfTheseus: Thought = {
   hook: "If you replace every part of something, is it still the same thing?",
   body: [
     "The ancient writer **Plutarch** told of the ship of the hero Theseus, kept in Athens for centuries. As planks rotted, they were replaced one by one, until no original wood was left.",
-    "Philosophers asked: is it still the same ship? If yes, what makes it the same? If no, at which plank did it stop being Theseus's ship?",
+    "Philosophers asked: is it still the same ship? If yes, what makes it the same? If no, at which plank did it stop being Theseus's ship? Your answer depends on what you think makes a thing itself: its **material**, its **shape**, or its unbroken **history**.",
     "Centuries later, **Thomas Hobbes** made it worse: what if someone saved all the old planks and rebuilt the original? Now there are two ships. Which is the real one? The puzzle is really about **identity**, including yours, since your body keeps replacing its own parts.",
   ],
   takeaway: "Identity might live in the pattern and history of a thing, not in its parts.",
@@ -38,10 +38,17 @@ export const shipOfTheseus: Thought = {
     },
     {
       type: "choice",
-      question: "Who added the twist of rebuilding a second ship from the old planks?",
-      options: ["Plato", "Thomas Hobbes", "Plutarch", "René Descartes"],
+      question:
+        "A museum restores an old race car, swapping every part over 30 years. A collector keeps all the old parts and rebuilds them into a car. Which view says the collector has the real car?",
+      options: [
+        "Its unbroken history matters most",
+        "What it's made of matters most",
+        "Its shape and design matter most",
+        "Its name and papers matter most",
+      ],
       answer: 1,
-      explain: "Hobbes, in 1655. Plutarch recorded the original puzzle about 1,500 years earlier.",
+      explain:
+        "Only the collector's car has the original material. The museum car has the unbroken history and the paperwork, and both cars share the same shape, so those views don't pick the collector. This is Hobbes's twist on the puzzle.",
     },
     {
       type: "truefalse",
@@ -52,9 +59,9 @@ export const shipOfTheseus: Thought = {
           explain: "Myth. Many brain neurons and the cells in the lens of your eye last your whole life.",
         },
         {
-          text: "Plutarch wrote that the ship was preserved in Athens.",
+          text: "If identity lives in unbroken history, a band that swaps its members one at a time is still the same band.",
           answer: true,
-          explain: "He said Athenians kept it for generations, swapping decayed timbers for new ones.",
+          explain: "It changed bit by bit and never stopped existing, so by the history view it's the same band, just like the slowly repaired ship.",
         },
         {
           text: "The puzzle only applies to physical objects.",

@@ -28,15 +28,18 @@ export const tardigrades: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "How long is a typical tardigrade?",
-      min: 0,
-      max: 5,
-      step: 0.1,
-      answer: 0.5,
-      tolerance: 0.2,
-      unit: "mm",
-      explain: "About half a millimeter. Just big enough to see as a tiny dot.",
+      type: "choice",
+      question:
+        "In moss that dried out over the summer, a biologist finds a tiny, lifeless-looking ball. How could she tell if it's a living tardigrade?",
+      options: [
+        "Warm it under a strong lamp",
+        "Add a drop of water and wait",
+        "Watch it for an hour for movement",
+        "Feed it some fresh, green moss",
+      ],
+      answer: 1,
+      explain:
+        "A dried tardigrade is a tun, paused until water returns. Add water and a living one soon uncurls and starts walking. Heat could kill it, and a tun won't move or eat on its own.",
     },
     {
       type: "choice",
@@ -64,9 +67,9 @@ export const tardigrades: Thought = {
           explain: "On a 2007 mission, many survived 10 days exposed in orbit.",
         },
         {
-          text: "Active tardigrades can survive almost anything.",
+          text: "A tardigrade scooped from a puddle, still active, would have a good chance of surviving space.",
           answer: false,
-          explain: "Awake, they're much more fragile. Most of their toughness comes from the dried-out tun state.",
+          explain: "Awake, they're much more fragile. The space survivors were dried into tuns first.",
         },
       ],
     },

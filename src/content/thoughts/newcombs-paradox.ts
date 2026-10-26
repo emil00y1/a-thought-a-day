@@ -37,15 +37,18 @@ export const newcombsParadox: Thought = {
       ],
     },
     {
-      type: "estimate",
-      question: "In the 2020 PhilPapers survey, what share of professional philosophers said to take both boxes?",
-      min: 0,
-      max: 100,
-      step: 1,
-      answer: 39,
-      tolerance: 6,
-      unit: "%",
-      explain: "39% chose two boxes and 31% chose one. The other 30% were undecided or gave another answer, so neither side had a majority.",
+      type: "choice",
+      question:
+        "Change one rule: the \"predictor\" now just flips a coin to decide whether to fill box B. What should you take?",
+      options: [
+        "Only box B, since it pays more on average",
+        "Both, since the coin can't know your choice",
+        "It makes no difference at all what you take",
+        "Only box A, since box B is a coin flip",
+      ],
+      answer: 1,
+      explain:
+        "Now your choice and the box are not linked at all. Box B holds $1,000,000 half the time either way, so taking both always adds $1,000. Here both camps agree. The real puzzle only appears when the prediction tracks what you'll do.",
     },
   ],
   recall: [

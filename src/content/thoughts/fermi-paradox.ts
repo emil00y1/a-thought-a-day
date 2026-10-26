@@ -41,14 +41,17 @@ export const fermiParadox: Thought = {
         "About 10 million years. The galaxy is over 13 billion years old, so there's been time to cross it more than a thousand times.",
     },
     {
-      type: "match",
-      prompt: "Match each possible answer to the paradox with its idea",
-      pairs: [
-        ["Rare Earth", "Complex life is extremely unlikely"],
-        ["Great Filter", "Some step stops almost everyone"],
-        ["Zoo hypothesis", "They watch but don't interfere"],
-        ["Dark forest", "Everyone hides because contact is dangerous"],
+      type: "choice",
+      question: "Which future discovery would make the Fermi paradox even harder to explain?",
+      options: [
+        "Planets like Earth are extremely rare",
+        "Life starts easily on many planets",
+        "No ship can ever cross between stars",
+        "Most civilizations last only 300 years",
       ],
+      answer: 1,
+      explain:
+        "If life is easy to start, the galaxy should be full of it, so the silence gets even stranger. The other three would each help explain why nobody has shown up.",
     },
     {
       type: "poll",

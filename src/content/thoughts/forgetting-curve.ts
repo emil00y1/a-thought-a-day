@@ -29,28 +29,34 @@ export const forgettingCurve: Thought = {
   activities: [
     {
       type: "choice",
-      question: "What did Ebbinghaus memorize to study forgetting?",
-      options: ["Lists of everyday words", "Nonsense syllables", "Strings of random digits", "Chess positions"],
+      question: "Maya has a test in 10 days and 3 hours to study. Which plan will help her remember the most on test day?",
+      options: [
+        "Reread her notes for 1 hour on days 1, 4 and 8",
+        "Quiz herself for 1 hour on days 1, 4 and 8",
+        "Quiz herself for 3 hours the night before",
+        "Reread her notes for 3 hours the night before",
+      ],
       answer: 1,
-      explain: "He used made-up syllables so that meaning and past knowledge couldn't help him.",
+      explain:
+        "It's the only plan that uses both tricks: spacing reviews over days and testing herself instead of rereading. Cramming the night before helps for a day, then fades fast.",
     },
     {
       type: "truefalse",
       statements: [
         {
-          text: "Forgetting is fastest right after you learn something.",
+          text: "You learn 20 new words on Monday and never review them. You'll lose more of them from Monday to Tuesday than from Friday to Saturday.",
           answer: true,
-          explain: "The curve is steepest at the start, then levels off.",
+          explain: "The curve is steepest right after learning, then levels off. Most of the loss happens in the first day.",
         },
         {
-          text: "Rereading your notes is the best way to remember them.",
+          text: "If you can't remember an answer during a self-quiz, the quiz was a waste of time.",
           answer: false,
-          explain: "Testing yourself works better. Rereading feels productive but builds weaker memories.",
+          explain: "Struggling to recall, then checking the answer, still strengthens the memory. That's the testing effect.",
         },
         {
-          text: "Three short reviews over a week beat one long session the night before.",
+          text: "To remember a new phone number for months, recalling it a few times over a couple of weeks beats repeating it 50 times in one go.",
           answer: true,
-          explain: "That's the spacing effect, which Ebbinghaus noticed too.",
+          explain: "Spaced recall flattens the curve each time. Fifty repeats in a row is cramming: strong for an hour, weak a week later.",
         },
       ],
     },

@@ -28,15 +28,17 @@ export const octopus: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "What share of an octopus's neurons are in its arms?",
-      min: 0,
-      max: 100,
-      step: 1,
-      answer: 66,
-      tolerance: 8,
-      unit: "%",
-      explain: "About two-thirds. Each arm handles a lot of its own decisions.",
+      type: "choice",
+      question: "An octopus pushes an arm deep into a dark crack, where its eyes can't see. What is most likely to happen?",
+      options: [
+        "The arm stops until the eyes can see it",
+        "The arm finds and tastes food on its own",
+        "The brain must check each touch first",
+        "The arm can feel things but not taste them",
+      ],
+      answer: 1,
+      explain:
+        "With about two-thirds of the neurons in the arms, and suckers full of taste sensors, each arm can explore and react partly on its own.",
     },
     {
       type: "match",
@@ -62,9 +64,9 @@ export const octopus: Thought = {
           explain: "Smart, but short-lived. Many die soon after breeding.",
         },
         {
-          text: "The word \"octopus\" is originally Latin.",
+          text: "Since most octopuses are colorblind, they can't blend in with colorful coral.",
           answer: false,
-          explain: "It's originally Greek, meaning \"eight feet\". That's why \"octopuses\" is the standard plural, not \"octopi\".",
+          explain: "They blend in very well anyway, matching brightness, pattern and texture. How they manage it without color vision is still being studied.",
         },
       ],
     },

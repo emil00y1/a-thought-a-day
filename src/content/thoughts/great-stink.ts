@@ -29,10 +29,17 @@ export const greatStink: Thought = {
   activities: [
     {
       type: "choice",
-      question: "What did most experts in 1858 think caused cholera?",
-      options: ["Dirty drinking water", "Bad air (miasma)", "Fleas carried by rats", "Spoiled food"],
+      question:
+        "Imagine London had cleaned up its drinking water but left the Thames smelling just as bad. What would most likely have happened to cholera?",
+      options: [
+        "It would stay the same, since the smell stayed",
+        "It would drop, since water was the real cause",
+        "It would rise, since the smell got even worse",
+        "It would drop only in the cooler months",
+      ],
       answer: 1,
-      explain: "Miasma theory blamed foul smells. It was wrong, but it got the sewers built.",
+      explain:
+        "Cholera spreads through dirty water, not smells. Clean drinking water alone would have cut it, even with the river still reeking.",
     },
     {
       type: "order",
@@ -49,9 +56,9 @@ export const greatStink: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "MPs hung chemical-soaked curtains to fight the smell.",
+          text: "A believer in miasma would fear a smelly swamp more than a clear, odorless well with sewage in it.",
           answer: true,
-          explain: "They were soaked in chloride of lime. It didn't help much.",
+          explain: "Miasma theory blamed bad air, so a well that looked and smelled fine seemed safe. In fact, the well was the real danger.",
         },
         {
           text: "The sewers were built because people knew germs cause cholera.",

@@ -29,15 +29,17 @@ export const leftAndRight: Thought = {
   activities: [
     {
       type: "choice",
-      question: "Where do the political terms \"left\" and \"right\" come from?",
+      question:
+        "Sam wants lower taxes and fewer rules for business. Sam also wants drugs legalized and less police power. Where does Sam fit on one left-right line?",
       options: [
-        "Seating in the Roman senate",
-        "Seating in a French assembly",
-        "Benches in the UK House of Commons",
-        "The two parties in the US Congress",
+        "Far left, since Sam wants big changes",
+        "Not neatly anywhere on a single line",
+        "Right, since all of Sam's views are right-wing",
+        "Dead center, since Sam is a moderate",
       ],
       answer: 1,
-      explain: "In 1789, supporters of the king sat on the right and revolutionaries on the left.",
+      explain:
+        "Sam's economic views lean right, but legalizing drugs and cutting police power usually count as left. What Sam's views share is wanting less state power, which is why many models add a second axis for it.",
     },
     {
       type: "match",
@@ -53,14 +55,14 @@ export const leftAndRight: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "In 1789, supporters of the king sat on the left.",
-          answer: false,
-          explain: "They sat on the right. Revolutionaries sat on the left.",
+          text: "In 1789, a delegate who wanted to end the king's power would have sat on the left.",
+          answer: true,
+          explain: "Those pushing for radical change sat on the left. Supporters of the king sat on the right.",
         },
         {
-          text: "In the UK House of Commons, the two sides face each other.",
-          answer: true,
-          explain: "Government on one side, opposition on the other, like a debate.",
+          text: "In the UK House of Commons, the left-wing party always sits on the left side of the room.",
+          answer: false,
+          explain: "The sides there are government and opposition. When a new party wins power, it moves to the government benches, whatever its views.",
         },
         {
           text: "Most people's views fit neatly on one left-right line.",

@@ -41,15 +41,16 @@ export const platosCave: Thought = {
     },
     {
       type: "choice",
-      question: "In the allegory, what do the shadows stand for?",
+      question: "Which of these people is most like a prisoner in Plato's cave?",
       options: [
-        "The dreams we have while asleep",
-        "What we mistake for the truth",
-        "The ghosts of our ancestors",
-        "The gods watching over us",
+        "A liar who knows the truth but hides it from others",
+        "A kid who thinks one TV channel shows all the world",
+        "A traveler who badly misses home after moving abroad",
+        "A student who finds a hard math lesson dull and slow",
       ],
       answer: 1,
-      explain: "The shadows are the surface of things. Plato thought real understanding lies beyond what we first see.",
+      explain:
+        "The prisoners honestly believe the shadows are all there is, because it's all they've ever seen. A liar knows better, so he isn't fooled the way they are.",
     },
     {
       type: "poll",

@@ -37,10 +37,12 @@ export const montyHall: Thought = {
     },
     {
       type: "choice",
-      question: "What's your chance of winning the car if you switch?",
-      options: ["1 in 2", "2 in 3", "1 in 3", "3 in 4"],
-      answer: 1,
-      explain: "Your first pick is right 1 in 3 times. The other 2 in 3, the car is behind the door the host left closed.",
+      question:
+        "New rule: the host doesn't know where the car is and opens one of the other doors at random. It happens to show a goat. Now what's your chance if you switch?",
+      options: ["1 in 3", "2 in 3", "1 in 2", "3 in 4"],
+      answer: 2,
+      explain:
+        "Picture 3 equally likely games. In 1 your pick is the car and he shows a goat. In 2 your pick is a goat, and half the time his random door shows the car, which didn't happen. That leaves 1 game where switching wins and 1 where sticking wins: 50/50. The 2 in 3 only works because the host knows.",
     },
     {
       type: "estimate",
