@@ -5,6 +5,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-fraunces);
   --font-brand: var(--font-grandstander);
@@ -56,6 +58,9 @@
   --border: oklch(0.9 0.012 85);
   --input: oklch(0.88 0.012 85);
   --ring: oklch(0.6 0.03 265);
+  /* The one call-to-action color: white text on it must stay readable. */
+  --cta: #e0553a;
+  --cta-foreground: #ffffff;
 }
 
 .dark {

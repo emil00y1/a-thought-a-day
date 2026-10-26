@@ -30,9 +30,7 @@ import { StatsStrip } from "@/components/stats-strip"
 import { Button } from "@/components/ui/button"
 import type { Activity, Thought } from "@/content/types"
 import type { Stats } from "@/lib/data"
-import { categories } from "@/content/categories"
 import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
-import { cn } from "@/lib/utils"
 import { Choice } from "./choice"
 import { Estimate } from "./estimate"
 import { FactCards } from "./fact-cards"
@@ -408,21 +406,17 @@ function Intro({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           whileTap={{ scale: 0.98 }}
-          // The day's category gradient, like the emoji tiles in the library and on share cards.
-          className={cn(
-            "group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gradient-to-r py-3.5 pr-3.5 pl-6 text-left text-[#161b24] transition-[filter] hover:brightness-105",
-            categories[thought.category].gradient
-          )}
+          className="group mt-8 flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-cta py-3.5 pr-3.5 pl-6 text-left text-cta-foreground transition-[filter] hover:brightness-105"
         >
           <span>
             <span className="block font-display text-xl leading-tight font-semibold">
               {learned ? "Play again" : "Start today's thought"}
             </span>
-            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-75">
+            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-85">
               <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
             </span>
           </span>
-          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white/85 text-[#161b24] transition-transform group-hover:translate-x-0.5">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-0.5">
             {/* A small nudge every few seconds, inviting a tap. */}
             <motion.span
               animate={{ x: [0, 4, 0, 4, 0] }}
