@@ -15,7 +15,7 @@ jobs:
           POSTGRES_PASSWORD: thought
           POSTGRES_DB: thought
         ports: ["5432:5432"]
-        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+        options: --health-cmd "pg_isready -U thought" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       DATABASE_URL: postgres://thought:thought@localhost:5432/thought
       BETTER_AUTH_SECRET: ci-only-secret-not-used-anywhere-else-1234567890
@@ -28,6 +28,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # Next.js generates the PageProps/LayoutProps route types; they aren't committed.
+      - run: npx next typegen
       - run: npx tsc --noEmit
       - run: npm test
       # Also runs the database migrations against the throwaway Postgres.
