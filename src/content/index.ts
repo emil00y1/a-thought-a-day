@@ -57,6 +57,16 @@ import { overtonWindow } from "./thoughts/overton-window"
 import { microbiomeRatio } from "./thoughts/microbiome-ratio"
 import { tenThousandHours } from "./thoughts/ten-thousand-hours"
 import { mandelaEffect } from "./thoughts/mandela-effect"
+import { lakeNyos } from "./thoughts/lake-nyos"
+import { jevonsParadox } from "./thoughts/jevons-paradox"
+import { pitchDrop } from "./thoughts/pitch-drop"
+import { marysRoom } from "./thoughts/marys-room"
+import { kolaBorehole } from "./thoughts/kola-borehole"
+import { newcombsParadox } from "./thoughts/newcombs-paradox"
+import { gomboc } from "./thoughts/gomboc"
+import { repugnantConclusion } from "./thoughts/repugnant-conclusion"
+import { bootesVoid } from "./thoughts/bootes-void"
+import { moravecsParadox } from "./thoughts/moravecs-paradox"
 import { validateThoughts } from "./validate"
 
 /** The day thought #1 goes live, at midnight in each player's time zone. Each following thought unlocks one day later. */
@@ -68,26 +78,36 @@ export const thoughts: Thought[] = [
   fermiParadox,
   shipOfTheseus,
   octopus,
+  lakeNyos,
   trolleyProblem,
   greatStink,
+  jevonsParadox,
   blueSky,
   weirdTime,
+  pitchDrop,
   leftAndRight,
   marshmallowTest,
+  marysRoom,
   montyHall,
   paleBlueDot,
+  kolaBorehole,
   survivorshipBias,
   platosCave,
+  newcombsParadox,
   tardigrades,
   milgram,
   gpsRelativity,
   veilOfIgnorance,
+  gomboc,
   penicillin,
   paperFolding,
+  repugnantConclusion,
   antikythera,
   stoicControl,
+  bootesVoid,
   birthdayParadox,
   prisonersDilemma,
+  moravecsParadox,
   tulipMania,
   dunningKruger,
   olbersParadox,
