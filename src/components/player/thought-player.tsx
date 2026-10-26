@@ -117,6 +117,23 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
     if (steps[to].kind === "done") void finish()
   }
 
+  // Keyboard players get focus moved to Continue when a game is done; touch players aren't scrolled around.
+  const usingKeyboard = useRef(false)
+  const continueRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    const key = () => (usingKeyboard.current = true)
+    const pointer = () => (usingKeyboard.current = false)
+    window.addEventListener("keydown", key)
+    window.addEventListener("pointerdown", pointer)
+    return () => {
+      window.removeEventListener("keydown", key)
+      window.removeEventListener("pointerdown", pointer)
+    }
+  }, [])
+  useEffect(() => {
+    if (step.kind === "activity" && isReady && usingKeyboard.current) continueRef.current?.focus()
+  }, [step.kind, isReady, index])
+
   // Fetch the games in the background once the page is idle, so Start still feels instant.
   useEffect(() => {
     const warm = () => {
@@ -164,6 +181,8 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
 
   return (
     <div>
+      {/* The visible title is only on the first screen; keep one for screen readers on every step. */}
+      {step.kind !== "intro" && <h1 className="sr-only">{thought.title}</h1>}
       {index > 0 && step.kind !== "done" && <Progress total={steps.length - 2} current={index} />}
 
       <AnimatePresence mode="wait" initial={false}>
@@ -253,7 +272,7 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 500, damping: 15 }}
           >
-            <Button size="lg" disabled={!isReady} onClick={() => go(index + 1)} className="group">
+            <Button ref={continueRef} size="lg" disabled={!isReady} onClick={() => go(index + 1)} className="group">
               {isLastActivity ? "Finish" : "Continue"}
               <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Button>
@@ -316,7 +335,15 @@ function stepLabel(step: Step, thought: Thought) {
 
 function Progress({ total, current }: { total: number; current: number }) {
   return (
-    <div className="mb-4 flex gap-1.5" aria-label={`Step ${current} of ${total}`}>
+    <div
+      className="mb-4 flex gap-1.5"
+      role="progressbar"
+      aria-label="Progress"
+      aria-valuemin={0}
+      aria-valuemax={total}
+      aria-valuenow={current}
+      aria-valuetext={`Step ${current} of ${total}`}
+    >
       {Array.from({ length: total }, (_, i) => (
         <div key={i} className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
           <motion.div

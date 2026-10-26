@@ -2,7 +2,7 @@
 
 import { Check, X } from "lucide-react"
 import { AnimatePresence, motion, useMotionValue, useTransform } from "motion/react"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import type { TrueFalseActivity } from "@/content/types"
@@ -93,6 +93,14 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
     if (isLast) onDone({ correct: newScore, total: statements.length })
   }
 
+  // Keep keyboard focus moving forward instead of dropping to the page.
+  const nextRef = useRef<HTMLButtonElement>(null)
+  const falseRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (answer !== null) nextRef.current?.focus({ preventScroll: true })
+    else if (index > 0) falseRef.current?.focus({ preventScroll: true })
+  }, [answer, index])
+
   function next() {
     setIndex(index + 1)
     setAnswer(null)
@@ -133,7 +141,7 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
 
       {answer === null && (
         <div className="mt-8 grid grid-cols-2 gap-3">
-          <Button variant="outline" size="lg" onClick={() => choose(false)} className="hover:border-destructive hover:text-destructive">
+          <Button ref={falseRef} variant="outline" size="lg" onClick={() => choose(false)} className="hover:border-destructive hover:text-destructive">
             <X /> False
           </Button>
           <Button variant="outline" size="lg" onClick={() => choose(true)} className="hover:border-success hover:text-success">
@@ -150,7 +158,7 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
         <div>
           {!isLast && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-              <Button variant="secondary" onClick={next} className="mt-4 w-full">
+              <Button ref={nextRef} variant="secondary" onClick={next} className="mt-4 w-full">
                 Next statement
               </Button>
             </motion.div>

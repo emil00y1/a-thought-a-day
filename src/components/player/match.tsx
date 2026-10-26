@@ -25,6 +25,8 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
   const [wrong, setWrong] = useState<{ side: Side; index: number }[]>([])
   // Pairs whose left tile was part of a wrong guess. Each pair can lose its point only once.
   const [slipped, setSlipped] = useState<number[]>([])
+  // Spoken to screen readers after each try.
+  const [said, setSaid] = useState("")
   const done = matched.length === pairs.length
   const firstTry = pairs.length - slipped.length
 
@@ -38,6 +40,7 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
     if (selected.index === index) {
       const next = [...matched, index]
       setMatched(next)
+      setSaid(`Matched: ${pairs[index][0]} with ${pairs[index][1]}.`)
       if (next.length === pairs.length) {
         onDone({ correct: firstTry, total: pairs.length })
         // Line the answers up side by side, so the finished board reads as an answer key.
@@ -46,6 +49,7 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
     } else {
       const leftIndex = side === "left" ? index : selected.index
       if (!slipped.includes(leftIndex)) setSlipped([...slipped, leftIndex])
+      setSaid("Not a match. Try again.")
       setWrong([selected, { side, index }])
       setTimeout(() => setWrong([]), 550)
     }
@@ -62,6 +66,8 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
         type="button"
         onClick={() => pick(side, index)}
         disabled={isMatched}
+        aria-pressed={isSelected}
+        aria-label={isMatched ? `${text}, matched` : undefined}
         initial={{ opacity: 0, y: 10 }}
         animate={
           flagged
@@ -99,6 +105,9 @@ export function Match({ activity, onDone }: { activity: MatchActivity; onDone: (
     <div>
       <ActivityTitle>{activity.prompt}</ActivityTitle>
       <p className="mt-1 text-sm text-muted-foreground">Tap one on each side to pair them up.</p>
+      <p aria-live="polite" className="sr-only">
+        {said}
+      </p>
       <div className="mt-6 grid grid-cols-2 gap-2.5">
         <div className="grid gap-2.5">{pairs.map(([left], i) => tile("left", i, left, i))}</div>
         <div className="grid gap-2.5">{rightOrder.map((i, n) => tile("right", i, pairs[i][1], n))}</div>

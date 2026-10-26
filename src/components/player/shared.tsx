@@ -119,5 +119,5 @@ export function Feedback({
 }
 
 export function ActivityTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="font-display text-2xl leading-tight font-semibold text-balance sm:text-[1.7rem]">{children}</h3>
+  return <h2 className="font-display text-2xl leading-tight font-semibold text-balance sm:text-[1.7rem]">{children}</h2>
 }

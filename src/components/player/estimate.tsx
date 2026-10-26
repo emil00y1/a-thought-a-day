@@ -96,6 +96,7 @@ export function Estimate({ activity, onDone }: { activity: EstimateActivity; onD
           disabled={locked}
           onChange={(e) => setGuess(Number(e.target.value))}
           aria-label="Your guess"
+          aria-valuetext={`${format(guess)}${unit ? ` ${unit}` : ""}`}
           className="h-3 w-full cursor-pointer appearance-none rounded-full disabled:cursor-default [&::-moz-range-thumb]:size-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:size-7 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:transition-transform active:[&::-webkit-slider-thumb]:scale-125"
           style={{
             background: `linear-gradient(to right, var(--primary) ${pct(guess)}%, var(--muted) ${pct(guess)}%)`,

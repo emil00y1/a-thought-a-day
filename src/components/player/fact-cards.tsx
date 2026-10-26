@@ -32,7 +32,8 @@ export function FactCards({ facts, onAllFlipped }: { facts: { q: string; a: stri
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.98 }}
           className="grid cursor-pointer text-left transform-3d [grid-template-areas:'card']"
-          aria-label={flipped[i] ? `${fact.q} ${fact.a}` : `${fact.q} (tap to reveal)`}
+          aria-pressed={flipped[i]}
+          aria-label={flipped[i] ? `${fact.q} ${fact.a}` : `${fact.q} (press to reveal)`}
         >
           <div className="flex items-center gap-4 rounded-2xl border-2 bg-card px-5 py-4 backface-hidden [grid-area:card]">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-muted font-display text-lg font-semibold">

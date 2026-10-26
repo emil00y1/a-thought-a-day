@@ -76,6 +76,7 @@ async function Archive() {
 function Tile({ thought }: { thought: Thought }) {
   return (
     <span
+      aria-hidden
       className={cn(
         "grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br text-2xl",
         categories[thought.category].gradient
