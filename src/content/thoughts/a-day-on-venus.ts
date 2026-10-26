@@ -28,15 +28,16 @@ export const aDayOnVenus: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "How many Earth days does Venus take to spin once, measured against the stars?",
-      min: 0,
-      max: 400,
-      step: 1,
-      answer: 243,
-      tolerance: 15,
-      unit: "days",
-      explain: "About 243 Earth days, the slowest spin of any planet in the solar system. Earth does the same in under 24 hours.",
+      type: "choice",
+      question: "Unlike Venus, Earth spins the same way it travels around the Sun. So compared with one spin measured against the stars, Earth's sunrise-to-sunrise day is...",
+      options: [
+        "A few minutes shorter",
+        "A few minutes longer",
+        "Exactly the same length",
+        "About half as long",
+      ],
+      answer: 1,
+      explain: "On Venus the backward spin and the orbit add up, so its solar day is shorter. On Earth they work against each other. As Earth moves along its orbit, it has to turn a little extra to face the Sun again: one spin takes about 23 hours 56 minutes, but sunrise to sunrise is 24 hours.",
     },
     {
       type: "truefalse",

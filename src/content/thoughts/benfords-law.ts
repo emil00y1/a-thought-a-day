@@ -29,14 +29,14 @@ export const benfordsLaw: Thought = {
   activities: [
     {
       type: "estimate",
-      question: "Benford's law says about 30% of numbers start with 1. About what share start with 2?",
+      question: "A town grows by 10% every year, from 1,000 people to 10,000 over about 24 years. For about how many of those years does its population start with a 1?",
       min: 0,
-      max: 30,
+      max: 24,
       step: 1,
-      answer: 18,
-      tolerance: 3,
-      unit: "%",
-      explain: "About 17.6%. The share keeps shrinking: 12.5% for 3, down to 4.6% for 9.",
+      answer: 7,
+      tolerance: 1,
+      unit: "years",
+      explain: "About 7 years. Getting from 1,000 to 2,000 means doubling, which takes about 7 years at 10% a year. Getting from 9,000 to 10,000 takes only about 1 year. Seven out of 24 is roughly the 30% Benford predicts.",
     },
     {
       type: "choice",

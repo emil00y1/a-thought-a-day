@@ -29,12 +29,12 @@ export const pavlovsDogs: Thought = {
   activities: [
     {
       type: "match",
-      prompt: "Match each term to its example",
+      prompt: "At the dentist, the drill whines just before it hurts. Now Mia flinches at the whine alone. Match each term to her story",
       pairs: [
-        ["Neutral stimulus", "A sound that means nothing yet"],
-        ["Conditioned stimulus", "A sound that now signals food"],
-        ["Conditioned response", "Drooling at the sound alone"],
-        ["Extinction", "Drooling fades when food stops"],
+        ["Neutral stimulus", "The whine, before her first visit"],
+        ["Conditioned stimulus", "The whine, after many visits"],
+        ["Conditioned response", "Flinching when she hears the whine"],
+        ["Extinction", "The flinch fades after painless visits"],
       ],
     },
     {

@@ -37,14 +37,16 @@ export const utilitarianism: Thought = {
       ],
     },
     {
-      type: "match",
-      prompt: "Match each thinker to their idea",
-      pairs: [
-        ["Bentham", "Pleasure and pain can be added up"],
-        ["Mill", "Brought the word \"utilitarian\" into use"],
-        ["Nozick", "A utility monster would get it all"],
-        ["Peter Singer", "Distant strangers count as much as neighbors"],
+      type: "choice",
+      question: "Ana gives $100 just to show off, and it feeds 50 families. Ben gives $100 out of pure kindness to a charity that wastes it all. To a utilitarian, whose gift was the better action?",
+      options: [
+        "Ben's, because his heart was right",
+        "Ana's, because of what it achieved",
+        "Neither, since both gave the same",
+        "Ben's, because Ana gained from it",
       ],
+      answer: 1,
+      explain: "Utilitarianism judges actions by their results, not by the reasons behind them. Ana's gift created far more well-being, so it was the better action, even if Ben seems like the kinder person.",
     },
     {
       type: "truefalse",

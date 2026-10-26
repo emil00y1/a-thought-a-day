@@ -28,15 +28,16 @@ export const honeyNeverSpoils: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "Flower nectar is about 70 to 80% water. About how much water is left in finished honey?",
-      min: 0,
-      max: 60,
-      step: 1,
-      answer: 17,
-      tolerance: 3,
-      unit: "%",
-      explain: "Usually about 15.5 to 18%. That's far more sugar than water could normally hold dissolved.",
+      type: "choice",
+      question: "Fish packed in lots of salt can keep for months without a fridge. Going by how honey works, what's the main reason?",
+      options: [
+        "The salt makes the fish more acidic",
+        "The salt pulls water out of germs",
+        "The salt seals air away from the fish",
+        "The salt feeds the fish's good bacteria",
+      ],
+      answer: 1,
+      explain: "Salt works like honey's sugar: it draws water out of any germs that land on the fish, so they can't grow. Salt isn't acidic, and air still reaches salted fish.",
     },
     {
       type: "order",

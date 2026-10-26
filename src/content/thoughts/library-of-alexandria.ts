@@ -29,15 +29,15 @@ export const libraryOfAlexandria: Thought = {
   activities: [
     {
       type: "choice",
-      question: "Why do historians doubt that Arab conquerors burned the library in AD 642?",
+      question: "A popular story says a king burned a famous temple's books. The oldest source for it was written 800 years after his death. How should a historian treat the story?",
       options: [
-        "The library had moved to Rome",
-        "Arab writers denied it at the time",
-        "It first appears centuries later",
-        "No Arab army ever reached Egypt",
+        "As likely true, since it's so well known",
+        "As doubtful, unless older sources back it",
+        "As proven false, since the source is late",
+        "As likely true, since writers copied facts",
       ],
-      answer: 2,
-      explain: "The tale first appears about 500 years later, and the main library was probably long gone by then anyway.",
+      answer: 1,
+      explain: "It's the same problem as the tale of the Arab conquerors, which first appears about 500 years later. A story that late could be made up or garbled, but a late source doesn't prove it false either. It needs support from older evidence.",
     },
     {
       type: "order",
