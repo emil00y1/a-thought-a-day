@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: thought
+          POSTGRES_PASSWORD: thought
+          POSTGRES_DB: thought
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://thought:thought@localhost:5432/thought
+      BETTER_AUTH_SECRET: ci-only-secret-not-used-anywhere-else-1234567890
+      BETTER_AUTH_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm test
+      # Also runs the database migrations against the throwaway Postgres.
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Play today's thought in a browser
+        run: |
+          npm run start &
+          npx --yes wait-on@8.0.3 http://localhost:3000 --timeout 60000
+          npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-failure
+          path: e2e-failure.png
+          if-no-files-found: ignore

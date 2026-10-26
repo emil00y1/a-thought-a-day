@@ -172,6 +172,7 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
           tabIndex={-1}
           role="group"
           aria-label={stepLabel(step, thought)}
+          data-step={index}
           initial={{ opacity: 0, x: 32 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -32 }}

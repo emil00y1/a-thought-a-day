@@ -1,0 +1,30 @@
+name: Live site check
+
+# Every morning, play today's thought on the real site, sign up with a throwaway
+# inbox and delete the account again. A failure means real players are affected.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+        env:
+          BASE_URL: https://justathought.day
+          SIGNUP: "1"
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-failure
+          path: e2e-failure.png
+          if-no-files-found: ignore

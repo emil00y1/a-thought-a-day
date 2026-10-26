@@ -102,6 +102,12 @@ npm run db:migrate    # applies it to your local database
 
 Commit the new file in `./drizzle`. The next deploy applies it to production automatically.
 
+## Testing
+
+- `npm test` runs quick checks: every thought passes the content rules in schedule order, answers aren't usually the longest option, days follow each player's time zone, and streaks forgive one missed day.
+- `npm run test:e2e` plays today's thought in a real browser against `http://localhost:3000` (start the app first). `BASE_URL=https://justathought.day SIGNUP=1 npm run test:e2e` also signs up with a throwaway inbox, checks the signed-in pages and deletes the account. Poll votes are never counted.
+- GitHub Actions runs lint, types, `npm test`, a build and the browser test on every push ([`ci.yml`](.github/workflows/ci.yml)), and checks the live site every morning ([`live-check.yml`](.github/workflows/live-check.yml)).
+
 ## Scripts
 
 | Command | What it does |
@@ -110,6 +116,8 @@ Commit the new file in `./drizzle`. The next deploy applies it to production aut
 | `npm run build` | Run database migrations (if `DATABASE_URL` is set), then build |
 | `npm run start` | Serve the production build |
 | `npm run lint` | Lint the code |
+| `npm test` | Content, day and streak checks |
+| `npm run test:e2e` | Play today's thought in a browser |
 | `npm run db:migrate` | Apply pending migrations |
 | `npm run db:generate` | Create a migration after changing the schema |
 | `npm run db:studio` | Browse the database in Drizzle Studio |
