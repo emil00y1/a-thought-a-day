@@ -28,22 +28,23 @@ export const bootesVoid: Thought = {
   ],
   activities: [
     {
-      type: "estimate",
-      question: "A region this big would normally hold about 2,000 galaxies. How many have been found in the Boötes Void?",
-      min: 0,
-      max: 1000,
-      step: 10,
-      answer: 60,
-      tolerance: 30,
-      unit: "galaxies",
-      explain: "Only about 60, roughly 3% of what you'd expect.",
+      type: "choice",
+      question: "If the Milky Way sat in the middle of the Boötes Void, why might we not have known other galaxies existed until the 1960s?",
+      options: [
+        "The void's thin gas would block their light",
+        "The closest ones would look too faint",
+        "Light can't travel across empty space",
+        "Dark matter would bend their light away",
+      ],
+      answer: 1,
+      explain: "With so few galaxies around, even the closest would be extremely far away, so they'd look far too faint for early telescopes. The void's gas is very thin, and light crosses empty space just fine.",
     },
     {
       type: "choice",
       question: "What makes the Boötes Void a \"void\"?",
       options: [
         "It contains no matter at all",
-        "Light can't travel through it",
+        "Light can't travel through that region",
         "It has far fewer galaxies than usual",
         "It's a giant black hole",
       ],

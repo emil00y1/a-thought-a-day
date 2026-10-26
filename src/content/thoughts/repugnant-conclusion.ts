@@ -37,15 +37,16 @@ export const repugnantConclusion: Thought = {
       ],
     },
     {
-      type: "order",
-      prompt: "Put Parfit's steps in order, from world A to world Z",
-      items: [
-        { text: "Ten billion people live wonderful lives", detail: "World A" },
-        { text: "Extra people with good lives are added", detail: "World A+" },
-        { text: "Everyone is evened out, with more good in total", detail: "World B" },
-        { text: "Repeat until lives are barely worth living", detail: "World Z" },
+      type: "choice",
+      question: "Island X has 1,000 people, each at happiness 9 out of 10. Island Y has 3,000 people, each at happiness 4. Which island does each theory rank higher?",
+      options: [
+        "Total picks X, average picks Y",
+        "Total picks Y, average picks X",
+        "Both theories pick island X",
+        "Both theories pick island Y",
       ],
-      explain: "Each step seems no worse, or even better, than the last. Yet the chain ends somewhere almost nobody likes.",
+      answer: 1,
+      explain: "Total: X has 9,000 and Y has 12,000, so total utilitarianism picks the bigger, less happy Y. Average: X scores 9 and Y scores 4, so average picks X. This is the A vs Z split in miniature.",
     },
   ],
   recall: [

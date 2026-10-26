@@ -29,14 +29,14 @@ export const birthdayParadox: Thought = {
   activities: [
     {
       type: "estimate",
-      question: "How many people do you need for a 50% chance that two share a birthday?",
-      min: 2,
-      max: 366,
+      question: "A group of 10 friends compare birthdays. How many different pairs of friends can be checked for a match?",
+      min: 0,
+      max: 100,
       step: 1,
-      answer: 23,
-      tolerance: 3,
-      unit: "people",
-      explain: "Just 23. With 23 people there are already 253 pairs.",
+      answer: 45,
+      tolerance: 2,
+      unit: "pairs",
+      explain: "Each of the 10 can pair with 9 others: 90. But that counts every pair twice (Ana-Ben and Ben-Ana), so it's 45. Ten people already give 45 chances for a match.",
     },
     {
       type: "choice",
@@ -51,14 +51,16 @@ export const birthdayParadox: Thought = {
       explain: "Every pair is a chance, and the number of pairs grows much faster than the number of people.",
     },
     {
-      type: "match",
-      prompt: "Match the group size to the chance of a shared birthday",
-      pairs: [
-        ["10 people", "About 12%"],
-        ["23 people", "About 50%"],
-        ["50 people", "About 97%"],
-        ["70 people", "99.9%"],
+      type: "choice",
+      question: "You're in a class of 30 students. Which of these is most likely to be true?",
+      options: [
+        "Someone shares your birthday",
+        "Two students share a birthday",
+        "Nobody shares any birthday",
+        "Someone has the teacher's birthday",
       ],
+      answer: 1,
+      explain: "Any pair can match, and 30 people make 435 pairs, so the chance is about 70%. Matching one particular person, you or the teacher, is under 10%.",
     },
   ],
   recall: [

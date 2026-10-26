@@ -46,19 +46,19 @@ export const prisonersDilemma: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "Tit for Tat never betrays first.",
+          text: "Two shops on the same street keep cutting prices to steal each other's customers, and both end up earning less. That's a prisoner's dilemma.",
           answer: true,
-          explain: "It always opens by cooperating.",
+          explain: "Each does better by undercutting whatever the other does, yet both would earn more if neither did.",
         },
         {
-          text: "The winning program was the most complicated one.",
+          text: "Playing Tit for Tat against someone who always betrays, you'd cooperate only in round one.",
+          answer: true,
+          explain: "Tit for Tat opens kindly, then copies the last move. After the first betrayal, it betrays back every round.",
+        },
+        {
+          text: "In a one-time deal with a stranger you'll never meet again, staying silent is the safe selfish choice.",
           answer: false,
-          explain: "Tit for Tat was one of the simplest programs entered.",
-        },
-        {
-          text: "When the game repeats, cooperation can beat betrayal.",
-          answer: true,
-          explain: "Betrayal gets punished next round, so trust pays off.",
+          explain: "With no next round, nothing punishes betrayal. That's exactly when selfish logic says betray, which is why repetition matters.",
         },
       ],
     },

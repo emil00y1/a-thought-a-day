@@ -29,10 +29,10 @@ export const gpsRelativity: Thought = {
   activities: [
     {
       type: "choice",
-      question: "Compared to clocks on the ground, GPS satellite clocks...",
-      options: ["Lose about 38 microseconds a day", "Gain about 38 microseconds a day", "Gain about 38 seconds a day", "Tick at exactly the same rate"],
+      question: "Two identical clocks sit still for years: one on a high mountain, one on a beach. Which ends up ahead?",
+      options: ["The beach clock", "The mountain clock", "Neither, they stay matched", "Whichever is kept colder"],
       answer: 1,
-      explain: "Weaker gravity speeds them up more than their speed slows them down.",
+      explain: "Neither clock is moving, so only gravity matters. Gravity is slightly weaker on the mountain, so that clock ticks a little faster. Scientists have measured this even with clocks just a few meters apart.",
     },
     {
       type: "match",
@@ -45,14 +45,14 @@ export const gpsRelativity: Thought = {
     },
     {
       type: "estimate",
-      question: "If nobody corrected for relativity, how far off would GPS drift in one day?",
+      question: "Each microsecond of clock error puts you about 300 m off. Suppose engineers corrected only for weaker gravity and forgot the speed effect. About how far would GPS drift each day?",
       min: 0,
-      max: 50,
-      step: 1,
-      answer: 10,
-      tolerance: 3,
+      max: 20,
+      step: 0.1,
+      answer: 2.1,
+      tolerance: 0.5,
       unit: "km",
-      explain: "Around 10 km per day, and growing. Your map would be noticeably wrong within minutes.",
+      explain: "The speed effect alone slows the clocks by about 7 microseconds a day. 7 × 300 m is about 2.1 km a day. Smaller than 10 km, but still far too much for a map.",
     },
   ],
   recall: [

@@ -28,13 +28,28 @@ export const gomboc: Thought = {
   ],
   activities: [
     {
-      type: "match",
-      prompt: "Match each to how it gets back upright",
-      pairs: [
-        ["Roly-poly toy", "A heavy weight in its base"],
-        ["Gömböc", "Its shape and nothing else"],
-        ["Flat turtle", "Pushing with its long neck"],
-        ["Domed tortoise", "Mostly rolling on its shell"],
+      type: "truefalse",
+      statements: [
+        {
+          text: "A pebble that can rest steadily on its flat side and also on its edge could still be a gömböc.",
+          answer: false,
+          explain: "A gömböc has exactly one stable resting point. Two steady positions rule it out.",
+        },
+        {
+          text: "A plastic egg with a lump of clay stuck inside its bottom counts as a gömböc.",
+          answer: false,
+          explain: "That's the roly-poly trick. A gömböc must be one even material, so only its shape can do the work.",
+        },
+        {
+          text: "A perfectly round, solid ball is not a gömböc.",
+          answer: true,
+          explain: "A ball rests happily on any spot, so it has no single resting point to roll back to.",
+        },
+        {
+          text: "Sanding a thin layer off one side of a gömböc could stop it from always rolling back upright.",
+          answer: true,
+          explain: "Its shape has to be extremely precise. A tiny change can create a second resting spot.",
+        },
       ],
     },
     {
@@ -42,7 +57,7 @@ export const gomboc: Thought = {
       question: "Why didn't a roly-poly toy already answer Arnold's question?",
       options: [
         "It has too many flat sides",
-        "It isn't the same density all through",
+        "It isn't one even material",
         "It only rights itself on soft ground",
         "It has dents in its outer surface",
       ],

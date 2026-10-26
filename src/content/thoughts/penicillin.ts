@@ -54,19 +54,19 @@ export const penicillin: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "Fleming found penicillin on purpose after years of searching.",
+          text: "A lab spots a new mold killing bacteria in a dish. Doctors could safely use it on patients the next month.",
           answer: false,
-          explain: "It was an accident: a mold contaminated one of his dishes.",
+          explain: "Killing bacteria in a dish is only the start. Like penicillin, it would need to be purified, made in bulk and tested first.",
         },
         {
-          text: "Fleming got the Nobel Prize alone.",
-          answer: false,
-          explain: "He shared it with Howard Florey and Ernst Chain in 1945.",
-        },
-        {
-          text: "The first patient died because the penicillin ran out.",
+          text: "Taking too small a dose of an antibiotic can help resistant bacteria take over.",
           answer: true,
-          explain: "He improved for days, but the supply ran out and the infection came back.",
+          explain: "A weak dose kills the easy bacteria but lets the toughest ones survive and multiply. That's the misuse Fleming warned about.",
+        },
+        {
+          text: "With a bigger supply of penicillin, the Oxford team's first patient in 1941 might well have survived.",
+          answer: true,
+          explain: "He was recovering while the drug lasted, then the infection came back when it ran out. Making enough of it was the real problem.",
         },
       ],
     },

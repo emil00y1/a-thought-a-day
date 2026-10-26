@@ -54,10 +54,10 @@ export const stoicControl: Thought = {
     },
     {
       type: "choice",
-      question: "According to Epictetus, what is truly up to us?",
-      options: ["Our health and body", "Our reputation with others", "Our judgments and choices", "Our money and possessions"],
+      question: "Maya studies hard for a test, but a strict teacher gives her a low grade. By Epictetus' split, what should she judge herself on?",
+      options: ["The grade on her paper", "What her classmates think", "How well she prepared", "The teacher's opinion of her"],
       answer: 2,
-      explain: "Health, reputation and wealth can all be taken away. How we judge and choose stays ours.",
+      explain: "Her effort and preparation were up to her. The grade, the teacher's view and her classmates' opinions were not. Like the Stoic archer, she aimed well; where the arrow landed is out of her hands.",
     },
     {
       type: "poll",

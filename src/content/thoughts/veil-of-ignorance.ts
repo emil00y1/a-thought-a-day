@@ -39,28 +39,33 @@ export const veilOfIgnorance: Thought = {
     },
     {
       type: "choice",
-      question: "What does the veil of ignorance hide from you?",
-      options: ["The laws of nature and science", "Your own place in society", "Other people's opinions", "The rules you're choosing"],
+      question: "Some kids are making the rules for a playground game. Which way of doing it works most like the veil of ignorance?",
+      options: [
+        "The best player writes all the rules",
+        "Rules are set before teams are drawn",
+        "Each team votes after seeing its players",
+        "Last year's winners keep their old rules",
+      ],
       answer: 1,
-      explain: "Not knowing where you'll land stops you from designing rules that only suit yourself.",
+      explain: "If nobody knows which team they'll be on, nobody can bend the rules toward their own side. In the other cases, someone already knows where they stand.",
     },
     {
       type: "truefalse",
       statements: [
         {
-          text: "Rawls said inequality is never acceptable.",
+          text: "By Rawls' rule, a plan that makes the rich much richer and also lifts the poorest a little could be fair.",
+          answer: true,
+          explain: "Rawls allowed inequality when it helps the worst-off. Here the poorest gain too.",
+        },
+        {
+          text: "By Rawls' rule, a plan that raises average wealth but leaves the poorest worse off is fair.",
           answer: false,
-          explain: "He allowed it if it benefits the worst-off.",
+          explain: "A higher average isn't enough for Rawls. What counts is how the worst-off do.",
         },
         {
-          text: "Robert Nozick was a famous critic of Rawls.",
-          answer: true,
-          explain: "His 1974 book argued for a much smaller state.",
-        },
-        {
-          text: "In experiments, most groups chose a guaranteed minimum income.",
-          answer: true,
-          explain: "A safety net, with the rest left to effort.",
+          text: "Behind the veil, giving extra votes to people with college degrees would be a safe choice.",
+          answer: false,
+          explain: "You don't know if you'll have a degree. You might be one of the people losing out.",
         },
       ],
     },
