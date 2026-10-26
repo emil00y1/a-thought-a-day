@@ -59,7 +59,7 @@
   --input: oklch(0.88 0.012 85);
   --ring: oklch(0.6 0.03 265);
   /* The one call-to-action color: white text on it must stay readable. */
-  --cta: #e0553a;
+  --cta: #c8412a;
   --cta-foreground: #ffffff;
 }
 
@@ -114,6 +114,55 @@
   }
   50% {
     transform: translate(-24px, 18px) scale(1.12);
+  }
+}
+
+/* Endless little loops run as CSS, so they don't cost JavaScript on every frame. */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--bob, -8px));
+  }
+}
+
+@keyframes nudge {
+  0%,
+  70%,
+  80%,
+  90%,
+  100% {
+    transform: translateX(0);
+  }
+  75%,
+  85% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes wave {
+  0%,
+  45%,
+  100% {
+    transform: rotate(0);
+  }
+  15% {
+    transform: rotate(-14deg);
+  }
+  30% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-1.2px) rotate(-2deg);
   }
 }
 

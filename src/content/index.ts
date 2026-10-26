@@ -37,6 +37,26 @@ import { bananasAreBerries } from "./thoughts/bananas-are-berries"
 import { socialContract } from "./thoughts/social-contract"
 import { benfordsLaw } from "./thoughts/benfords-law"
 import { placeboEffect } from "./thoughts/placebo-effect"
+import { aDayOnVenus } from "./thoughts/a-day-on-venus"
+import { libraryOfAlexandria } from "./thoughts/library-of-alexandria"
+import { pavlovsDogs } from "./thoughts/pavlovs-dogs"
+import { occamsRazor } from "./thoughts/occams-razor"
+import { arrowOfTime } from "./thoughts/arrow-of-time"
+import { drowningChild } from "./thoughts/drowning-child"
+import { honeyNeverSpoils } from "./thoughts/honey-never-spoils"
+import { utilitarianism } from "./thoughts/utilitarianism"
+import { frequencyIllusion } from "./thoughts/frequency-illusion"
+import { mozartEffect } from "./thoughts/mozart-effect"
+import { darkMatter } from "./thoughts/dark-matter"
+import { dancingPlague } from "./thoughts/dancing-plague"
+import { hawthorneEffect } from "./thoughts/hawthorne-effect"
+import { cogito } from "./thoughts/cogito"
+import { ringOfGyges } from "./thoughts/ring-of-gyges"
+import { howVaccinesWork } from "./thoughts/how-vaccines-work"
+import { overtonWindow } from "./thoughts/overton-window"
+import { microbiomeRatio } from "./thoughts/microbiome-ratio"
+import { tenThousandHours } from "./thoughts/ten-thousand-hours"
+import { mandelaEffect } from "./thoughts/mandela-effect"
 import { validateThoughts } from "./validate"
 
 /** The day thought #1 goes live, at midnight in each player's time zone. Each following thought unlocks one day later. */
@@ -80,6 +100,26 @@ export const thoughts: Thought[] = [
   socialContract,
   benfordsLaw,
   placeboEffect,
+  aDayOnVenus,
+  libraryOfAlexandria,
+  pavlovsDogs,
+  occamsRazor,
+  arrowOfTime,
+  drowningChild,
+  honeyNeverSpoils,
+  utilitarianism,
+  frequencyIllusion,
+  mozartEffect,
+  darkMatter,
+  dancingPlague,
+  hawthorneEffect,
+  cogito,
+  ringOfGyges,
+  howVaccinesWork,
+  overtonWindow,
+  microbiomeRatio,
+  tenThousandHours,
+  mandelaEffect,
 ]
 
 validateThoughts(thoughts)

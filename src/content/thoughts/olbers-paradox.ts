@@ -55,7 +55,7 @@ export const olbersParadox: Thought = {
         {
           text: "Stars have been shining for as long as the universe has existed.",
           answer: false,
-          explain: "The first stars formed at least 100 million years after the Big Bang, and every star burns out eventually.",
+          explain: "The first stars took tens of millions of years or more to form after the Big Bang, and every star burns out eventually.",
         },
       ],
     },

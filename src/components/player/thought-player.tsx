@@ -1,6 +1,5 @@
 "use client"
 
-import confetti from "canvas-confetti"
 import {
   ArrowRight,
   ArrowUpDown,
@@ -17,6 +16,7 @@ import {
   Vote,
 } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { toast } from "sonner"
@@ -31,14 +31,25 @@ import { Button } from "@/components/ui/button"
 import type { Activity, Thought } from "@/content/types"
 import type { Stats } from "@/lib/data"
 import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
-import { Choice } from "./choice"
-import { Estimate } from "./estimate"
-import { FactCards } from "./fact-cards"
-import { Match } from "./match"
-import { Order } from "./order"
-import { Poll } from "./poll"
 import type { Result } from "./shared"
-import { TrueFalse } from "./true-false"
+
+// The games load when a player gets to them, so the first screen stays light.
+const loadGames = {
+  facts: () => import("./fact-cards").then((m) => m.FactCards),
+  choice: () => import("./choice").then((m) => m.Choice),
+  truefalse: () => import("./true-false").then((m) => m.TrueFalse),
+  order: () => import("./order").then((m) => m.Order),
+  match: () => import("./match").then((m) => m.Match),
+  estimate: () => import("./estimate").then((m) => m.Estimate),
+  poll: () => import("./poll").then((m) => m.Poll),
+}
+const FactCards = dynamic(loadGames.facts)
+const Choice = dynamic(loadGames.choice)
+const TrueFalse = dynamic(loadGames.truefalse)
+const Order = dynamic(loadGames.order)
+const Match = dynamic(loadGames.match)
+const Estimate = dynamic(loadGames.estimate)
+const Poll = dynamic(loadGames.poll)
 
 type Step = { kind: "intro" } | { kind: "read" } | { kind: "facts" } | { kind: "activity"; activity: Activity } | { kind: "done" }
 
@@ -105,6 +116,19 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
     window.scrollTo({ top: 0, behavior: "smooth" })
     if (steps[to].kind === "done") void finish()
   }
+
+  // Fetch the games in the background once the page is idle, so Start still feels instant.
+  useEffect(() => {
+    const warm = () => {
+      for (const load of Object.values(loadGames)) void load()
+    }
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(warm, { timeout: 4000 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(warm, 2000)
+    return () => clearTimeout(id)
+  }, [])
 
   // The logo or Today link, clicked mid-game, takes you back to the first screen.
   useEffect(() => {
@@ -359,14 +383,10 @@ function Intro({
         <motion.div
           className="mt-8 inline-block text-7xl"
           initial={{ scale: 0, rotate: -20 }}
-          animate={{ scale: 1, rotate: 0, y: [0, -8, 0] }}
-          transition={{
-            scale: { type: "spring", stiffness: 300, damping: 12 },
-            rotate: { type: "spring", stiffness: 300, damping: 12 },
-            y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.6 },
-          }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 12 }}
         >
-          {thought.emoji}
+          <span className="inline-block animate-[bob_3s_ease-in-out_0.6s_infinite]">{thought.emoji}</span>
         </motion.div>
 
         <motion.h1
@@ -412,18 +432,15 @@ function Intro({
             <span className="block font-display text-xl leading-tight font-semibold">
               {learned ? "Play again" : "Start today's thought"}
             </span>
-            <span className="mt-0.5 flex items-center gap-1.5 text-sm opacity-85">
+            <span className="mt-0.5 flex items-center gap-1.5 text-sm">
               <Clock className="size-3.5" /> ~3 min · {thought.activities.length} mini games
             </span>
           </span>
           <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-0.5">
             {/* A small nudge every few seconds, inviting a tap. */}
-            <motion.span
-              animate={{ x: [0, 4, 0, 4, 0] }}
-              transition={{ duration: 0.9, repeat: Infinity, repeatDelay: 3.5, delay: 1.5, ease: "easeInOut" }}
-            >
+            <span className="animate-[nudge_4.4s_ease-in-out_1.5s_infinite]">
               <ArrowRight className="size-5" />
-            </motion.span>
+            </span>
           </span>
         </motion.button>
       </div>
@@ -486,9 +503,11 @@ function Done({
   onReplay: () => void
 }) {
   useEffect(() => {
-    const opts = { particleCount: 70, spread: 70, startVelocity: 45, disableForReducedMotion: true }
-    void confetti({ ...opts, angle: 60, origin: { x: 0, y: 0.7 } })
-    void confetti({ ...opts, angle: 120, origin: { x: 1, y: 0.7 } })
+    void import("canvas-confetti").then(({ default: confetti }) => {
+      const opts = { particleCount: 70, spread: 70, startVelocity: 45, disableForReducedMotion: true }
+      void confetti({ ...opts, angle: 60, origin: { x: 0, y: 0.7 } })
+      void confetti({ ...opts, angle: 120, origin: { x: 1, y: 0.7 } })
+    })
   }, [])
 
   return (

@@ -39,12 +39,9 @@ export function FactCards({ facts, onAllFlipped }: { facts: { q: string; a: stri
               {i + 1}
             </span>
             <span className="flex-1 font-display text-lg leading-snug font-medium">{fact.q}</span>
-            <motion.span
-              animate={{ rotate: [0, -14, 10, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 + i * 0.4 }}
-            >
+            <span className="animate-[wave_2.7s_ease-in-out_infinite]" style={{ animationDelay: `${i * 0.4}s` }}>
               <Hand className="size-4 text-muted-foreground" />
-            </motion.span>
+            </span>
           </div>
           <div
             className={cn(
