@@ -42,14 +42,14 @@ export const dancingPlague: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "At first, the city's answer was to have people dance even more.",
+          text: "If Waller is right, the city's music halls probably helped the dancing spread.",
           answer: true,
-          explain: "Doctors thought overheated blood was to blame, and that dancing it out could cure it.",
+          explain: "A stress-induced trance spreads when people see others caught in it. Halls full of dancers and crowds of watchers gave it a stage.",
         },
         {
-          text: "Eventually, Strasbourg's council banned public dancing.",
-          answer: true,
-          explain: "When music seemed to spread the dancing, the council banned public dancing and music.",
+          text: "Under Waller's theory, a calm, well-fed town would be just as likely to have an outbreak.",
+          answer: false,
+          explain: "Waller ties the outbreak to famine, disease and fear. Without that strain, his theory predicts much less risk.",
         },
         {
           text: "Historians agree the cause was moldy bread.",
@@ -60,15 +60,15 @@ export const dancingPlague: Thought = {
     },
     {
       type: "choice",
-      question: "If John Waller is right, why did the dancing plague strike Strasbourg in 1518?",
+      question: "Which new discovery would most support the ergot theory over Waller's idea?",
       options: [
-        "A new dance craze had arrived",
-        "The water supply was poisoned",
-        "People were worn down by hardship",
-        "Musicians had cursed the city",
+        "The dancing spread fastest where crowds watched",
+        "All the dancers ate rye from one moldy batch",
+        "Many dancers believed Saint Vitus was angry",
+        "Most dancers had lost family to recent disease",
       ],
-      answer: 2,
-      explain: "Famine and disease had hit the region hard. Waller thinks that stress, plus fear of an angry saint, pushed people into a trance.",
+      answer: 1,
+      explain: "Ergot is a poison, so a shared source of moldy rye would point to it. The other three fit Waller's idea of fear and stress spreading through a crowd.",
     },
   ],
   recall: [

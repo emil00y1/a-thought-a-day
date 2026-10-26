@@ -42,15 +42,15 @@ export const overtonWindow: Thought = {
     },
     {
       type: "choice",
-      question: "According to Lehman, what do most politicians do with the Overton window?",
+      question: "Ten years ago, a policy idea sounded extreme. Now candidates in both parties back it. By Lehman's account, what most likely happened?",
       options: [
-        "Drag it toward their own views",
-        "Ignore it when they write laws",
-        "Find where it is and stay inside",
-        "Close it to block new ideas",
+        "Politicians pushed it hard until voters agreed",
+        "Public opinion moved and politicians followed",
+        "The idea was inside the window all along",
+        "A think tank quietly wrote it into law",
       ],
-      answer: 2,
-      explain: "Lehman said lawmakers are in the business of detecting where the window is, then moving to match it.",
+      answer: 1,
+      explain: "Lehman said politicians mostly follow the window. A shift like this usually starts with changes in public opinion, and politicians move once the idea is safe to back.",
     },
     {
       type: "poll",

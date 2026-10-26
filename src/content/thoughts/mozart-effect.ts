@@ -54,19 +54,19 @@ export const mozartEffect: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "The original 1993 study tested babies and young children.",
+          text: "Students hear Mozart, then take a spatial puzzle test a week later. They should still score higher.",
           answer: false,
-          explain: "It tested 36 college students. The claims about babies came later, from the press and marketers.",
+          explain: "In the original study, the boost faded within about 15 minutes. A week later, there's nothing left to measure.",
         },
         {
-          text: "Studies linked to the original researchers tended to find bigger effects.",
+          text: "Someone who finds classical music boring would probably get less of a boost from Mozart than a fan would.",
           answer: true,
-          explain: "A 2010 meta-analysis found their effects were more than three times larger, a warning sign.",
+          explain: "If the boost comes from enjoyment and alertness, music that bores you shouldn't lift you much.",
         },
         {
-          text: "Learning to play an instrument is the same thing as the Mozart effect.",
+          text: "A toy company says Mozart CDs raise babies' IQ, citing the 1993 study. The study backs that claim.",
           answer: false,
-          explain: "The Mozart effect is about listening. Whether music lessons help children is a separate question.",
+          explain: "The study tested college students on one kind of spatial task. It never tested babies or measured IQ.",
         },
       ],
     },

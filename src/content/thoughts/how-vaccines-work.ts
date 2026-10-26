@@ -46,9 +46,9 @@ export const howVaccinesWork: Thought = {
           explain: "Many use a killed germ or just one harmless piece of it, which is enough for the body to learn from.",
         },
         {
-          text: "Jenner was the first person to try cowpox against smallpox.",
-          answer: false,
-          explain: "A Dorset farmer, Benjamin Jesty, did it in 1774. Jenner's careful tests and writing made the method spread.",
+          text: "People who had chickenpox as kids rarely get it badly again, for the same reason vaccines work.",
+          answer: true,
+          explain: "The first infection left memory cells behind. A vaccine builds the same memory, just without the illness.",
         },
         {
           text: "Some vaccines need more than one dose.",
@@ -59,15 +59,15 @@ export const howVaccinesWork: Thought = {
     },
     {
       type: "choice",
-      question: "Why do vaccinated people usually fight off a germ faster?",
+      question: "A new flu strain has changed the markers on its surface. Why might last year's flu shot protect less well?",
       options: [
-        "The vaccine stays in their blood for life",
-        "Memory cells already know the germ",
-        "The vaccine makes their body hotter",
-        "Germs cannot enter a vaccinated body",
+        "The old vaccine has worn out of their blood by now",
+        "Memory cells may not recognize the new markers",
+        "Flu germs become immune to all vaccines",
+        "The body forgets every germ within a year",
       ],
       answer: 1,
-      explain: "Memory cells skip the slow first-time learning, so the defense starts much sooner.",
+      explain: "Memory cells and antibodies fit a germ's antigens like a key in a lock. Change the lock enough, and the old keys stop fitting well. That's why flu shots are updated often.",
     },
   ],
   recall: [

@@ -28,25 +28,36 @@ export const tenThousandHours: Thought = {
   ],
   activities: [
     {
-      type: "match",
-      prompt: "A 2014 review asked how much practice explains skill differences. Match each field to its share",
-      pairs: [
-        ["Games like chess", "About 26%"],
-        ["Music", "About 21%"],
-        ["Sports", "About 18%"],
-        ["Professions", "Under 1%"],
+      type: "choice",
+      question: "Two pianists each log 10,000 hours. One mostly plays songs she already knows. The other drills hard passages with a teacher. What does Ericsson's work predict?",
+      options: [
+        "Both will reach the same level",
+        "The first will likely improve more",
+        "The second will likely improve more",
+        "Both are now guaranteed to be experts",
       ],
+      answer: 2,
+      explain: "Hours alone aren't the point. Deliberate practice, focused on weak spots with feedback, is what drives improvement.",
     },
     {
-      type: "order",
-      prompt: "Put these moments in the story of the 10,000-hour rule in order, oldest first",
-      items: [
-        { text: "Ericsson's violin study", detail: "1993" },
-        { text: "Gladwell's Outliers", detail: "2008" },
-        { text: "Review of 88 practice studies", detail: "2014" },
-        { text: "Ericsson's book Peak corrects the rule", detail: "2016" },
+      type: "truefalse",
+      statements: [
+        {
+          text: "Someone who has typed every day for 10,000 hours is sure to be a world-class typist.",
+          answer: false,
+          explain: "Typing on autopilot isn't deliberate practice. Without pushing on weak spots, people usually stop improving.",
+        },
+        {
+          text: "In some fields, people might reach the top with far fewer than 10,000 hours.",
+          answer: true,
+          explain: "10,000 was an average for one group of violinists. The hours needed vary a lot between fields and people.",
+        },
+        {
+          text: "Two people with the same hours of deliberate practice can still end up at different levels.",
+          answer: true,
+          explain: "Later studies found practice explains only part of the differences in skill. Other things matter too.",
+        },
       ],
-      explain: "Ericsson wrote Peak partly to set the record straight about what his research actually showed.",
     },
     {
       type: "poll",

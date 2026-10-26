@@ -43,19 +43,19 @@ export const hawthorneEffect: Thought = {
       type: "truefalse",
       statements: [
         {
-          text: "In the lighting story, output rose only when the lights got brighter.",
-          answer: false,
-          explain: "Output reportedly rose when lights were dimmed too, and even in the control room. So light alone couldn't explain it.",
-        },
-        {
-          text: "In one later study at the plant, a group of men held their output down.",
+          text: "Hospital staff wash their hands more often while an inspector stands nearby. That fits the Hawthorne effect.",
           answer: true,
-          explain: "In the bank wiring room, the men feared faster work would lead to lower pay rates, so the group kept output in check.",
+          explain: "They act differently because they know they're being watched. Studies of hand washing have found exactly this.",
         },
         {
-          text: "The 2011 recheck of the lighting data found a huge effect.",
+          text: "To rule out the Hawthorne effect, a control group should get no attention at all.",
           answer: false,
-          explain: "Levitt and List found only slight evidence, far weaker than the legend.",
+          explain: "The control group should get the same attention as the test group. Then any extra gain must come from the change itself.",
+        },
+        {
+          text: "If a team works faster after almost any change, that proves each change was a good one.",
+          answer: false,
+          explain: "When any change seems to help, the likely cause is something they share, like extra attention, not the changes themselves.",
         },
       ],
     },

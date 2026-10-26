@@ -39,15 +39,15 @@ export const cogito: Thought = {
     },
     {
       type: "choice",
-      question: "Why can't even the evil demon make Descartes doubt that he exists?",
+      question: "Which of these could the evil demon NOT trick Descartes about?",
       options: [
-        "His body proves that he's real",
-        "Being fooled means someone exists",
-        "His memories can't be faked",
-        "Other people can see him",
+        "That he has hands and a body",
+        "That he is awake, not dreaming",
+        "That he is thinking right now",
+        "That the sky above him is real",
       ],
-      answer: 1,
-      explain: "To be tricked, there has to be someone being tricked. The demon can fake the world, but not the doubter.",
+      answer: 2,
+      explain: "The demon could fake his body, his waking life and the whole world. But being tricked is itself a kind of thinking, so it can't be faked that he's thinking.",
     },
     {
       type: "poll",
