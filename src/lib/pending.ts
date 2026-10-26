@@ -2,7 +2,8 @@
 
 const KEY = "atad:pending"
 
-export type Pending = { slug: string; correct: number; total: number }
+/** `squares` is the Wordle-style result line, so a later share can reuse it. */
+export type Pending = { slug: string; correct: number; total: number; squares?: string }
 
 export function savePending(pending: Pending) {
   try {

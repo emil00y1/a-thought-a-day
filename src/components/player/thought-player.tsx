@@ -171,7 +171,10 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
     if (preview) return
     if (!signedIn) {
       // The first play counts, like for signed-in players; replays don't overwrite it.
-      if (parsePending(pendingSnapshot())?.slug !== thought.slug) savePending({ slug: thought.slug, ...score })
+      if (parsePending(pendingSnapshot())?.slug !== thought.slug) {
+        const games = thought.activities.map((_, i) => results[3 + i] ?? null)
+        savePending({ slug: thought.slug, ...score, squares: gameSquares(games) })
+      }
       return
     }
     const res = await completeThought({ slug: thought.slug, ...score })
@@ -250,6 +253,9 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
             <Done
               thought={thought}
               score={score}
+              // Each game's result, in order; the first three steps are intro, reading and facts.
+              games={thought.activities.map((_, i) => results[3 + i] ?? null)}
+              dateLabel={dateLabel}
               stats={stats}
               signedIn={signedIn}
               preview={preview}
@@ -395,7 +401,7 @@ function Intro({
   dateLabel: string
   learned: boolean
   /** A guest's score from earlier today. */
-  result: Result | null
+  result: (Result & { squares?: string }) | null
   onStart: () => void
 }) {
   return (
@@ -450,7 +456,7 @@ function Intro({
 
         {learned ? (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            <Button size="lg" onClick={() => shareThought(thought, result)} className="mt-8 h-12 w-full rounded-2xl text-base">
+            <Button size="lg" onClick={() => shareThought(thought, dateLabel, result)} className="mt-8 h-12 w-full rounded-2xl text-base">
               <Share2 /> Share today&apos;s thought
             </Button>
             <button
@@ -532,6 +538,8 @@ function IntroFooter({
 function Done({
   thought,
   score,
+  games,
+  dateLabel,
   stats,
   signedIn,
   preview,
@@ -540,6 +548,8 @@ function Done({
 }: {
   thought: Thought
   score: Result
+  games: (Result | null)[]
+  dateLabel: string
   stats: Stats | null
   signedIn: boolean
   preview?: boolean
@@ -609,7 +619,7 @@ function Done({
           </motion.blockquote>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-            <Button variant="outline" size="lg" onClick={() => shareThought(thought, score)} className="mt-6">
+            <Button variant="outline" size="lg" onClick={() => shareThought(thought, dateLabel, score, games)} className="mt-6">
               <Share2 /> Share
             </Button>
           </motion.div>
@@ -657,9 +667,33 @@ function Done({
   )
 }
 
-async function shareThought(thought: Thought, score: Result | null) {
-  const result = score && score.correct > 0 ? ` I got ${score.correct}/${score.total}.` : ""
-  const text = `${thought.emoji} ${thought.title}: ${thought.hook}${result}`
+/** One square per game, Wordle style: right, partly right, missed, or an opinion poll. */
+function gameSquares(games: (Result | null)[]) {
+  return games
+    .map((g) => (!g || g.total === 0 ? "💬" : g.correct === g.total ? "🟩" : g.correct > 0 ? "🟨" : "🟥"))
+    .join("")
+}
+
+/** Spoiler-free share text, like Wordle's: date, thought, how it went, and the link. */
+function shareText(
+  thought: Thought,
+  dateLabel: string,
+  score: (Result & { squares?: string }) | null,
+  games?: (Result | null)[]
+) {
+  const points = score && score.correct > 0 ? `${score.correct}/${score.total}` : ""
+  const squares = games ? gameSquares(games) : (score?.squares ?? "")
+  const line = [squares, points].filter(Boolean).join(" ")
+  return [`Just a thought · ${dateLabel}`, `${thought.emoji} ${thought.title}`, line].filter(Boolean).join("\n")
+}
+
+async function shareThought(
+  thought: Thought,
+  dateLabel: string,
+  score: (Result & { squares?: string }) | null,
+  games?: (Result | null)[]
+) {
+  const text = shareText(thought, dateLabel, score, games)
   // The thought's own page: today it opens the game, later it's the readable archive page.
   const url = `${window.location.origin}/thoughts/${thought.slug}`
   if (navigator.share) {
@@ -668,7 +702,7 @@ async function shareThought(thought: Thought, score: Result | null) {
     return
   }
   try {
-    await navigator.clipboard.writeText(`${text} ${url}`)
+    await navigator.clipboard.writeText(`${text}\n${url}`)
     toast.success("Copied. Paste it anywhere.")
   } catch {
     toast.error("Couldn't copy. Try again.")
