@@ -18,7 +18,7 @@ import {
 import { AnimatePresence, motion } from "motion/react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
+import { type ComponentType, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { toast } from "sonner"
 
 import { completeThought } from "@/app/actions"
@@ -33,23 +33,26 @@ import type { Stats } from "@/lib/data"
 import { parsePending, pendingSnapshot, savePending } from "@/lib/pending"
 import type { Result } from "./shared"
 
-// The games load when a player gets to them, so the first screen stays light.
-const loadGames = {
-  facts: () => import("./fact-cards").then((m) => m.FactCards),
-  choice: () => import("./choice").then((m) => m.Choice),
-  truefalse: () => import("./true-false").then((m) => m.TrueFalse),
-  order: () => import("./order").then((m) => m.Order),
-  match: () => import("./match").then((m) => m.Match),
-  estimate: () => import("./estimate").then((m) => m.Estimate),
-  poll: () => import("./poll").then((m) => m.Poll),
+// The games load in the background, so the first screen stays light.
+// Once loaded, a game renders straight away instead of pausing on its lazy wrapper.
+function lazyGame<P extends object>(load: () => Promise<ComponentType<P>>) {
+  let Loaded: ComponentType<P> | undefined
+  const preload = () => load().then((c) => (Loaded = c))
+  const Lazy = dynamic(preload)
+  function Game(props: P) {
+    const [C] = useState(() => Loaded ?? Lazy)
+    return <C {...props} />
+  }
+  return Object.assign(Game, { preload })
 }
-const FactCards = dynamic(loadGames.facts)
-const Choice = dynamic(loadGames.choice)
-const TrueFalse = dynamic(loadGames.truefalse)
-const Order = dynamic(loadGames.order)
-const Match = dynamic(loadGames.match)
-const Estimate = dynamic(loadGames.estimate)
-const Poll = dynamic(loadGames.poll)
+const FactCards = lazyGame(() => import("./fact-cards").then((m) => m.FactCards))
+const Choice = lazyGame(() => import("./choice").then((m) => m.Choice))
+const TrueFalse = lazyGame(() => import("./true-false").then((m) => m.TrueFalse))
+const Order = lazyGame(() => import("./order").then((m) => m.Order))
+const Match = lazyGame(() => import("./match").then((m) => m.Match))
+const Estimate = lazyGame(() => import("./estimate").then((m) => m.Estimate))
+const Poll = lazyGame(() => import("./poll").then((m) => m.Poll))
+const games = [FactCards, Choice, TrueFalse, Order, Match, Estimate, Poll]
 
 type Step = { kind: "intro" } | { kind: "read" } | { kind: "facts" } | { kind: "activity"; activity: Activity } | { kind: "done" }
 
@@ -137,7 +140,7 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
   // Fetch the games in the background once the page is idle, so Start still feels instant.
   useEffect(() => {
     const warm = () => {
-      for (const load of Object.values(loadGames)) void load()
+      for (const game of games) void game.preload()
     }
     if ("requestIdleCallback" in window) {
       const id = requestIdleCallback(warm, { timeout: 4000 })
@@ -198,7 +201,8 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
           data-step={index}
           initial={{ opacity: 0, x: 32 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -32 }}
+          // A short tween out: a spring would keep moving after it's invisible and delay the next step.
+          exit={{ opacity: 0, x: -32, transition: { duration: 0.15, ease: "easeIn" } }}
           transition={{ type: "spring", stiffness: 320, damping: 32 }}
           className="outline-none"
         >
