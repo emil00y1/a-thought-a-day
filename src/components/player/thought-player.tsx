@@ -3,6 +3,7 @@
 import {
   ArrowRight,
   ArrowUpDown,
+  Bell,
   BookOpen,
   Check,
   CircleHelp,
@@ -21,7 +22,7 @@ import Link from "next/link"
 import { type ComponentType, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { toast } from "sonner"
 
-import { completeThought, countPlay } from "@/app/actions"
+import { completeThought, countPlay, setReminders } from "@/app/actions"
 import { HOME_EVENT } from "@/components/nav-links"
 import { CategoryBadge, CategoryGlow } from "@/components/category-badge"
 import { Countdown } from "@/components/countdown"
@@ -650,7 +651,12 @@ function Done({
         {preview ? (
           <p className="text-center text-sm text-muted-foreground">Preview mode. Nothing was saved.</p>
         ) : signedIn ? (
-          stats && <StatsStrip learned={stats.learned} streak={stats.streak} unlockAt={unlockAt} />
+          stats && (
+            <>
+              <StatsStrip learned={stats.learned} streak={stats.streak} unlockAt={unlockAt} />
+              {!stats.reminders && <ReminderPrompt />}
+            </>
+          )
         ) : (
           <div className="border-t pt-6 text-center">
             <p className="font-display text-xl font-semibold">Don&apos;t let it fade</p>
@@ -683,6 +689,34 @@ function Done({
           </div>
         )}
       </motion.div>
+    </div>
+  )
+}
+
+/** Offers the midday reminder email to signed-in players who haven't turned it on. */
+function ReminderPrompt() {
+  const [state, setState] = useState<"ask" | "saving" | "on">("ask")
+
+  async function turnOn() {
+    setState("saving")
+    const res = await setReminders(true)
+    if (res.ok) setState("on")
+    else {
+      setState("ask")
+      toast.error("Couldn't turn on reminders. Try again.")
+    }
+  }
+
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3">
+      <p className="text-sm">
+        {state === "on" ? "Done. We'll email you around midday if you haven't played." : "Want a nudge tomorrow if you forget?"}
+      </p>
+      {state !== "on" && (
+        <Button variant="outline" size="sm" onClick={turnOn} disabled={state === "saving"}>
+          <Bell /> Remind me
+        </Button>
+      )}
     </div>
   )
 }

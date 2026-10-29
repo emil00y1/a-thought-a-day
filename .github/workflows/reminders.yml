@@ -11,4 +11,7 @@ jobs:
   remind:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -fsS -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" https://justathought.day/api/reminders
+      - run: |
+          curl -fsS -H "Authorization: Bearer $CRON_SECRET" https://justathought.day/api/reminders
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}

@@ -7,7 +7,7 @@ import { cache } from "react"
 
 import { addDays, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought, quizResult } from "@/db/schema"
+import { learnedThought, quizResult, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 
 /** Learned thoughts needed before memory quizzes unlock. */
@@ -17,6 +17,8 @@ export type Stats = {
   learned: number
   streak: number
   learnedToday: boolean
+  /** Whether the daily reminder email is on. */
+  reminders: boolean
 }
 
 function isTimeZone(zone: string) {
@@ -99,14 +101,15 @@ export function streakFrom(days: string[], today: string) {
 }
 
 export async function getStats(userId: string, today: string): Promise<Stats> {
-  const rows = await db
-    .select({ day: learnedThought.day })
-    .from(learnedThought)
-    .where(eq(learnedThought.userId, userId))
+  const [rows, [settings]] = await Promise.all([
+    db.select({ day: learnedThought.day }).from(learnedThought).where(eq(learnedThought.userId, userId)),
+    db.select({ reminders: user.reminders }).from(user).where(eq(user.id, userId)),
+  ])
   const days = rows.map((r) => r.day)
   return {
     learned: rows.length,
     streak: streakFrom(days, today),
     learnedToday: days.includes(today),
+    reminders: settings?.reminders ?? false,
   }
 }
