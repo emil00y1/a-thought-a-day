@@ -272,7 +272,8 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
 
       {/* Games show their own next step, so Continue only appears once they're done. */}
       {(step.kind === "read" || step.kind === "facts" || (step.kind === "activity" && isReady)) && (
-        <div className="mt-5 flex items-center justify-between gap-4">
+        // Sticks to the bottom of the screen when a long step would push it out of view.
+        <div className="sticky bottom-4 z-10 mt-5 flex items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             {isReady ? "" : `Flip all ${thought.facts.length} cards to continue`}
           </p>

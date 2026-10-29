@@ -149,26 +149,23 @@ export function TrueFalse({ activity, onDone }: { activity: TrueFalseActivity; o
           </Button>
         </div>
       )}
+      {/* Next takes the place of the True/False buttons, so a long explanation can't push it off screen. */}
+      {answer !== null && !isLast && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mt-8">
+          <Button ref={nextRef} variant="secondary" size="lg" onClick={next} className="w-full">
+            Next statement
+          </Button>
+        </motion.div>
+      )}
       <div className="mt-4">
         <Feedback show={answer !== null} correct={answer === statement.answer}>
           {statement.explain}
         </Feedback>
       </div>
-      {answer !== null && (
-        <div>
-          {!isLast && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-              <Button ref={nextRef} variant="secondary" onClick={next} className="mt-4 w-full">
-                Next statement
-              </Button>
-            </motion.div>
-          )}
-          {isLast && (
-            <p className="mt-4 text-center text-sm text-muted-foreground">
-              {score} of {statements.length} right
-            </p>
-          )}
-        </div>
+      {answer !== null && isLast && (
+        <p className="mt-4 text-center text-sm text-muted-foreground">
+          {score} of {statements.length} right
+        </p>
       )}
     </div>
   )
