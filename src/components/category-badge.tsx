@@ -4,7 +4,7 @@ import { categories } from "@/content/categories"
 import type { Category } from "@/content/types"
 import { cn } from "@/lib/utils"
 
-/** The category as colored small caps after a short bar. No pill. */
+/** The category as colored small caps after a small dot. No pill. */
 export function CategoryBadge({ category, className }: { category: Category; className?: string }) {
   const style = categories[category]
   return (
@@ -17,10 +17,10 @@ export function CategoryBadge({ category, className }: { category: Category; cla
       )}
     >
       <motion.span
-        initial={{ width: 0 }}
-        animate={{ width: 16 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 24, delay: 0.15 }}
-        className={cn("h-0.5 rounded-full", style.solid)}
+        className={cn("size-1.5 rounded-full", style.solid)}
       />
       {style.label}
     </span>
