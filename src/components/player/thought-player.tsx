@@ -21,7 +21,7 @@ import Link from "next/link"
 import { type ComponentType, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { toast } from "sonner"
 
-import { completeThought } from "@/app/actions"
+import { completeThought, countPlay } from "@/app/actions"
 import { HOME_EVENT } from "@/components/nav-links"
 import { CategoryBadge, CategoryGlow } from "@/components/category-badge"
 import { Countdown } from "@/components/countdown"
@@ -117,7 +117,22 @@ export function ThoughtPlayer({ thought, dateLabel, signedIn, stats: serverStats
     moved.current = true
     setIndex(to)
     window.scrollTo({ top: 0, behavior: "smooth" })
-    if (steps[to].kind === "done") void finish()
+    if (to === 1) count("started")
+    if (steps[to].kind === "done") {
+      count("finished")
+      void finish()
+    }
+  }
+
+  /** Counts a start or finish once per browser, so replays and reloads don't inflate it. */
+  function count(kind: "started" | "finished") {
+    if (preview) return
+    try {
+      const key = `jat:${kind}:${thought.slug}`
+      if (localStorage.getItem(key)) return
+      localStorage.setItem(key, "1")
+    } catch {}
+    void countPlay({ slug: thought.slug, kind }).catch(() => {})
   }
 
   // Keyboard players get focus moved to Continue when a game is done; touch players aren't scrolled around.

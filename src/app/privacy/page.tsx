@@ -19,6 +19,8 @@ const sections = [
     items: [
       googleEnabled ? "Your email address. If you sign in with Google, also your name and profile picture." : "Your email address.",
       "Which thoughts you've learned, on which day, and your score. Also your memory quiz scores.",
+      "If you turn on daily reminders: that choice, your time zone, and the day we last emailed you. Every reminder has an unsubscribe link.",
+      "How many times each thought is started and finished, counted anonymously. Just a total per thought.",
       "Poll answers, counted anonymously. We only store the total votes per option, not who voted.",
       "Your sign-in sessions, including the IP address and browser they came from, so you stay signed in and we can spot abuse.",
       "Sign-in codes, stored scrambled (hashed). They expire after 5 minutes.",
@@ -35,7 +37,7 @@ const sections = [
     items: [
       "One cookie keeps you signed in.",
       "One cookie holds your time zone, so the new thought arrives at your midnight.",
-      "Your browser remembers your light or dark mode choice, and which polls you've voted in.",
+      "Your browser remembers your light or dark mode choice, which polls you've voted in, and which thoughts it has already counted.",
       "If you play without an account, your result is kept in your browser until you sign in, so it can be saved.",
       "We count visits with Vercel Web Analytics. It uses no cookies and doesn't follow you across other sites.",
     ],
@@ -45,7 +47,7 @@ const sections = [
     items: [
       "Neon stores the data above.",
       "Vercel hosts the app and counts visits.",
-      "Resend sends the sign-in emails.",
+      "Resend sends the sign-in and reminder emails.",
       "ImprovMX forwards emails sent to our contact address.",
       ...(googleEnabled ? ["Google, only if you choose to sign in with Google."] : []),
     ],
@@ -54,7 +56,7 @@ const sections = [
     title: "Where your data lives",
     items: [
       "Your data is stored in Frankfurt, Germany, and the app runs there too.",
-      "Sign-in emails are sent from Ireland.",
+      "Emails are sent from Ireland.",
       "Some of these providers are US companies.",
     ],
   },

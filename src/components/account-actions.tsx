@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { deleteAccount } from "@/app/actions"
+import { deleteAccount, setReminders } from "@/app/actions"
 import { Button } from "@/components/ui/button"
 import { authClient } from "@/lib/auth-client"
 
@@ -83,5 +83,39 @@ export function DeleteAccount() {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+/** Opt-in switch for the midday reminder email. */
+export function ReminderToggle({ initial }: { initial: boolean }) {
+  const [on, setOn] = useState(initial)
+  const [pending, setPending] = useState(false)
+
+  async function toggle() {
+    setPending(true)
+    const res = await setReminders(!on)
+    setPending(false)
+    if (!res.ok) {
+      toast.error("Couldn't save that. Try again.")
+      return
+    }
+    setOn(!on)
+    toast.success(on ? "Reminders off." : "Reminders on. See you at midday.")
+  }
+
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label="Daily reminder"
+      onClick={toggle}
+      disabled={pending}
+      className={`relative h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors disabled:opacity-60 ${on ? "bg-foreground" : "bg-muted-foreground/30"}`}
+    >
+      <span
+        className={`absolute top-0.5 left-0.5 size-5 rounded-full bg-background shadow transition-transform ${on ? "translate-x-5" : ""}`}
+      />
+    </button>
   )
 }

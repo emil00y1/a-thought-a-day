@@ -1,10 +1,13 @@
+import { eq } from "drizzle-orm"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 
-import { DeleteAccount, SignOutButton } from "@/components/account-actions"
+import { DeleteAccount, ReminderToggle, SignOutButton } from "@/components/account-actions"
 import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
+import { db } from "@/db"
+import { user as userTable } from "@/db/schema"
 import { getUser } from "@/lib/data"
 
 export const metadata: Metadata = { title: "Account", robots: { index: false } }
@@ -23,6 +26,7 @@ export default function AccountPage() {
 async function Account() {
   const user = await getUser()
   if (!user) return <SignInPrompt>Sign in to see your account.</SignInPrompt>
+  const [settings] = await db.select({ reminders: userTable.reminders }).from(userTable).where(eq(userTable.id, user.id))
 
   return (
     <div>
@@ -36,6 +40,13 @@ async function Account() {
           <dd className="font-medium">
             {user.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
           </dd>
+        </div>
+        <div className="flex items-center justify-between gap-4 py-4">
+          <div>
+            <p className="font-medium">Daily reminder</p>
+            <p className="text-sm text-muted-foreground">An email around midday, only if you haven&apos;t played yet.</p>
+          </div>
+          <ReminderToggle initial={settings?.reminders ?? false} />
         </div>
       </dl>
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">

@@ -5,7 +5,7 @@ import { headers } from "next/headers"
 
 import { saveableDay, thoughtBySlug, todayKey } from "@/content"
 import { db } from "@/db"
-import { learnedThought, pollTally, quizResult, submission, user } from "@/db/schema"
+import { learnedThought, pollTally, quizResult, submission, thoughtPlays, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { sendToOwner } from "@/lib/email"
 import { getStats, getTimeZone, getUser, type Stats } from "@/lib/data"
@@ -18,8 +18,8 @@ function clampInt(value: number, min: number, max: number) {
 
 /** Marks a thought as learned. Only today's thought can be saved (or yesterday's, just after midnight). */
 export async function completeThought(input: { slug: string; correct: number; total: number }): Promise<Result> {
-  const user = await getUser()
-  if (!user) return { ok: false, error: "Sign in to save your progress." }
+  const current = await getUser()
+  if (!current) return { ok: false, error: "Sign in to save your progress." }
 
   const timeZone = await getTimeZone()
   const day = saveableDay(input.slug, timeZone)
@@ -30,11 +30,13 @@ export async function completeThought(input: { slug: string; correct: number; to
 
   await db
     .insert(learnedThought)
-    .values({ userId: user.id, thoughtSlug: input.slug, day, correct, total })
+    .values({ userId: current.id, thoughtSlug: input.slug, day, correct, total })
     .onConflictDoNothing()
+  // Keep the time zone current, so a reminder arrives at their midday.
+  await db.update(user).set({ timeZone }).where(eq(user.id, current.id))
 
   // No refresh() here: just after midnight it would swap the page to the new thought mid-celebration.
-  return { ok: true, stats: await getStats(user.id, todayKey(new Date(), timeZone)) }
+  return { ok: true, stats: await getStats(current.id, todayKey(new Date(), timeZone)) }
 }
 
 /** Saves a finished memory quiz score. */
@@ -124,5 +126,26 @@ export async function sendMessage(input: {
     // It's saved in the database either way.
     console.error("Couldn't email the message", error)
   }
+  return { ok: true }
+}
+
+/** Counts a start or finish of a thought. The player sends each one once per browser. */
+export async function countPlay(input: { slug: string; kind: "started" | "finished" }) {
+  if (!thoughtBySlug(input.slug) || (input.kind !== "started" && input.kind !== "finished")) return
+  const column = thoughtPlays[input.kind]
+  await db
+    .insert(thoughtPlays)
+    .values({ thoughtSlug: input.slug, [input.kind]: 1 })
+    .onConflictDoUpdate({ target: thoughtPlays.thoughtSlug, set: { [input.kind]: sql`${column} + 1` } })
+}
+
+/** Turns the daily reminder email on or off, saving the time zone it's sent in. */
+export async function setReminders(on: boolean): Promise<{ ok: boolean }> {
+  const current = await getUser()
+  if (!current) return { ok: false }
+  await db
+    .update(user)
+    .set({ reminders: on === true, timeZone: await getTimeZone() })
+    .where(eq(user.id, current.id))
   return { ok: true }
 }

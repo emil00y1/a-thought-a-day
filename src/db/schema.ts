@@ -8,6 +8,10 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
+  // Daily reminder email, opt-in. The time zone is saved when they play, so the email arrives at their midday.
+  reminders: boolean("reminders").default(false).notNull(),
+  timeZone: text("time_zone"),
+  remindedOn: date("reminded_on", { mode: "string" }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
@@ -136,3 +140,10 @@ export const pollTally = pgTable(
   },
   (t) => [primaryKey({ columns: [t.thoughtSlug, t.pollIndex, t.option] })]
 )
+
+/** How often each thought was started and finished, guests included. Each browser counts once per thought. */
+export const thoughtPlays = pgTable("thought_plays", {
+  thoughtSlug: text("thought_slug").primaryKey(),
+  started: integer("started").notNull().default(0),
+  finished: integer("finished").notNull().default(0),
+})

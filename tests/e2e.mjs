@@ -28,6 +28,9 @@ try {
   if (slug) {
     await page.evaluate((s) => {
       for (let i = 0; i < 6; i++) localStorage.setItem(`jat:voted:${s}:${i}`, "1")
+      // Same for the play counts.
+      localStorage.setItem(`jat:started:${s}`, "1")
+      localStorage.setItem(`jat:finished:${s}`, "1")
     }, slug)
   }
 

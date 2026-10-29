@@ -1,0 +1,14 @@
+name: Daily reminders
+
+# Every hour, ask the site to email players whose midday it is and who haven't played yet.
+# Needs the same CRON_SECRET in the repo's Actions secrets and in Vercel's environment variables.
+on:
+  schedule:
+    - cron: "5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" https://justathought.day/api/reminders
