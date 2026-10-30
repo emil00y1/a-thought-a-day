@@ -4,12 +4,12 @@ const BUBBLE =
 // CSS loops (keyframes in globals.css), so the header logo costs no JavaScript per frame.
 const drift = "[transform-box:fill-box] [transform-origin:center]"
 
-/** A yellow thought bubble with an ink outline, whose little bubbles drift upward. */
+/** An orange thought bubble with an ink outline, whose little bubbles drift upward. */
 export function Logo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
-      {/* Always an ink outline, also in dark mode, so the bubble stays yellow and black. */}
-      <g stroke="#161b24" strokeWidth="2.4" strokeLinejoin="round" fill="#ffc83d">
+      {/* Always an ink outline, also in dark mode, so the bubble stays orange and charcoal. */}
+      <g stroke="#21232e" strokeWidth="2.4" strokeLinejoin="round" fill="#fe8500">
         <circle cx="8.5" cy="34" r="2.6" className={`${drift} animate-[bob_2.4s_ease-in-out_infinite] [--bob:-1.5px]`} />
         <circle
           cx="14"

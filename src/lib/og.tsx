@@ -23,8 +23,8 @@ const gradients: Record<Category, [string, string]> = {
   curious: ["#fef08a", "#f59e0b"],
 }
 
-const ink = "#161b24"
-const muted = "#5e636f"
+const ink = "#21232e"
+const muted = "#5c6070"
 
 const fonts = Promise.all(
   ["Fraunces.ttf", "Grandstander.ttf"].map((file) => readFile(join(process.cwd(), "src/assets/fonts", file)))
@@ -33,7 +33,7 @@ const fonts = Promise.all(
 function Logo() {
   return (
     <svg width="56" height="56" viewBox="0 0 40 40">
-      <g stroke={ink} strokeWidth="2.4" strokeLinejoin="round" fill="#ffc83d">
+      <g stroke={ink} strokeWidth="2.4" strokeLinejoin="round" fill="#fe8500">
         <circle cx="8.5" cy="34" r="2.6" />
         <circle cx="14" cy="27" r="3.6" />
         <path d="M24 4.5c4.2 0 7.6 2.6 8.4 6.1 3.2.6 5.6 3.2 5.6 6.4 0 3.6-3 6.5-6.8 6.5H17.6c-3.6 0-6.6-2.8-6.6-6.2 0-3 2.3-5.5 5.4-6.1C17.3 7.3 20.4 4.5 24 4.5Z" />
@@ -49,7 +49,7 @@ export async function ogImage(thought: Thought | null) {
 
   return new ImageResponse(
     (
-      <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", background: "#fdfaf4", padding: 64, color: ink }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", background: "#f6f7f9", padding: 64, color: ink }}>
         <div style={{ display: "flex", flex: 1, alignItems: "center", gap: 56 }}>
           <div
             style={{

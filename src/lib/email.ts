@@ -65,11 +65,11 @@ export async function sendReminder(email: string, title: string, emoji: string, 
 }
 
 // Brand colors from globals.css, as hex since email clients don't support oklch.
-const ink = "#161b24"
-const cream = "#fdfaf4"
-const muted = "#f4f0e7"
-const mutedText = "#5e636f"
-const border = "#e2ded5"
+const ink = "#21232e"
+const cream = "#f6f7f9"
+const muted = "#eceef3"
+const mutedText = "#5c6070"
+const border = "#e1e4ea"
 const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
 
 /** Tables and inline styles, because that's what email clients render reliably. */
@@ -135,7 +135,7 @@ function reminderHtml(title: string, emoji: string, unsubscribeUrl: string) {
     <div style="font-size:48px;line-height:1;">${emoji}</div>
     <p style="margin:20px 0 6px;font-size:13px;color:${mutedText};">Today's thought</p>
     <h1 style="margin:0 0 24px;font-size:24px;line-height:1.3;font-weight:700;">${safeTitle}</h1>
-    <a href="${siteUrl}" style="display:inline-block;background:${ink};color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 28px;border-radius:999px;">Play now</a>
+    <a href="${siteUrl}" style="display:inline-block;background:#fe8500;color:${ink};text-decoration:none;font-size:15px;font-weight:600;padding:14px 28px;border-radius:999px;">Play now</a>
     <p style="margin:20px 0 0;font-size:13px;color:${mutedText};">Takes a few minutes.</p>
   </td></tr>
   <tr><td style="padding:20px 4px 0;font-family:${font};font-size:12px;line-height:1.5;color:${mutedText};text-align:center;">
